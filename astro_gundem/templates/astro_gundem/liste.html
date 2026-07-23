@@ -1,0 +1,56 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}Astrolojik Gündem{% endblock %}
+
+{% block content %}
+<div class="text-center mb-10">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ GÖKYÜZÜNDE ŞU AN ✦</p>
+    <h2 class="font-baslik text-4xl text-gradient-gold mb-2">Astrolojik Gündem</h2>
+    <p class="text-gray-400 text-sm">Güncel gök olayları ve senin için ne anlama geldikleri.</p>
+</div>
+
+{% if aktif_olaylar %}
+<p class="text-sm tracking-wide text-rose-300 font-normal mb-3">✦ ŞU AN AKTİF</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+    {% for olay in aktif_olaylar %}
+        <a href="{% url 'gundem_detay' olay.id %}" class="holo-border rounded-2xl p-6 block">
+            <p class="text-xs text-gray-400 mb-1">{{ olay.baslangic_tarihi }} — {{ olay.bitis_tarihi }}</p>
+            <p class="font-baslik text-xl text-rose-100 mb-2">{{ olay.baslik }}</p>
+            <p class="text-sm text-gray-300">{{ olay.kisa_aciklama }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if yaklasan_olaylar %}
+<p class="text-sm tracking-wide text-rose-300 font-normal mb-3">✦ YAKLAŞAN</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+    {% for olay in yaklasan_olaylar %}
+        <a href="{% url 'gundem_detay' olay.id %}" class="card-elegant rounded-2xl p-6 block">
+            <p class="text-xs text-gray-400 mb-1">{{ olay.baslangic_tarihi }} — {{ olay.bitis_tarihi }}</p>
+            <p class="font-baslik text-xl text-rose-100 mb-2">{{ olay.baslik }}</p>
+            <p class="text-sm text-gray-300">{{ olay.kisa_aciklama }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if gecmis_olaylar %}
+<p class="text-sm tracking-wide text-rose-300 font-normal mb-3">✦ GEÇMİŞ</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {% for olay in gecmis_olaylar %}
+        <a href="{% url 'gundem_detay' olay.id %}" class="card-elegant rounded-2xl p-6 block opacity-60 hover:opacity-100 transition">
+            <p class="text-xs text-gray-400 mb-1">{{ olay.baslangic_tarihi }} — {{ olay.bitis_tarihi }}</p>
+            <p class="font-baslik text-xl text-rose-100 mb-2">{{ olay.baslik }}</p>
+            <p class="text-sm text-gray-300">{{ olay.kisa_aciklama }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if not aktif_olaylar and not yaklasan_olaylar and not gecmis_olaylar %}
+<div class="card-elegant rounded-2xl p-8 text-center max-w-md mx-auto">
+    <p class="text-gray-400 text-sm">Şu an gösterilecek bir astrolojik gündem yok.</p>
+</div>
+{% endif %}
+{% endblock %}

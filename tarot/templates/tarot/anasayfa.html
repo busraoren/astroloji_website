@@ -1,0 +1,59 @@
+{% extends 'burcs/base.html' %}
+{% load static %}
+
+{% block title %}Tarot Falı{% endblock %}
+
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ GEÇMİŞ · ŞİMDİ · GELECEK ✦</p>
+    <h2 class="font-baslik text-4xl text-gradient-gold mb-2">Tarot Falı</h2>
+    <p id="bilgi-metni" class="text-rose-200 text-sm mt-2">3 kart seç</p>
+</div>
+
+<form id="tarot-form" method="post" action="{% url 'tarot_kartlari_sec' %}">
+    {% csrf_token %}
+    <div id="secilen-inputlar"></div>
+
+    <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2">
+        {% for i in kart_sayisi %}
+            <div class="kart-sirti aspect-[2/3] rounded-lg border border-rose-300/20 cursor-pointer hover:border-rose-300/60 transition overflow-hidden"
+                 data-pozisyon="{{ i }}">
+                <img src="{% static 'tarot/kartlar/Cards-jpg/CardBacks.jpg' %}" class="w-full h-full object-cover">
+            </div>
+        {% endfor %}
+    </div>
+</form>
+
+<script>
+    const kartlar = document.querySelectorAll('.kart-sirti');
+    const form = document.getElementById('tarot-form');
+    const secilenInputlar = document.getElementById('secilen-inputlar');
+    const bilgiMetni = document.getElementById('bilgi-metni');
+    let secilenler = [];
+
+    kartlar.forEach(kart => {
+        kart.addEventListener('click', () => {
+            const pozisyon = kart.dataset.pozisyon;
+            if (secilenler.includes(pozisyon)) return;
+            if (secilenler.length >= 3) return;
+
+            secilenler.push(pozisyon);
+            kart.classList.add('border-rose-300', 'scale-95', 'opacity-50');
+            kart.classList.remove('cursor-pointer');
+
+            const gizliInput = document.createElement('input');
+            gizliInput.type = 'hidden';
+            gizliInput.name = 'pozisyon';
+            gizliInput.value = pozisyon;
+            secilenInputlar.appendChild(gizliInput);
+
+            bilgiMetni.textContent = `${secilenler.length}/3 kart seçildi`;
+
+            if (secilenler.length === 3) {
+                bilgiMetni.textContent = 'Yorumlanıyor...';
+                setTimeout(() => form.submit(), 500);
+            }
+        });
+    });
+</script>
+{% endblock %}

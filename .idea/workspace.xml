@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/astrologyWebsite.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/00-TheFool.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/01-TheMagician.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/02-TheHighPriestess.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/03-TheEmpress.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/04-TheEmperor.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/05-TheHierophant.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/06-TheLovers.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/07-TheChariot.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/08-Strength.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/09-TheHermit.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/10-WheelOfFortune.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/11-Justice.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/12-TheHangedMan.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/13-Death.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/14-Temperance.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/15-TheDevil.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/16-TheTower.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/17-TheStar.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/18-TheMoon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/19-TheSun.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/20-Judgement.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/21-TheWorld.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/CardBacks.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups06.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups07.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups08.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups09.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Cups14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles06.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles07.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles08.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles09.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Pentacles14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords06.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords07.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords08.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords09.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Swords14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands06.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands07.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands08.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands09.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tarot/static/tarot/kartlar/Cards-jpg/Wands14.jpg" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="3GDJ7T7UJHyZopkFgCGVt8E0zDz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/hp/astrologyWebsite/astrologyWebsite/tarot/static/tarot/kartlar&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\tarot\static\tarot\kartlar" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\unluler\templates\unluler" />
+      <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\numeroloji\template\numeroloji" />
+      <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\dogum_haritasi\templates\dogum_haritası" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-6a3326d57233-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.24807.21" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="" />
+      <created>1783500039735</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1783500039735</updated>
+    </task>
+    <servers />
+  </component>
+</project>

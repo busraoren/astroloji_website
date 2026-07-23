@@ -1,0 +1,101 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}Uyumluluk Sonucu{% endblock %}
+
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ UYUMLULUK ANALİZİ ✦</p>
+    <h2 class="font-baslik text-4xl text-gradient-gold">
+        {{ sonuc.kisi1_isim }} <span class="holo-number">&</span> {{ sonuc.kisi2_isim }}
+    </h2>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+
+    <div class="lg:col-span-3 card-elegant rounded-3xl p-8">
+        <div class="text-gray-300 text-sm leading-relaxed space-y-4">
+            {{ yorum_html|safe }}
+        </div>
+    </div>
+
+    <div class="lg:col-span-2 space-y-4">
+        <div class="card-elegant rounded-2xl p-5">
+            <p class="font-baslik text-lg text-rose-100 mb-3 text-center">{{ sonuc.kisi1_isim }}</p>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <p class="text-xs text-rose-300 mb-2 text-center">Gezegenler</p>
+                    <ul class="space-y-1.5">
+                        {% for gezegen, bilgi in sonuc.kisi1_gezegenler.gezegenler.items %}
+                            <li class="flex justify-between text-sm border-b border-white/5 pb-1.5">
+                                <span class="text-gray-400">{{ gezegen }}</span>
+                                <span class="text-gray-200">{{ bilgi.burc }}</span>
+                            </li>
+                        {% endfor %}
+                        {% if sonuc.kisi1_gezegenler.yukselen %}
+                            <li class="flex justify-between text-sm pt-1.5">
+                                <span class="holo-number font-medium">Yükselen</span>
+                                <span class="holo-number font-medium">{{ sonuc.kisi1_gezegenler.yukselen.burc }}</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div>
+                    {% if sonuc.kisi1_gezegenler.evler %}
+                        <p class="text-xs text-rose-300 mb-2 text-center">Evler</p>
+                        <ul class="space-y-1.5">
+                            {% for ev_no, bilgi in sonuc.kisi1_gezegenler.evler.items %}
+                                <li class="flex justify-between text-sm border-b border-white/5 pb-1.5">
+                                    <span class="text-gray-400">{{ ev_no }}.Ev</span>
+                                    <span class="text-gray-200">{{ bilgi.burc }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card-elegant rounded-2xl p-5">
+            <p class="font-baslik text-lg text-rose-100 mb-3 text-center">{{ sonuc.kisi2_isim }}</p>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <p class="text-xs text-rose-300 mb-2 text-center">Gezegenler</p>
+                    <ul class="space-y-1.5">
+                        {% for gezegen, bilgi in sonuc.kisi2_gezegenler.gezegenler.items %}
+                            <li class="flex justify-between text-sm border-b border-white/5 pb-1.5">
+                                <span class="text-gray-400">{{ gezegen }}</span>
+                                <span class="text-gray-200">{{ bilgi.burc }}</span>
+                            </li>
+                        {% endfor %}
+                        {% if sonuc.kisi2_gezegenler.yukselen %}
+                            <li class="flex justify-between text-sm pt-1.5">
+                                <span class="holo-number font-medium">Yükselen</span>
+                                <span class="holo-number font-medium">{{ sonuc.kisi2_gezegenler.yukselen.burc }}</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div>
+                    {% if sonuc.kisi2_gezegenler.evler %}
+                        <p class="text-xs text-rose-300 mb-2 text-center">Evler</p>
+                        <ul class="space-y-1.5">
+                            {% for ev_no, bilgi in sonuc.kisi2_gezegenler.evler.items %}
+                                <li class="flex justify-between text-sm border-b border-white/5 pb-1.5">
+                                    <span class="text-gray-400">{{ ev_no }}.Ev</span>
+                                    <span class="text-gray-200">{{ bilgi.burc }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-8">
+    <a href="{% url 'uyumluluk' %}" class="holo-btn inline-block font-semibold px-8 py-3 rounded-full tracking-wide text-sm">
+        YENİ TEST YAP
+    </a>
+</div>
+{% endblock %}

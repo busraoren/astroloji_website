@@ -1,0 +1,45 @@
+{% extends 'burcs/base.html' %}
+{% load static %}
+
+{% block title %}Tarot Yorumun{% endblock %}
+
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ KARTLAR KONUŞTU ✦</p>
+    <h2 class="font-baslik text-4xl text-gradient-gold">Tarot Yorumun</h2>
+</div>
+
+<div class="grid grid-cols-3 gap-4 mb-10">
+    {% for kart in kartlar %}
+        <div class="card-elegant rounded-2xl p-4 text-center flex flex-col">
+            <p class="text-xs text-rose-300 mb-3">
+                {% if forloop.counter == 1 %}Geçmiş{% elif forloop.counter == 2 %}Şimdi{% else %}Gelecek{% endif %}
+            </p>
+
+            <div class="flex-1 flex items-center justify-center mb-3">
+                {% if kart.gorsel %}
+                    <img src="{% static kart.gorsel %}" alt="{{ kart.isim }}" class="w-full rounded-lg">
+                {% else %}
+                    <div class="w-full aspect-[2/3.5] rounded-lg holo-border flex items-center justify-center text-4xl">
+                        ✨
+                    </div>
+                {% endif %}
+            </div>
+
+            <p class="font-baslik text-lg text-rose-100">{{ kart.isim }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="card-elegant rounded-3xl p-8">
+    <div class="text-gray-300 text-sm leading-relaxed space-y-4">
+        {{ yorum_html|safe }}
+    </div>
+</div>
+
+<div class="text-center mt-8">
+    <a href="{% url 'tarot_anasayfa' %}" class="holo-btn inline-block font-semibold px-8 py-3 rounded-full tracking-wide text-sm">
+        TEKRAR BAK
+    </a>
+</div>
+{% endblock %}

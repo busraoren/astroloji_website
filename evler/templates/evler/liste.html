@@ -1,0 +1,20 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}Astrolojide Evler{% endblock %}
+
+{% block content %}
+<div class="text-center mb-10">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ YAŞAMIN ON İKİ ALANI ✦</p>
+    <h2 class="font-baslik text-4xl text-gradient-gold mb-2">Astrolojide Evler</h2>
+    <p class="text-gray-400 text-sm">Her ev, yaşamının farklı bir alanını temsil eder.</p>
+</div>
+
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+    {% for ev_no, bilgi in evler.items %}
+        <a href="{% url 'ev_detay' ev_no %}" class="card-elegant rounded-2xl p-6 text-center group">
+            <div class="text-3xl font-baslik holo-number mb-2">{{ ev_no }}</div>
+            <p class="font-baslik text-base text-rose-100 group-hover:text-rose-200 transition">{{ bilgi.anahtar_kelime }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

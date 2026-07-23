@@ -1,0 +1,8 @@
+{% if aktif_gundem %}
+<div class="holo-border rounded-2xl p-6 mb-8">
+    <p class="text-xs tracking-widest text-amber-200 font-normal mb-2">✦ ŞU AN GÖKYÜZÜNDE</p>
+    <p class="font-baslik text-2xl text-gradient-gold mb-2">{{ aktif_gundem.baslik }}</p>
+    <p class="text-sm text-gray-300 mb-3">{{ aktif_gundem.kisa_aciklama }}</p>
+    <a href="{% url 'gundem_detay' aktif_gundem.id %}" class="text-xs text-rose-300 hover:text-rose-200 transition">Detayları Oku →</a>
+</div>
+{% endif %}

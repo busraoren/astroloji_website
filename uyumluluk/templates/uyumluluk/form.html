@@ -1,0 +1,51 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}Uyumluluk Testi{% endblock %}
+
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ İKİ RUH, TEK ENERJİ ✦</p>
+    <h2 class="font-baslik text-4xl text-gradient-gold mb-2">Uyumluluk Testi</h2>
+    <p class="text-gray-400 text-sm">İki kişinin doğum bilgilerini gir, aranızdaki enerjiyi keşfet.</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="relative grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 max-w-3xl mx-auto">
+        <div class="card-elegant rounded-2xl p-6">
+            <p class="font-baslik text-xl text-rose-100 mb-4 text-center">1. Kişi</p>
+            {{ form.kisi1_isim.label_tag }}
+            {{ form.kisi1_isim }}
+            {{ form.kisi1_dogum_tarihi.label_tag }}
+            {{ form.kisi1_dogum_tarihi }}
+            {{ form.kisi1_dogum_saati.label_tag }}
+            {{ form.kisi1_dogum_saati }}
+            {{ form.kisi1_dogum_yeri.label_tag }}
+            {{ form.kisi1_dogum_yeri }}
+        </div>
+
+        <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center w-12 h-12 rounded-full border border-rose-300/40 bg-[#0a0a0f] text-xl z-10">
+            🤍
+        </div>
+
+        <div class="card-elegant rounded-2xl p-6">
+            <p class="font-baslik text-xl text-rose-100 mb-4 text-center">2. Kişi</p>
+            {{ form.kisi2_isim.label_tag }}
+            {{ form.kisi2_isim }}
+            {{ form.kisi2_dogum_tarihi.label_tag }}
+            {{ form.kisi2_dogum_tarihi }}
+            {{ form.kisi2_dogum_saati.label_tag }}
+            {{ form.kisi2_dogum_saati }}
+            {{ form.kisi2_dogum_yeri.label_tag }}
+            {{ form.kisi2_dogum_yeri }}
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+        <button type="submit" class="holo-btn w-full font-semibold py-3 rounded-full tracking-wide text-sm">
+            UYUMLULUĞU HESAPLA
+        </button>
+    </div>
+</form>
+{% endblock %}

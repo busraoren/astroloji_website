@@ -1,0 +1,13 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}Uyumluluk Testi{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white/5 backdrop-blur rounded-2xl p-8 border border-purple-800/30 text-center">
+    <h2 class="text-2xl font-bold text-yellow-400 mb-4">Doğum Bilgisi Eksik</h2>
+    <p class="text-gray-300 mb-6">Uyumluluk testi yapabilmek için önce kendi doğum bilgilerini profiline eklemelisin.</p>
+    <a href="{% url 'profil' %}" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-6 py-3 rounded-full transition">
+        Profile Git
+    </a>
+</div>
+{% endblock %}

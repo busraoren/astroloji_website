@@ -1,0 +1,50 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}{{ bilgi.ad }}{% endblock %}
+
+{% block content %}
+<div class="text-center mb-8">
+    <div class="text-6xl holo-number mb-4">{{ ev_no }}</div>
+    <h2 class="font-baslik text-4xl text-gradient-gold mb-2">{{ bilgi.ad }}</h2>
+    <p class="text-rose-300 text-sm">{{ bilgi.anahtar_kelime }}</p>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 max-w-lg mx-auto">
+    <div class="card-elegant rounded-xl p-4 text-center">
+        <p class="text-xs text-gray-400 mb-1">Doğal Yöneticisi</p>
+        <p class="text-sm text-rose-200">{{ bilgi.dogal_yonetici }}</p>
+    </div>
+    {% if kullanici_burcu %}
+        <div class="holo-border rounded-xl p-4 text-center">
+            <p class="text-xs text-gray-400 mb-1">Senin Burcun</p>
+            <p class="text-sm holo-number font-medium">{{ kullanici_burcu }}</p>
+        </div>
+    {% else %}
+        <div class="card-elegant rounded-xl p-4 text-center">
+            <p class="text-xs text-gray-400 mb-1">Senin Burcun</p>
+            <p class="text-xs text-gray-500">Giriş yap ve doğum bilgini gir</p>
+        </div>
+    {% endif %}
+</div>
+
+<div class="card-elegant rounded-2xl p-8 mb-6 max-w-2xl mx-auto">
+    <p class="text-sm tracking-wide text-rose-300 mb-3">✦ BU EV NE ANLATIR</p>
+    <p class="text-gray-300 text-sm leading-relaxed">{{ bilgi.aciklama }}</p>
+</div>
+
+{% if kisisel_yorum %}
+<div class="card-elegant rounded-2xl p-8 max-w-2xl mx-auto">
+    <p class="text-sm tracking-wide text-rose-300 mb-3">✦ SENİN İÇİN YORUM</p>
+    <p class="text-gray-300 text-sm leading-relaxed">{{ kisisel_yorum }}</p>
+</div>
+{% elif not kullanici_burcu %}
+<div class="card-elegant rounded-2xl p-8 max-w-2xl mx-auto text-center">
+    <p class="text-gray-400 text-sm mb-4">Bu evdeki kendi burcunu ve sana özel yorumu görmek için giriş yap ve doğum bilgini (tarih, saat, yer) profiline ekle.</p>
+    <a href="{% url 'profil' %}" class="holo-btn inline-block font-semibold px-6 py-3 rounded-full text-sm">PROFİLE GİT</a>
+</div>
+{% endif %}
+
+<div class="text-center mt-8">
+    <a href="{% url 'ev_listesi' %}" class="text-sm text-rose-300 hover:text-rose-200 transition">← Tüm Evlere Dön</a>
+</div>
+{% endblock %}

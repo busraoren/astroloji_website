@@ -1,0 +1,26 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}{{ olay.baslik }}{% endblock %}
+
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ {{ olay.get_tur_display|upper }} ✦</p>
+    <h2 class="font-baslik text-4xl text-gradient-gold mb-2">{{ olay.baslik }}</h2>
+    <p class="text-gray-400 text-sm">{{ olay.baslangic_tarihi }} — {{ olay.bitis_tarihi }}</p>
+</div>
+
+{% if olay.etkilenen_burclar %}
+<div class="card-elegant rounded-xl p-4 mb-6 max-w-lg mx-auto text-center">
+    <p class="text-xs text-gray-400 mb-1">En Çok Etkilenen Burçlar</p>
+    <p class="text-sm text-rose-200">{{ olay.etkilenen_burclar }}</p>
+</div>
+{% endif %}
+
+<div class="card-elegant rounded-2xl p-8 max-w-2xl mx-auto">
+    <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line">{{ olay.detay_aciklama }}</p>
+</div>
+
+<div class="text-center mt-8">
+    <a href="{% url 'gundem_listesi' %}" class="text-sm text-rose-300 hover:text-rose-200 transition">← Tüm Gündeme Dön</a>
+</div>
+{% endblock %}

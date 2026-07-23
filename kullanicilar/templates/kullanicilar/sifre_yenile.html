@@ -1,0 +1,18 @@
+{% extends 'burcs/base.html' %}
+{% block title %}Yeni Şifre{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white/5 backdrop-blur rounded-2xl p-8 border border-purple-800/30">
+    <h2 class="text-2xl font-bold text-yellow-400 mb-6 text-center">Yeni Şifre Belirle</h2>
+    {% if validlink %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-3 rounded-full transition mt-4">
+                Şifreyi Değiştir
+            </button>
+        </form>
+    {% else %}
+        <p class="text-red-400 text-center">Bu link geçersiz veya süresi dolmuş.</p>
+    {% endif %}
+</div>
+{% endblock %}
