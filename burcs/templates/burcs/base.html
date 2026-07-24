@@ -7,8 +7,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Premium Tipografi: Cinzel (Mistik), Cormorant (Zarif Başlıklar), Montserrat (Modern Okunabilirlik) -->
+    <!-- Cinzel (Mistik/Klasik), Cormorant (Zarif İtalik), Montserrat (Okunabilirlik) -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -20,27 +21,24 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            /* Mor-Siyah Derin Uzay Arka Planı */
-            background-color: #05020a;
-            background-image:
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 21, 104, 0.3), transparent),
-                radial-gradient(ellipse 60% 60% at 100% 100%, rgba(30, 10, 60, 0.4), transparent),
-                radial-gradient(ellipse 60% 60% at 0% 50%, rgba(46, 16, 101, 0.15), transparent),
-                radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8), transparent),
-                radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1.5px 1.5px at 45% 60%, rgba(212, 175, 55, 0.7), transparent), /* Altın yıldız */
-                radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.6), transparent),
-                radial-gradient(1px 1px at 20% 90%, rgba(200,180,255,0.5), transparent),
-                radial-gradient(1.5px 1.5px at 65% 35%, rgba(255,255,255,0.8), transparent),
-                radial-gradient(1px 1px at 30% 45%, rgba(255,255,255,0.4), transparent);
-            background-attachment: fixed;
+            background-color: #030108; /* Çok daha derin bir uzay siyahı */
+            color: #e2e8f0;
         }
 
+        /* Lüks Doku (Noise) Katmanı */
+        .bg-noise {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Mistik Fontlar ve Renk Geçişleri */
         .font-mistik { font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
         .font-baslik { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; }
 
-        /* Premium Altın ve Mor Gradient Yazılar */
         .text-gradient-gold {
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
@@ -48,81 +46,114 @@
             color: transparent;
         }
         .text-gradient-purple {
-            background: linear-gradient(135deg, #d8b4fe 0%, #c084fc 50%, #9333ea 100%);
+            background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 50%, #9333ea 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        /* Glassmorphism Premium Kartlar */
-        .card-elegant {
-            background: linear-gradient(145deg, rgba(30, 20, 50, 0.4), rgba(10, 5, 20, 0.6));
+        /* Premium Glassmorphism (Cam Efekti) */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(20, 10, 35, 0.5), rgba(5, 2, 10, 0.7));
             border: 1px solid rgba(139, 92, 246, 0.15);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-        .card-elegant:hover {
-            border-color: rgba(212, 175, 55, 0.4); /* Hoverda altın rengi border */
-            box-shadow: 0 10px 40px rgba(107, 33, 168, 0.3), inset 0 0 20px rgba(212, 175, 55, 0.05);
-            transform: translateY(-3px);
+            border-top: 1px solid rgba(212, 175, 55, 0.2); /* Üstten hafif altın yansıması */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
         }
 
-        /* Animasyonlu Yıldızlar */
+        .card-elegant {
+            background: linear-gradient(145deg, rgba(30, 20, 50, 0.4), rgba(10, 5, 20, 0.6));
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            backdrop-filter: blur(12px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-elegant::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent);
+            transform: skewX(-20deg);
+            transition: 0.7s;
+        }
+
+        .card-elegant:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px rgba(107, 33, 168, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.05);
+            transform: translateY(-4px);
+        }
+        .card-elegant:hover::after {
+            left: 150%;
+        }
+
+        /* Animasyonlar: Yıldızlar, Nebulalar, Kayan Yıldızlar */
         .star {
             position: absolute;
             border-radius: 50%;
             background: white;
             box-shadow: 0 0 8px 1px rgba(255,255,255,0.8);
-            animation: twinkle 5s ease-in-out infinite;
+            animation: twinkle var(--duration, 4s) ease-in-out infinite alternate;
         }
-        .star.gold {
-            background: #fde047;
-            box-shadow: 0 0 10px 2px rgba(212, 175, 55, 0.8);
-        }
-        .star.purple {
-            background: #d8b4fe;
-            box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.8);
-        }
+        .star.gold { background: #fde047; box-shadow: 0 0 12px 2px rgba(212, 175, 55, 0.8); }
+        .star.purple { background: #d8b4fe; box-shadow: 0 0 12px 2px rgba(168, 85, 247, 0.8); }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.3); }
+            0% { opacity: 0.1; transform: scale(0.7); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Kayan Yıldız */
         @keyframes shooting-star {
-            0% { transform: translate(0, 0) rotate(-35deg) scale(1); opacity: 0; }
-            5% { opacity: 1; }
-            15% { transform: translate(-300px, 200px) rotate(-35deg) scale(0); opacity: 0; }
-            100% { transform: translate(-300px, 200px) rotate(-35deg) scale(0); opacity: 0; }
+            0% { transform: translate(0, 0) rotate(-40deg) scale(1); opacity: 0; }
+            2% { opacity: 1; }
+            8% { transform: translate(-400px, 400px) rotate(-40deg) scale(0); opacity: 0; }
+            100% { transform: translate(-400px, 400px) rotate(-40deg) scale(0); opacity: 0; }
         }
 
-        /* Gezegen Süzülmesi */
-        .planet {
+        .planet-glow {
             position: absolute;
             border-radius: 50%;
-            filter: blur(0.5px);
-            animation: float 18s ease-in-out infinite;
+            filter: blur(1px);
+            animation: float-complex 25s ease-in-out infinite;
         }
-        @keyframes float {
+
+        @keyframes float-complex {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(10px, -15px) rotate(4deg); }
-            50% { transform: translate(20px, 0px) rotate(8deg); }
-            75% { transform: translate(10px, 15px) rotate(4deg); }
+            33% { transform: translate(15px, -25px) rotate(5deg); }
+            66% { transform: translate(-10px, 15px) rotate(-2deg); }
         }
 
-        @keyframes float-slow {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-30px, 20px) scale(1.05); }
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: pulse-nebula 20s infinite alternate;
+            z-index: -2;
+            opacity: 0.4;
+        }
+        @keyframes pulse-nebula {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0.5; }
         }
 
-        /* Holografik ve Premium Butonlar */
+        .zodiac-bg {
+            position: absolute;
+            font-size: 15rem;
+            color: rgba(255, 255, 255, 0.015);
+            animation: spin-slow 120s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+            user-select: none;
+        }
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+
+        /* Premium Buton */
         .holo-btn {
             position: relative;
-            background: linear-gradient(120deg, rgba(88, 28, 135, 0.8), rgba(49, 10, 80, 0.9));
-            border: 1px solid rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(30, 5, 50, 0.9));
+            border: 1px solid rgba(212, 175, 55, 0.4);
             color: #fbf5b7;
             overflow: hidden;
             transition: all 0.4s ease;
@@ -131,144 +162,201 @@
         .holo-btn::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
             transition: all 0.6s ease;
             z-index: -1;
         }
-        .holo-btn:hover::before {
-            left: 100%;
-        }
+        .holo-btn:hover::before { left: 100%; }
         .holo-btn:hover {
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+            border-color: rgba(212, 175, 55, 0.8);
+            transform: translateY(-1px);
         }
 
-        /* Özel Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #05020a; }
-        ::-webkit-scrollbar-thumb { background: #3b0764; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #6b21a8; }
+        /* Sidebar Aktif Link Stili */
+        .sidebar-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .sidebar-link::before {
+            content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            height: 0; width: 2px; background: #d4af37; transition: 0.3s ease;
+        }
+        .sidebar-link:hover::before, .sidebar-link.active::before { height: 60%; }
+        .sidebar-link:hover { background: rgba(139, 92, 246, 0.1); color: #e9d5ff; padding-left: 1.5rem; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030108; }
+        ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
     </style>
 </head>
-<body class="text-gray-200 min-h-screen relative selection:bg-purple-900 selection:text-gold-200">
+<body class="relative selection:bg-purple-900 selection:text-gold-200">
 
     <!-- ARKA PLAN EFEKTLERİ -->
+    <div class="bg-noise"></div>
     <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
 
-        <!-- Mistik Atmosfer Işıkları -->
-        <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-purple-900/10 blur-[150px]"></div>
-        <div class="absolute top-1/4 -right-20 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[120px]"></div>
-        <div class="absolute bottom-0 left-1/3 w-[700px] h-[700px] rounded-full bg-violet-900/10 blur-[160px]"></div>
+        <!-- Arkada dönen devasa burç sembolleri -->
+        <div class="zodiac-bg" style="top: -5%; left: -5%;">♈︎</div>
+        <div class="zodiac-bg" style="bottom: 10%; right: -5%; animation-direction: reverse; animation-duration: 150s;">♏︎</div>
+        <div class="zodiac-bg" style="top: 40%; left: 40%; font-size: 25rem; opacity: 0.01;">♌︎</div>
+
+        <!-- Hareketli Nebulalar -->
+        <div class="nebula w-[600px] h-[600px] bg-purple-900/30 top-[-10%] left-[-10%]"></div>
+        <div class="nebula w-[800px] h-[800px] bg-indigo-900/20 bottom-[-20%] right-[-10%]" style="animation-delay: -5s;"></div>
+        <div class="nebula w-[500px] h-[500px] bg-fuchsia-900/20 top-[40%] left-[30%]" style="animation-delay: -10s;"></div>
 
         <!-- Yıldızlar -->
-        <div class="star" style="top:10%; left:15%; width:2px; height:2px; animation-delay:0s;"></div>
-        <div class="star gold" style="top:25%; left:75%; width:3px; height:3px; animation-delay:1.2s;"></div>
-        <div class="star purple" style="top:40%; left:30%; width:4px; height:4px; animation-delay:0.5s;"></div>
-        <div class="star" style="top:60%; left:85%; width:2px; height:2px; animation-delay:2.1s;"></div>
-        <div class="star gold" style="top:80%; left:20%; width:3px; height:3px; animation-delay:0.8s;"></div>
-        <div class="star purple" style="top:15%; left:55%; width:2px; height:2px; animation-delay:3.4s;"></div>
-        <div class="star" style="top:85%; left:70%; width:3px; height:3px; animation-delay:1.7s;"></div>
+        <div class="star" style="top:12%; left:15%; width:2px; height:2px; --duration: 3s;"></div>
+        <div class="star gold" style="top:25%; left:85%; width:3px; height:3px; --duration: 5s;"></div>
+        <div class="star purple" style="top:45%; left:25%; width:4px; height:4px; --duration: 4s;"></div>
+        <div class="star" style="top:60%; left:75%; width:2px; height:2px; --duration: 6s;"></div>
+        <div class="star gold" style="top:85%; left:15%; width:3px; height:3px; --duration: 3.5s;"></div>
+        <div class="star purple" style="top:18%; left:55%; width:2px; height:2px; --duration: 4.5s;"></div>
 
         <!-- Kayan Yıldızlar -->
-        <div class="absolute" style="top: 10%; left: 80%; width: 100px; height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.8), transparent); animation: shooting-star 10s linear infinite; animation-delay: 2s;"></div>
-        <div class="absolute" style="top: 40%; left: 60%; width: 80px; height: 1px; background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.8), transparent); animation: shooting-star 14s linear infinite; animation-delay: 7s;"></div>
+        <div class="absolute" style="top: 5%; left: 85%; width: 150px; height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 1), transparent); animation: shooting-star 12s linear infinite; animation-delay: 2s;"></div>
+        <div class="absolute" style="top: 30%; left: 70%; width: 100px; height: 1px; background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 1), transparent); animation: shooting-star 18s linear infinite; animation-delay: 9s;"></div>
 
-        <!-- Gezegenler (Mor & Altın Tonlarında) -->
-        <div class="planet" style="top:15%; left:85%; width:60px; height:60px;
-             background: radial-gradient(circle at 30% 30%, #c084fc, #581c87 60%, #1e1b4b 100%);
-             box-shadow: 0 0 40px 5px rgba(107, 33, 168, 0.3); animation-delay:0s;"></div>
+        <!-- Gezegenler -->
+        <div class="planet-glow" style="top:20%; right:8%; width:70px; height:70px;
+             background: radial-gradient(circle at 30% 30%, #a855f7, #4c1d95 60%, #17072e 100%);
+             box-shadow: 0 0 50px 10px rgba(107, 33, 168, 0.4); border: 1px solid rgba(168,85,247,0.2);"></div>
 
-        <div class="planet" style="top:70%; left:8%; width:40px; height:40px;
+        <!-- Satürn benzeri halkalı gezegen -->
+        <div class="planet-glow" style="bottom:15%; left:5%; width:45px; height:45px;
              background: radial-gradient(circle at 35% 35%, #fde047, #b45309 60%, #451a03 100%);
-             box-shadow: 0 0 30px 4px rgba(180, 83, 9, 0.2); animation-delay:2s; animation-duration: 22s;"></div>
-
-        <!-- Büyük Yarı Saydam Nebula - Sağ Alt -->
-        <div class="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-full opacity-20"
-             style="background: radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.4) 0%, rgba(88, 28, 135, 0.3) 40%, transparent 80%);
-                 animation: float-slow 30s ease-in-out infinite;">
+             box-shadow: 0 0 30px 5px rgba(180, 83, 9, 0.3); animation-duration: 30s;">
+             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[15px] border border-yellow-500/30 rounded-[50%] rotate-[-20deg]"></div>
         </div>
     </div>
 
     <!-- PREMIUM NAVBAR -->
-    <nav class="border-b border-purple-900/30 bg-[#05020a]/60 backdrop-blur-xl sticky top-0 z-50 transition-all">
+    <nav class="border-b border-purple-500/20 bg-[#030108]/70 backdrop-blur-2xl sticky top-0 z-50 transition-all shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="{% url 'anasayfa' %}" class="flex items-center gap-3 group">
-                <span class="text-xl text-purple-400 group-hover:text-yellow-500 transition-colors duration-300">✦</span>
-                <span class="font-mistik text-2xl text-gradient-gold tracking-widest">astrobacılar</span>
+            <!-- Logo -->
+            <a href="{% url 'anasayfa' %}" class="flex items-center gap-3 group shrink-0">
+                <span class="text-2xl text-purple-500 group-hover:text-yellow-400 transition-colors duration-500" style="text-shadow: 0 0 15px rgba(168,85,247,0.6);">✦</span>
+                <span class="font-mistik text-2xl text-gradient-gold tracking-[0.2em]">ASTROBACILAR</span>
             </a>
 
-            <!-- Masaüstü Menü -->
-            <div class="hidden lg:flex items-center gap-8 text-xs tracking-[0.15em] font-medium">
-                <a href="{% url 'anasayfa' %}" class="text-purple-300 border-b border-purple-400/50 pb-1 transition">ANA SAYFA</a>
-                <a href="{% url 'dogum_haritasi' %}" class="text-gray-400 hover:text-purple-300 hover:border-b hover:border-purple-400/50 pb-1 transition-all">DOĞUM HARİTASI</a>
-                <a href="{% url 'uyumluluk' %}" class="text-gray-400 hover:text-purple-300 hover:border-b hover:border-purple-400/50 pb-1 transition-all">UYUMLULUK</a>
-                <a href="{% url 'numeroloji' %}" class="text-gray-400 hover:text-purple-300 hover:border-b hover:border-purple-400/50 pb-1 transition-all">NUMEROLOJİ</a>
-                <a href="{% url 'gundem_listesi' %}" class="text-gray-400 hover:text-purple-300 hover:border-b hover:border-purple-400/50 pb-1 transition-all">GÜNDEM</a>
-                <a href="{% url 'tarot_anasayfa' %}" class="text-gray-400 hover:text-purple-300 hover:border-b hover:border-purple-400/50 pb-1 transition-all">TAROT</a>
-                <a href="{% url 'unlu_listesi' %}" class="text-gray-400 hover:text-purple-300 hover:border-b hover:border-purple-400/50 pb-1 transition-all">ÜNLÜLER</a>
+            <!-- Masaüstü Linkler (Geniş boşluklu) -->
+            <div class="hidden xl:flex items-center gap-10 text-xs tracking-[0.2em] font-medium ml-8">
+                <a href="{% url 'anasayfa' %}" class="text-purple-300 border-b-2 border-purple-500/60 pb-1 transition">ANA SAYFA</a>
+                <a href="{% url 'dogum_haritasi' %}" class="text-gray-400 hover:text-purple-300 hover:border-b-2 hover:border-purple-500/60 pb-1 transition-all">DOĞUM HARİTASI</a>
+                <a href="{% url 'uyumluluk' %}" class="text-gray-400 hover:text-purple-300 hover:border-b-2 hover:border-purple-500/60 pb-1 transition-all">UYUMLULUK</a>
+                <a href="{% url 'numeroloji' %}" class="text-gray-400 hover:text-purple-300 hover:border-b-2 hover:border-purple-500/60 pb-1 transition-all">NUMEROLOJİ</a>
+                <a href="{% url 'gundem_listesi' %}" class="text-gray-400 hover:text-purple-300 hover:border-b-2 hover:border-purple-500/60 pb-1 transition-all">GÜNDEM</a>
+                <a href="{% url 'tarot_anasayfa' %}" class="text-gray-400 hover:text-purple-300 hover:border-b-2 hover:border-purple-500/60 pb-1 transition-all">TAROT</a>
+                <a href="{% url 'unlu_listesi' %}" class="text-gray-400 hover:text-purple-300 hover:border-b-2 hover:border-purple-500/60 pb-1 transition-all">ÜNLÜLER</a>
             </div>
 
-            <!-- Kullanıcı İşlemleri -->
-            <div class="flex items-center gap-5 text-sm font-medium">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'profil' %}" class="flex items-center gap-3 text-gray-300 hover:text-purple-300 transition">
-                        <span class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-900 border border-purple-500/30 flex items-center justify-center text-white font-semibold text-sm shadow-lg">
-                            {{ user.username|slice:":1"|upper }}
-                        </span>
-                        <span class="hidden md:block tracking-wide">{{ user.username }}</span>
-                    </a>
-                    <a href="{% url 'cikis' %}" class="text-gray-500 hover:text-purple-400 transition text-xs tracking-wider">ÇIKIŞ</a>
-                {% else %}
-                    <a href="{% url 'giris' %}" class="text-gray-400 hover:text-purple-300 transition text-xs tracking-wider">GİRİŞ YAP</a>
-                    <a href="{% url 'kayit' %}" class="holo-btn text-xs tracking-[0.1em] px-6 py-2.5 rounded-full">KAYIT OL</a>
-                {% endif %}
+            <!-- Sağ Kısım (Auth + Mobil Buton) -->
+            <div class="flex items-center gap-6 text-sm font-medium shrink-0">
+                <!-- Desktop Auth -->
+                <div class="hidden md:flex items-center gap-6">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profil' %}" class="flex items-center gap-3 text-gray-300 hover:text-purple-300 transition">
+                            <span class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-700 to-indigo-950 border border-purple-500/40 flex items-center justify-center text-gold-200 font-semibold text-sm shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                                {{ user.username|slice:":1"|upper }}
+                            </span>
+                            <span class="tracking-widest text-xs">{{ user.username|upper }}</span>
+                        </a>
+                        <a href="{% url 'cikis' %}" class="text-gray-500 hover:text-purple-400 transition text-[11px] tracking-widest">ÇIKIŞ</a>
+                    {% else %}
+                        <a href="{% url 'giris' %}" class="text-gray-400 hover:text-purple-300 transition text-[11px] tracking-widest">GİRİŞ YAP</a>
+                        <a href="{% url 'kayit' %}" class="holo-btn text-[11px] tracking-[0.15em] px-7 py-2.5 rounded-full">KAYIT OL</a>
+                    {% endif %}
+                </div>
+
+                <!-- Hamburger Menu Button (Mobil/Tablet) -->
+                <button id="mobile-menu-btn" class="xl:hidden text-gray-300 hover:text-gold-400 transition text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-[240px_1fr_280px] gap-8 relative">
+    <!-- MOBİL YANDAN AÇILIR MENÜ (DRAWER) -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="mobile-drawer" class="fixed top-0 right-0 h-full w-72 max-w-[80vw] glass-panel z-[70] transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-purple-500/20">
+            <span class="font-mistik text-lg text-gradient-gold">MENÜ</span>
+            <button id="close-menu-btn" class="text-gray-400 hover:text-rose-400 text-2xl transition">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto py-6 px-4 space-y-2 flex flex-col">
+            <a href="{% url 'anasayfa' %}" class="block px-4 py-3 text-sm tracking-widest text-purple-300 bg-purple-900/20 rounded-lg"><i class="fas fa-home mr-3 opacity-50"></i>ANA SAYFA</a>
+            <a href="{% url 'dogum_haritasi' %}" class="block px-4 py-3 text-sm tracking-widest text-gray-400 hover:text-purple-200 hover:bg-white/5 rounded-lg transition"><i class="fas fa-star mr-3 opacity-50"></i>DOĞUM HARİTASI</a>
+            <a href="{% url 'uyumluluk' %}" class="block px-4 py-3 text-sm tracking-widest text-gray-400 hover:text-purple-200 hover:bg-white/5 rounded-lg transition"><i class="fas fa-heart mr-3 opacity-50"></i>UYUMLULUK</a>
+            <a href="{% url 'numeroloji' %}" class="block px-4 py-3 text-sm tracking-widest text-gray-400 hover:text-purple-200 hover:bg-white/5 rounded-lg transition"><i class="fas fa-sort-numeric-up mr-3 opacity-50"></i>NUMEROLOJİ</a>
+            <a href="{% url 'gundem_listesi' %}" class="block px-4 py-3 text-sm tracking-widest text-gray-400 hover:text-purple-200 hover:bg-white/5 rounded-lg transition"><i class="fas fa-globe mr-3 opacity-50"></i>GÜNDEM</a>
+            <a href="{% url 'tarot_anasayfa' %}" class="block px-4 py-3 text-sm tracking-widest text-gray-400 hover:text-purple-200 hover:bg-white/5 rounded-lg transition"><i class="fas fa-moon mr-3 opacity-50"></i>TAROT</a>
+            <a href="{% url 'unlu_listesi' %}" class="block px-4 py-3 text-sm tracking-widest text-gray-400 hover:text-purple-200 hover:bg-white/5 rounded-lg transition"><i class="fas fa-users mr-3 opacity-50"></i>ÜNLÜLER</a>
 
-        <!-- SOL SIDEBAR (Masaüstü) -->
-        <aside class="hidden lg:block space-y-2 sticky top-28 h-fit">
-            <a href="{% url 'anasayfa' %}" class="flex items-center gap-4 px-5 py-3.5 rounded-xl bg-purple-900/20 border border-purple-500/30 text-purple-200 text-xs font-medium tracking-widest backdrop-blur-md transition">
-                <span class="text-gold-400 text-base">✦</span> ANA SAYFA
-            </a>
-            <a href="{% url 'dogum_haritasi' %}" class="flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest hover:text-purple-200 hover:bg-white/[0.03] transition">
-                <span class="text-purple-500/50 text-base">✦</span> DOĞUM HARİTAM
-            </a>
-            <a href="{% url 'uyumluluk' %}" class="flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest hover:text-purple-200 hover:bg-white/[0.03] transition">
-                <span class="text-purple-500/50 text-base">✦</span> UYUM ANALİZİ
-            </a>
-            <a href="{% url 'numeroloji' %}" class="flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest hover:text-purple-200 hover:bg-white/[0.03] transition">
-                <span class="text-purple-500/50 text-base">✦</span> NUMEROLOJİ
-            </a>
-            <a href="{% url 'gundem_listesi' %}" class="flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest hover:text-purple-200 hover:bg-white/[0.03] transition">
-                <span class="text-purple-500/50 text-base">✦</span> GÜNDEM
-            </a>
-            <a href="{% url 'tarot_anasayfa' %}" class="flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest hover:text-purple-200 hover:bg-white/[0.03] transition">
-                <span class="text-purple-500/50 text-base">✦</span> TAROT
-            </a>
-            <a href="{% url 'unlu_listesi' %}" class="flex items-center gap-4 px-5 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest hover:text-purple-200 hover:bg-white/[0.03] transition">
-               <span class="text-purple-500/50 text-base">✦</span>  ÜNLÜLER
-            </a>
+            <div class="mt-auto pt-8 border-t border-purple-500/20 md:hidden flex flex-col gap-4">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profil' %}" class="text-center text-sm tracking-widest text-gray-300">PROFİL ({{ user.username|upper }})</a>
+                    <a href="{% url 'cikis' %}" class="text-center text-sm tracking-widest text-gray-500">ÇIKIŞ</a>
+                {% else %}
+                    <a href="{% url 'giris' %}" class="text-center text-sm tracking-widest text-gray-400">GİRİŞ YAP</a>
+                    <a href="{% url 'kayit' %}" class="holo-btn text-center text-xs tracking-widest py-3 rounded-xl block">KAYIT OL</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-[250px_1fr] xl:grid-cols-[250px_1fr_300px] gap-8 relative">
+
+        <!-- SOL SIDEBAR (Masaüstü) - Glass Panel İçinde -->
+        <aside class="hidden lg:block sticky top-28 h-fit glass-panel rounded-2xl p-4">
+            <div class="space-y-1">
+                <a href="{% url 'anasayfa' %}" class="sidebar-link active flex items-center gap-4 px-4 py-3.5 rounded-xl bg-purple-900/30 text-purple-200 text-xs font-semibold tracking-widest">
+                    <span class="text-gold-400 text-sm">✦</span> ANA SAYFA
+                </a>
+                <a href="{% url 'dogum_haritasi' %}" class="sidebar-link flex items-center gap-4 px-4 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest">
+                    <span class="text-purple-500/50 text-sm">✦</span> DOĞUM HARİTAM
+                </a>
+                <a href="{% url 'uyumluluk' %}" class="sidebar-link flex items-center gap-4 px-4 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest">
+                    <span class="text-purple-500/50 text-sm">✦</span> UYUM ANALİZİ
+                </a>
+                <a href="{% url 'numeroloji' %}" class="sidebar-link flex items-center gap-4 px-4 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest">
+                    <span class="text-purple-500/50 text-sm">✦</span> NUMEROLOJİ
+                </a>
+                <a href="{% url 'gundem_listesi' %}" class="sidebar-link flex items-center gap-4 px-4 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest">
+                    <span class="text-purple-500/50 text-sm">✦</span> GÜNDEM
+                </a>
+                <a href="{% url 'tarot_anasayfa' %}" class="sidebar-link flex items-center gap-4 px-4 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest">
+                    <span class="text-purple-500/50 text-sm">✦</span> TAROT
+                </a>
+                <a href="{% url 'unlu_listesi' %}" class="sidebar-link flex items-center gap-4 px-4 py-3.5 rounded-xl text-gray-400 text-xs font-medium tracking-widest">
+                   <span class="text-purple-500/50 text-sm">✦</span> ÜNLÜLER
+                </a>
+            </div>
         </aside>
 
         <!-- ANA İÇERİK -->
-        <main class="min-w-0">
+        <main class="min-w-0 z-10">
             {% block content %}
             {% endblock %}
         </main>
 
-        <!-- SAĞ SIDEBAR (Masaüstü) -->
-        <aside class="hidden lg:block space-y-6 sticky top-28 h-fit">
+        <!-- SAĞ SIDEBAR (Masaüstü Ekstra Ekranlar için) -->
+        <aside class="hidden xl:block sticky top-28 h-fit space-y-6">
             {% block sidebar %}
-            <div class="card-elegant rounded-2xl p-6">
-                <p class="text-xs tracking-[0.2em] text-purple-400 font-semibold mb-4 flex items-center gap-2">
-                    <span class="text-yellow-500">✦</span> GÜNÜN SÖZÜ
+            <div class="glass-panel rounded-2xl p-7 relative overflow-hidden group">
+                <!-- Arka plan parlama -->
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-2xl group-hover:bg-yellow-500/20 transition duration-500"></div>
+
+                <p class="text-[10px] tracking-[0.25em] text-purple-300 font-semibold mb-5 flex items-center gap-2">
+                    <span class="text-yellow-500 animate-pulse">✦</span> GÜNÜN MOTTOSU
                 </p>
-                <p class="text-sm text-gray-300 font-baslik text-lg italic leading-relaxed">
+                <p class="font-baslik text-xl text-gray-200 italic leading-relaxed">
                     "Yıldızlar sana sadece eğilimleri fısıldar; kaderini yazan yine senin iradendir."
                 </p>
             </div>
@@ -277,5 +365,36 @@
 
     </div>
 
+    <!-- Drawer Menu JS -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const overlay = document.getElementById('mobile-overlay');
+        const drawer = document.getElementById('mobile-drawer');
+
+        function openMenu() {
+            overlay.classList.remove('hidden');
+            // Gecikme ile opacity ve transform uygula ki animasyon çalışsın
+            setTimeout(() => {
+                overlay.classList.remove('opacity-0');
+                drawer.classList.remove('translate-x-full');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // arkada scrollu engelle
+        }
+
+        function closeMenu() {
+            overlay.classList.add('opacity-0');
+            drawer.classList.add('translate-x-full');
+            // Animasyon bitince display none yap
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        btn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+    </script>
 </body>
 </html>
