@@ -7,394 +7,277 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Mistik başlıklar için Cinzel, zarif metinler için Jost ve italik vurgular için Cormorant -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Mistik serif yazılar ve logolar için Cormorant, okunabilirlik için Jost -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
+        :root {
+            --bg-deep: #07020e;
+            --border-mystic: rgba(147, 51, 234, 0.2);
+            --gold-light: #e5c07b;
+            --pink-neon: #d7698d;
+            --purple-glow: rgba(107, 33, 168, 0.4);
+        }
+
         html, body {
             overflow-x: hidden;
             scroll-behavior: smooth;
-        }
-
-        body {
+            background-color: var(--bg-deep);
+            color: #d1c5e2;
             font-family: 'Jost', sans-serif;
-            font-weight: 400;
-            /* Ana Tema: Derin Uzay Siyahı ve Koyu Mor */
-            background-color: #080312;
-            color: #e2e8f0;
+            font-weight: 300;
         }
 
-        /* Kompleks Uzay Arka Planı (Siyah/Mor bazlı) */
-        .space-bg {
+        /* Zarif ve İnce Kaydırma Çubuğu */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: #3b1d52; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--pink-neon); }
+
+        /* Tipografi */
+        .font-serif-mystic { font-family: 'Cormorant Garamond', serif; }
+        .text-gold { color: var(--gold-light); }
+        .text-pink-glow { color: var(--pink-neon); text-shadow: 0 0 10px rgba(215, 105, 141, 0.3); }
+
+        /* Arka Plan Ayrıntıları (Noise ve İnce Çizgiler) */
+        .bg-cosmos {
             position: fixed;
             inset: 0;
-            z-index: -20;
+            z-index: -10;
             background-image:
-                radial-gradient(circle at 20% 30%, rgba(76, 29, 149, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(147, 51, 234, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 50% 10%, rgba(236, 72, 153, 0.05) 0%, transparent 30%);
-            background-attachment: fixed;
+                radial-gradient(circle at 15% 50%, rgba(45, 15, 70, 0.4), transparent 40%),
+                radial-gradient(circle at 85% 20%, rgba(70, 20, 60, 0.3), transparent 30%);
         }
-
-        /* Lüks Noise (Kumlanma) Katmanı */
         .bg-noise {
             position: fixed;
             inset: 0;
-            z-index: -19;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: -9;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             pointer-events: none;
         }
 
-        /* Tipografi Grupları */
-        .font-mistik { font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
-        .font-baslik { font-family: 'Cormorant Garamond', serif; font-style: italic; }
-
-        /* Renk Geçişleri (Pembe ve Sarı Vurgular) */
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #fde047 0%, #facc15 50%, #ca8a04 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .text-gradient-pink {
-            background: linear-gradient(135deg, #fbcfe8 0%, #ec4899 50%, #be185d 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Glassmorphism - Emek Verilmiş Arayüz Panelleri */
-        .glass-panel {
-            background: linear-gradient(145deg, rgba(25, 10, 45, 0.4), rgba(10, 5, 20, 0.7));
-            border: 1px solid rgba(168, 85, 247, 0.15);
-            border-top: 1px solid rgba(236, 72, 153, 0.25); /* Pembe ışık yansıması */
-            border-left: 1px solid rgba(253, 224, 71, 0.15); /* Sarı ışık yansıması */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(168, 85, 247, 0.05);
+        /* Emek Verilmiş İnce Çizgili Kartlar (Line-Art UI) */
+        .card-line-art {
+            background: rgba(12, 5, 22, 0.6);
+            border: 1px solid var(--border-mystic);
+            border-radius: 12px;
             position: relative;
-        }
-
-        /* Kartlar İçin Dekoratif Köşeler (Astrolojik Hissiyat) */
-        .corner-decorated {
-            position: relative;
-        }
-        .corner-decorated::before, .corner-decorated::after {
-            content: ''; position: absolute; width: 20px; height: 20px; border: 1px solid transparent; transition: all 0.3s ease; pointer-events: none;
-        }
-        .corner-decorated::before { top: 10px; left: 10px; border-top-color: rgba(236,72,153,0.5); border-left-color: rgba(236,72,153,0.5); }
-        .corner-decorated::after { bottom: 10px; right: 10px; border-bottom-color: rgba(253,224,71,0.5); border-right-color: rgba(253,224,71,0.5); }
-        .corner-decorated:hover::before, .corner-decorated:hover::after { width: 30px; height: 30px; }
-
-        .card-elegant {
-            background: linear-gradient(145deg, rgba(30, 15, 50, 0.3), rgba(15, 5, 25, 0.6));
-            border: 1px solid rgba(168, 85, 247, 0.15);
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .card-elegant:hover {
-            border-color: rgba(236, 72, 153, 0.4);
-            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15), inset 0 0 15px rgba(253, 224, 71, 0.05);
-            transform: translateY(-5px);
-        }
-
-        /* Animasyonlar: Yıldızlar, Nebulalar, Gezegenler */
-        .star {
-            position: absolute;
-            border-radius: 50%;
-            background: #fff;
-            animation: twinkle var(--duration, 4s) ease-in-out infinite alternate;
-        }
-        .star.pink { background: #fbcfe8; box-shadow: 0 0 15px 2px rgba(236, 72, 153, 0.7); }
-        .star.gold { background: #fef08a; box-shadow: 0 0 15px 2px rgba(250, 204, 21, 0.7); }
-
-        @keyframes twinkle {
-            0% { opacity: 0.1; transform: scale(0.6); }
-            100% { opacity: 0.9; transform: scale(1.3); }
-        }
-
-        @keyframes shooting-star {
-            0% { transform: translate(0, 0) rotate(-45deg) scale(1); opacity: 0; }
-            5% { opacity: 1; }
-            10% { transform: translate(-500px, 500px) rotate(-45deg) scale(0); opacity: 0; }
-            100% { transform: translate(-500px, 500px) rotate(-45deg) scale(0); opacity: 0; }
-        }
-
-        /* Arka Planda Süzülen Astrolojik Semboller */
-        .floating-zodiac {
-            position: absolute;
-            font-family: 'Noto Sans Symbols2', sans-serif;
-            font-size: 8rem;
-            color: rgba(236, 72, 153, 0.02); /* Çok çok hafif pembe transparan */
-            animation: float-zodiac 25s ease-in-out infinite alternate;
-            z-index: -15;
-            user-select: none;
-        }
-        @keyframes float-zodiac {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
-            50% { transform: translate(30px, -40px) rotate(15deg); opacity: 0.04; }
-            100% { transform: translate(-20px, 20px) rotate(-10deg); opacity: 0.02; }
-        }
-
-        /* Uzay Vibe'ı - Orbit/Yörünge Çizgileri */
-        .orbit-circle {
-            position: absolute;
-            border-radius: 50%;
-            border: 1px dashed rgba(253, 224, 71, 0.1);
-            animation: spin-slow 60s linear infinite;
-            z-index: -16;
-            pointer-events: none;
-        }
-        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
-
-        /* Yüksek Emek Hissi Veren Buton */
-        .btn-mystic {
-            position: relative;
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.7), rgba(76, 29, 149, 0.9));
-            border: 1px solid rgba(236, 72, 153, 0.4);
-            color: #fff;
-            overflow: hidden;
             transition: all 0.4s ease;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
         }
-        .btn-mystic::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(253, 224, 71, 0.3), transparent);
-            transition: all 0.6s ease; z-index: -1;
-        }
-        .btn-mystic:hover::before { left: 100%; }
-        .btn-mystic:hover {
-            box-shadow: 0 0 25px rgba(236, 72, 153, 0.4), inset 0 0 10px rgba(253, 224, 71, 0.2);
-            border-color: #fde047;
-            transform: translateY(-2px);
+        .card-line-art:hover {
+            border-color: rgba(215, 105, 141, 0.4);
+            box-shadow: 0 0 20px rgba(215, 105, 141, 0.05), inset 0 0 15px rgba(229, 192, 123, 0.03);
         }
 
-        /* Sidebar Aktif Link (Sarı/Pembe Uyumu) */
-        .sidebar-link {
+        /* Kart Köşe Süslemeleri */
+        .corner-marks::before, .corner-marks::after {
+            content: ''; position: absolute; width: 12px; height: 12px; border: 1px solid transparent; pointer-events: none; transition: 0.3s;
+        }
+        .corner-marks::before { top: 6px; left: 6px; border-top-color: rgba(229, 192, 123, 0.4); border-left-color: rgba(229, 192, 123, 0.4); }
+        .corner-marks::after { bottom: 6px; right: 6px; border-bottom-color: rgba(215, 105, 141, 0.4); border-right-color: rgba(215, 105, 141, 0.4); }
+
+        /* Buton (Zarif ve İnce) */
+        .btn-elegant {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(215, 105, 141, 0.3);
+            background: rgba(215, 105, 141, 0.05);
+            color: var(--pink-neon);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
             transition: all 0.3s ease;
-            position: relative;
         }
-        .sidebar-link::before {
-            content: '✦'; position: absolute; left: -15px; top: 50%; transform: translateY(-50%) scale(0);
-            color: #fde047; transition: 0.3s ease; opacity: 0; font-size: 10px;
+        .btn-elegant:hover {
+            background: rgba(215, 105, 141, 0.15);
+            border-color: var(--pink-neon);
+            box-shadow: 0 0 15px rgba(215, 105, 141, 0.2);
+            color: #fff;
         }
-        .sidebar-link:hover::before, .sidebar-link.active::before { transform: translateY(-50%) scale(1); opacity: 1; left: 0; }
-        .sidebar-link:hover, .sidebar-link.active { background: rgba(236, 72, 153, 0.1); color: #fbcfe8; padding-left: 1.5rem; border-radius: 0.5rem; }
 
-        /* Gelişmiş Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #080312; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #9333ea, #ec4899); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, #a855f7, #f472b6); }
+        /* Sidebar Linkleri */
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.25rem;
+            color: #9486a8;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(90deg, rgba(215, 105, 141, 0.08), transparent);
+            border-left: 1px solid var(--pink-neon);
+            color: var(--gold-light);
+        }
+        .nav-link i { font-size: 1rem; opacity: 0.7; }
+
+        /* Yıldızlar (Daha minik ve zarif) */
+        .star-tiny {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 4s) infinite alternate;
+        }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 0.8; transform: scale(1.2); } }
     </style>
 </head>
-<body class="relative selection:bg-pink-600/40 selection:text-gold-200">
+<body>
 
-    <!-- ARKA PLAN EFEKTLERİ VE ASTROLOJİK DETAYLAR -->
-    <div class="space-bg"></div>
+    <!-- ARKA PLAN -->
+    <div class="bg-cosmos"></div>
     <div class="bg-noise"></div>
 
-    <!-- Yörüngeler -->
-    <div class="orbit-circle w-[600px] h-[600px] top-[-10%] right-[-5%] border-pink-500/10"></div>
-    <div class="orbit-circle w-[900px] h-[900px] bottom-[-20%] left-[-10%] border-yellow-500/5"></div>
-
-    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-
-        <!-- Süzülen Burç Sembolleri -->
-        <div class="floating-zodiac" style="top: 10%; left: 5%; color: rgba(253, 224, 71, 0.03);">♌︎</div>
-        <div class="floating-zodiac" style="top: 40%; right: 10%; animation-delay: -5s; font-size: 12rem;">♏︎</div>
-        <div class="floating-zodiac" style="bottom: 15%; left: 20%; animation-delay: -12s; font-size: 10rem; color: rgba(236, 72, 153, 0.03);">♒︎</div>
-        <div class="floating-zodiac" style="top: -5%; left: 45%; animation-delay: -8s; font-size: 15rem; opacity: 0.01;">♓︎</div>
-
-        <!-- Mistik Renkli Nebulalar -->
-        <div class="absolute w-[600px] h-[600px] rounded-full bg-pink-900/20 blur-[120px] top-[-10%] left-[-10%] mix-blend-screen"></div>
-        <div class="absolute w-[800px] h-[800px] rounded-full bg-purple-900/20 blur-[150px] bottom-[-20%] right-[-10%] mix-blend-screen"></div>
-        <div class="absolute w-[500px] h-[500px] rounded-full bg-yellow-900/10 blur-[100px] top-[40%] left-[30%] mix-blend-screen"></div>
-
-        <!-- Yıldız Katmanları -->
-        <div class="star gold" style="top:15%; left:20%; width:3px; height:3px; --duration: 3s;"></div>
-        <div class="star pink" style="top:25%; left:80%; width:4px; height:4px; --duration: 5s;"></div>
-        <div class="star" style="top:45%; left:25%; width:2px; height:2px; --duration: 4s;"></div>
-        <div class="star pink" style="top:65%; left:75%; width:3px; height:3px; --duration: 6s;"></div>
-        <div class="star gold" style="top:85%; left:15%; width:4px; height:4px; --duration: 3.5s;"></div>
-        <div class="star" style="top:18%; left:55%; width:2px; height:2px; --duration: 4.5s;"></div>
-        <div class="star pink" style="top:75%; left:45%; width:3px; height:3px; --duration: 5.5s;"></div>
-
-        <!-- Kayan Yıldızlar -->
-        <div class="absolute" style="top: 5%; left: 90%; width: 150px; height: 1px; background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 1), transparent); animation: shooting-star 15s linear infinite; animation-delay: 2s;"></div>
-        <div class="absolute" style="top: 35%; left: 80%; width: 100px; height: 1px; background: linear-gradient(90deg, transparent, rgba(253, 224, 71, 1), transparent); animation: shooting-star 20s linear infinite; animation-delay: 10s;"></div>
+    <!-- Uzay Ayrıntıları (Minik yıldızlar) -->
+    <div class="fixed inset-0 pointer-events-none -z-10">
+        <div class="star-tiny w-[2px] h-[2px] top-[15%] left-[20%]" style="--duration: 3s; box-shadow: 0 0 5px #e5c07b;"></div>
+        <div class="star-tiny w-[1px] h-[1px] top-[40%] left-[80%]" style="--duration: 5s;"></div>
+        <div class="star-tiny w-[2px] h-[2px] top-[70%] left-[10%]" style="--duration: 4s; box-shadow: 0 0 5px #d7698d;"></div>
+        <div class="star-tiny w-[1px] h-[1px] top-[85%] left-[60%]" style="--duration: 6s;"></div>
     </div>
 
-    <!-- PREMIUM NAVBAR -->
-    <nav class="border-b border-pink-500/10 bg-[#080312]/80 backdrop-blur-2xl sticky top-0 z-50 transition-all shadow-[0_4px_30px_rgba(0,0,0,0.8)]">
+    <!-- ÜST MENÜ (NAVBAR) - Şık ve Siyah -->
+    <nav class="border-b border-purple-900/30 bg-[#07020e]/90 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
 
-            <!-- Logo (Tamamen Küçük Harf) -->
-            <a href="{% url 'anasayfa' %}" class="flex items-center gap-3 group shrink-0 w-48">
-                <span class="text-xl text-pink-500 group-hover:text-yellow-400 transition-colors duration-500" style="text-shadow: 0 0 15px rgba(236,72,153,0.8);">✦</span>
-                <span class="font-mistik text-2xl text-gradient-gold tracking-[0.2em] lowercase">astrobacılar</span>
+            <!-- LOGO: Tamamen küçük harf, kibar tırnaklı font -->
+            <a href="{% url 'anasayfa' %}" class="flex items-center gap-3 shrink-0">
+                <span class="text-xl text-gold" style="text-shadow: 0 0 10px rgba(229,192,123,0.4);">✧</span>
+                <span class="font-serif-mystic lowercase text-3xl tracking-widest text-gold font-light">astrobacılar</span>
             </a>
 
-            <!-- Masaüstü Linkler (Ünlüler ile Giriş Yap Ayrıldı -> flex-1 ve justify-center eklendi) -->
-            <div class="hidden xl:flex flex-1 justify-center items-center gap-8 px-8">
-                <a href="{% url 'anasayfa' %}" class="text-pink-300 font-medium text-[13px] tracking-[0.15em] border-b border-pink-500/50 pb-1 transition">ANA SAYFA</a>
-                <a href="{% url 'dogum_haritasi' %}" class="text-gray-400 font-medium text-[13px] tracking-[0.15em] hover:text-pink-300 hover:border-b hover:border-pink-500/50 pb-1 transition-all">DOĞUM HARİTASI</a>
-                <a href="{% url 'uyumluluk' %}" class="text-gray-400 font-medium text-[13px] tracking-[0.15em] hover:text-pink-300 hover:border-b hover:border-pink-500/50 pb-1 transition-all">UYUMLULUK</a>
-                <a href="{% url 'numeroloji' %}" class="text-gray-400 font-medium text-[13px] tracking-[0.15em] hover:text-pink-300 hover:border-b hover:border-pink-500/50 pb-1 transition-all">NUMEROLOJİ</a>
-                <a href="{% url 'gundem_listesi' %}" class="text-gray-400 font-medium text-[13px] tracking-[0.15em] hover:text-pink-300 hover:border-b hover:border-pink-500/50 pb-1 transition-all">GÜNDEM</a>
-                <a href="{% url 'tarot_anasayfa' %}" class="text-gray-400 font-medium text-[13px] tracking-[0.15em] hover:text-pink-300 hover:border-b hover:border-pink-500/50 pb-1 transition-all">TAROT</a>
-                <a href="{% url 'unlu_listesi' %}" class="text-gray-400 font-medium text-[13px] tracking-[0.15em] hover:text-pink-300 hover:border-b hover:border-pink-500/50 pb-1 transition-all">ÜNLÜLER</a>
+            <!-- MASAÜSTÜ MENÜ -->
+            <div class="hidden xl:flex items-center gap-8 text-[11px] tracking-[0.2em] text-[#9486a8]">
+                <a href="{% url 'anasayfa' %}" class="hover:text-pink-300 transition border-b border-pink-500/50 pb-1 text-pink-200">ANA SAYFA</a>
+                <a href="{% url 'dogum_haritasi' %}" class="hover:text-pink-300 transition pb-1">BURÇLAR</a>
+                <a href="{% url 'dogum_haritasi' %}" class="hover:text-pink-300 transition pb-1">HARİTAM</a>
+                <a href="{% url 'uyumluluk' %}" class="hover:text-pink-300 transition pb-1">ASTROLOJİ</a>
+                <a href="{% url 'tarot_anasayfa' %}" class="hover:text-pink-300 transition pb-1">TAROT</a>
+                <a href="{% url 'unlu_listesi' %}" class="hover:text-pink-300 transition pb-1">ÜNLÜLER</a>
             </div>
 
-            <!-- Sağ Kısım (Auth Alanı sağa yaslandı) -->
-            <div class="flex items-center justify-end gap-6 w-48 shrink-0">
-                <!-- Desktop Auth -->
-                <div class="hidden md:flex items-center gap-6">
+            <!-- GİRİŞ / PROFİL KISMI -->
+            <div class="flex items-center gap-6 shrink-0">
+                <div class="hidden md:flex items-center gap-5">
+                    <button class="text-[#9486a8] hover:text-gold transition text-lg"><i class="fas fa-search"></i></button>
+                    <button class="text-[#9486a8] hover:text-gold transition text-lg"><i class="far fa-bell"></i></button>
+
                     {% if user.is_authenticated %}
-                        <a href="{% url 'profil' %}" class="flex items-center gap-3 text-gray-300 hover:text-pink-300 transition group">
-                            <span class="w-9 h-9 rounded-full bg-gradient-to-br from-pink-600 to-purple-900 border border-pink-500/40 flex items-center justify-center text-gold-200 text-sm font-semibold shadow-[0_0_15px_rgba(236,72,153,0.3)] group-hover:shadow-[0_0_20px_rgba(253,224,71,0.4)] transition-all">
+                        <div class="h-6 w-px bg-purple-900/50"></div>
+                        <a href="{% url 'profil' %}" class="flex items-center gap-3 text-sm text-[#d1c5e2] hover:text-pink-300 transition">
+                            <span class="w-8 h-8 rounded-full border border-pink-500/30 flex items-center justify-center bg-pink-900/20 text-gold text-xs">
                                 {{ user.username|slice:":1"|upper }}
                             </span>
-                            <span class="tracking-widest text-xs font-medium">{{ user.username|upper }}</span>
+                            <span class="font-light tracking-wider">{{ user.username|upper }}</span>
                         </a>
-                        <a href="{% url 'cikis' %}" class="text-gray-500 hover:text-pink-400 transition text-xs tracking-widest font-medium">ÇIKIŞ</a>
                     {% else %}
-                        <!-- Giriş Yap ile Linkler arasına net mesafe -->
-                        <a href="{% url 'giris' %}" class="text-gray-300 hover:text-pink-300 transition text-xs tracking-[0.15em] font-medium whitespace-nowrap">GİRİŞ YAP</a>
-                        <a href="{% url 'kayit' %}" class="btn-mystic text-xs tracking-[0.15em] px-6 py-2.5 rounded-full font-medium whitespace-nowrap">KAYIT OL</a>
+                        <div class="h-6 w-px bg-purple-900/50"></div>
+                        <a href="{% url 'giris' %}" class="text-[11px] tracking-[0.2em] text-[#9486a8] hover:text-pink-300 transition">GİRİŞ</a>
+                        <a href="{% url 'kayit' %}" class="text-[11px] tracking-[0.2em] text-pink-300 border border-pink-500/30 px-5 py-2 rounded-full hover:bg-pink-900/20 transition">KAYIT OL</a>
                     {% endif %}
                 </div>
-
-                <!-- Hamburger Menu Button (Mobil/Tablet) -->
-                <button id="mobile-menu-btn" class="xl:hidden text-gray-400 hover:text-pink-400 transition text-2xl focus:outline-none">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
         </div>
     </nav>
 
-    <!-- MOBİL SOLDAN AÇILIR MENÜ (DRAWER) -->
-    <div id="mobile-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[60] hidden opacity-0 transition-opacity duration-300"></div>
-    <div id="mobile-drawer" class="fixed top-0 left-0 h-full w-72 max-w-[80vw] glass-panel z-[70] transform -translate-x-full transition-transform duration-300 ease-out flex flex-col border-r border-pink-500/20">
-        <div class="p-6 flex justify-between items-center border-b border-pink-500/20 bg-purple-900/10">
-            <span class="font-mistik text-xl text-gradient-gold lowercase">astrobacılar</span>
-            <button id="close-menu-btn" class="text-gray-400 hover:text-pink-400 text-2xl transition">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="flex-1 overflow-y-auto py-6 px-4 space-y-2 flex flex-col">
-            <a href="{% url 'anasayfa' %}" class="block px-4 py-4 text-sm font-medium tracking-widest text-pink-200 bg-pink-900/20 rounded-xl border border-pink-500/20"><i class="fas fa-home mr-3 opacity-60 text-yellow-500"></i>ANA SAYFA</a>
-            <a href="{% url 'dogum_haritasi' %}" class="block px-4 py-4 text-sm font-medium tracking-widest text-gray-300 hover:text-pink-200 hover:bg-white/5 rounded-xl transition"><i class="fas fa-star mr-3 opacity-40"></i>DOĞUM HARİTASI</a>
-            <a href="{% url 'uyumluluk' %}" class="block px-4 py-4 text-sm font-medium tracking-widest text-gray-300 hover:text-pink-200 hover:bg-white/5 rounded-xl transition"><i class="fas fa-heart mr-3 opacity-40"></i>UYUMLULUK</a>
-            <a href="{% url 'numeroloji' %}" class="block px-4 py-4 text-sm font-medium tracking-widest text-gray-300 hover:text-pink-200 hover:bg-white/5 rounded-xl transition"><i class="fas fa-sort-numeric-up mr-3 opacity-40"></i>NUMEROLOJİ</a>
-            <a href="{% url 'gundem_listesi' %}" class="block px-4 py-4 text-sm font-medium tracking-widest text-gray-300 hover:text-pink-200 hover:bg-white/5 rounded-xl transition"><i class="fas fa-globe mr-3 opacity-40"></i>GÜNDEM</a>
-            <a href="{% url 'tarot_anasayfa' %}" class="block px-4 py-4 text-sm font-medium tracking-widest text-gray-300 hover:text-pink-200 hover:bg-white/5 rounded-xl transition"><i class="fas fa-moon mr-3 opacity-40"></i>TAROT</a>
-            <a href="{% url 'unlu_listesi' %}" class="block px-4 py-4 text-sm font-medium tracking-widest text-gray-300 hover:text-pink-200 hover:bg-white/5 rounded-xl transition"><i class="fas fa-users mr-3 opacity-40"></i>ÜNLÜLER</a>
+    <!-- ANA YAPI (Üç Kolonlu Grid) -->
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] xl:grid-cols-[220px_1fr_280px] gap-8">
 
-            <div class="mt-auto pt-8 border-t border-pink-500/20 md:hidden flex flex-col gap-5">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'profil' %}" class="text-center text-sm font-medium tracking-widest text-gray-200">PROFİL ({{ user.username|upper }})</a>
-                    <a href="{% url 'cikis' %}" class="text-center text-sm font-medium tracking-widest text-gray-500">ÇIKIŞ</a>
-                {% else %}
-                    <a href="{% url 'giris' %}" class="text-center text-sm font-medium tracking-widest text-gray-300">GİRİŞ YAP</a>
-                    <a href="{% url 'kayit' %}" class="btn-mystic text-center text-sm font-medium tracking-widest py-3.5 rounded-xl block">KAYIT OL</a>
-                {% endif %}
+        <!-- SOL SIDEBAR -->
+        <aside class="hidden lg:block sticky top-24 h-fit">
+            <div class="card-line-art p-3 corner-marks flex flex-col gap-2">
+                <a href="{% url 'anasayfa' %}" class="nav-link active">
+                    <i class="fas fa-home"></i> Ana Sayfa
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-sun"></i> Günlük Yorum
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-star-and-crescent"></i> Haftalık Yorum
+                </a>
+                <a href="{% url 'dogum_haritasi' %}" class="nav-link">
+                    <i class="fas fa-dharmachakra"></i> Doğum Haritam
+                </a>
+                <a href="{% url 'uyumluluk' %}" class="nav-link">
+                    <i class="fas fa-heart"></i> Uyum Analizi
+                </a>
+                <a href="{% url 'tarot_anasayfa' %}" class="nav-link">
+                    <i class="fas fa-layer-group"></i> Tarot
+                </a>
+                <a href="{% url 'unlu_listesi' %}" class="nav-link">
+                    <i class="fas fa-users"></i> Ünlüler
+                </a>
             </div>
-        </div>
-    </div>
 
-    <!-- MAIN GRID -->
-    <div class="max-w-[1500px] mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[260px_1fr_320px] gap-10 relative">
-
-        <!-- SOL SIDEBAR (Masaüstü) -->
-        <aside class="hidden lg:block sticky top-32 h-fit glass-panel rounded-2xl p-5 corner-decorated">
-            <div class="space-y-2">
-                <a href="{% url 'anasayfa' %}" class="sidebar-link active flex items-center px-4 py-4 text-pink-200 text-sm font-medium tracking-widest border border-pink-500/20 shadow-inner">
-                    ANA SAYFA
-                </a>
-                <a href="{% url 'dogum_haritasi' %}" class="sidebar-link flex items-center px-4 py-4 text-gray-400 text-sm font-medium tracking-widest hover:bg-white/5 transition">
-                    DOĞUM HARİTAM
-                </a>
-                <a href="{% url 'uyumluluk' %}" class="sidebar-link flex items-center px-4 py-4 text-gray-400 text-sm font-medium tracking-widest hover:bg-white/5 transition">
-                    UYUM ANALİZİ
-                </a>
-                <a href="{% url 'numeroloji' %}" class="sidebar-link flex items-center px-4 py-4 text-gray-400 text-sm font-medium tracking-widest hover:bg-white/5 transition">
-                    NUMEROLOJİ
-                </a>
-                <a href="{% url 'gundem_listesi' %}" class="sidebar-link flex items-center px-4 py-4 text-gray-400 text-sm font-medium tracking-widest hover:bg-white/5 transition">
-                    GÜNDEM
-                </a>
-                <a href="{% url 'tarot_anasayfa' %}" class="sidebar-link flex items-center px-4 py-4 text-gray-400 text-sm font-medium tracking-widest hover:bg-white/5 transition">
-                    TAROT
-                </a>
-                <a href="{% url 'unlu_listesi' %}" class="sidebar-link flex items-center px-4 py-4 text-gray-400 text-sm font-medium tracking-widest hover:bg-white/5 transition">
-                   ÜNLÜLER
-                </a>
+            <!-- Sol Alt Motivasyon Kartı -->
+            <div class="card-line-art p-6 corner-marks mt-6 text-center">
+                <p class="text-[10px] tracking-[0.2em] text-pink-300 mb-4 font-medium uppercase">Günlük Motivasyon</p>
+                <p class="font-serif-mystic text-[15px] italic text-gray-300 leading-relaxed font-light">
+                    "Yıldızlar seni yönlendirebilir, ama yolu seçmek senin elinde."
+                </p>
+                <i class="fas fa-moon text-pink-500/30 mt-4 text-xl"></i>
             </div>
         </aside>
 
-        <!-- ANA İÇERİK -->
-        <main class="min-w-0 z-10">
+        <!-- ORTA İÇERİK (Index.html buraya gelecek) -->
+        <main class="min-w-0">
             {% block content %}
             {% endblock %}
         </main>
 
         <!-- SAĞ SIDEBAR -->
-        <aside class="hidden xl:block sticky top-32 h-fit space-y-8">
+        <aside class="hidden xl:flex flex-col gap-6 sticky top-24 h-fit">
             {% block sidebar %}
-            <!-- Günün Mottosu Kartı -->
-            <div class="glass-panel rounded-2xl p-8 corner-decorated group">
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/10 rounded-full blur-[40px] group-hover:bg-yellow-500/10 transition duration-700"></div>
 
-                <p class="text-xs tracking-[0.25em] text-pink-300 font-semibold mb-6 flex items-center gap-3">
-                    <span class="text-yellow-400 text-lg">✦</span> GÜNÜN MOTTOSU
-                </p>
-                <div class="relative">
-                    <i class="fas fa-quote-left absolute -top-4 -left-3 text-2xl text-pink-500/20"></i>
-                    <p class="font-baslik text-2xl text-gray-200 italic leading-relaxed pl-4 font-light">
-                        "Yıldızlar sana sadece eğilimleri fısıldar; kaderini yazan yine senin iradendir."
-                    </p>
+            <!-- Sağ Kart 1: Günlük Yorum -->
+            <div class="card-line-art p-6 corner-marks">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Günlük Yorumun</p>
+                        <p class="text-xs text-[#9486a8] mt-1">24 Temmuz 2026</p>
+                    </div>
+                    <i class="fas fa-sun text-gold/40 text-2xl"></i>
                 </div>
+                <div class="flex items-center gap-3 mb-3">
+                    <i class="fas fa-yin-yang text-gold text-xl"></i>
+                    <p class="font-serif-mystic text-xl text-gold">Denge</p>
+                </div>
+                <p class="text-xs text-gray-400 font-light leading-relaxed mb-4">
+                    Bugün içsel dengeni bulmak için harika bir gün. Yıldızlar sana sakinlik vadediyor.
+                </p>
+                <a href="#" class="text-[10px] tracking-widest text-pink-300 hover:text-gold transition">DEVAMINI OKU →</a>
             </div>
+
+            <!-- Sağ Kart 2: Ay'ın Fazı -->
+            <div class="card-line-art p-6 corner-marks text-center relative overflow-hidden">
+                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-1">Ay'ın Fazı</p>
+                <p class="text-sm text-gold font-light mb-4">Büyüyen Ay</p>
+
+                <!-- Ay Çizimi (SVG Line art) -->
+                <svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto mb-4" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="rgba(215, 105, 141, 0.2)" stroke-width="1" stroke-dasharray="2 2"/>
+                    <path d="M50 5 A45 45 0 0 1 50 95 A30 45 0 0 0 50 5" fill="rgba(215, 105, 141, 0.1)" stroke="#d7698d" stroke-width="0.5"/>
+                    <circle cx="70" cy="30" r="1" fill="#e5c07b"/>
+                    <circle cx="65" cy="70" r="1.5" fill="#e5c07b"/>
+                </svg>
+
+                <p class="text-[11px] text-gray-400 font-light">Niyetlerini belirle, evren seninle.</p>
+            </div>
+
             {% endblock %}
         </aside>
 
     </div>
-
-    <!-- Drawer Menu JS (Soldan) -->
-    <script>
-        const btn = document.getElementById('mobile-menu-btn');
-        const closeBtn = document.getElementById('close-menu-btn');
-        const overlay = document.getElementById('mobile-overlay');
-        const drawer = document.getElementById('mobile-drawer');
-
-        function openMenu() {
-            overlay.classList.remove('hidden');
-            setTimeout(() => {
-                overlay.classList.remove('opacity-0');
-                drawer.classList.remove('-translate-x-full');
-            }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMenu() {
-            overlay.classList.add('opacity-0');
-            drawer.classList.add('-translate-x-full');
-            setTimeout(() => {
-                overlay.classList.add('hidden');
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        btn.addEventListener('click', openMenu);
-        closeBtn.addEventListener('click', closeMenu);
-        overlay.addEventListener('click', closeMenu);
-    </script>
 </body>
 </html>
