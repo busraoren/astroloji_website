@@ -31,4 +31,5 @@ urlpatterns = [
     path('unluler/', include('unluler.urls')),
     path('evler/', include('evler.urls')),
     path('gundem/', include('astro_gundem.urls')),
+    path('testler/', include('test_detay.urls')),
 ]
