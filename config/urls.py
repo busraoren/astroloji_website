@@ -19,6 +19,7 @@ from django.urls import path, include
 
 from django.contrib import admin
 from django.urls import path, include
+from burcs import views as burcs_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
