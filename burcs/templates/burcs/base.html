@@ -85,6 +85,7 @@
         .btn-elegant {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             border: 1px solid rgba(215, 105, 141, 0.3);
             background: rgba(215, 105, 141, 0.05);
@@ -163,21 +164,14 @@
 
             <!-- DETAYLANDIRILMIŞ LOGO VE ANİMASYON -->
             <a href="{% url 'anasayfa' %}" class="flex items-center gap-2 shrink-0 group">
-
                 <!-- Ay'da Sallanan Detaylı At Animasyonu -->
                 <div class="relative w-12 h-12 flex items-center justify-center shrink-0 mr-1">
-                    <!-- Mistik Ay -->
                     <i class="fas fa-moon text-[30px] text-[#e5c07b] -rotate-12 drop-shadow-[0_0_10px_rgba(229,192,123,0.5)] group-hover:drop-shadow-[0_0_15px_rgba(229,192,123,0.8)] transition-all duration-500"></i>
-
-                    <!-- Detaylı Sallanan At (Satranç Atı Formunda) -->
                     <div class="absolute top-[15%] right-[32%] origin-top animate-[swing-horse_3s_ease-in-out_infinite_alternate]">
-                        <!-- Parlayan İp -->
                         <div class="w-[1px] h-[18px] bg-gradient-to-b from-[#e5c07b] to-[#d7698d] mx-auto shadow-[0_0_6px_rgba(215,105,141,0.8)]"></div>
-                        <!-- Asil At Figürü -->
                         <i class="fas fa-chess-knight text-[#d7698d] text-[13px] block -ml-[5.5px] drop-shadow-[0_0_8px_rgba(215,105,141,0.9)]"></i>
                     </div>
                 </div>
-
                 <span class="font-serif-mystic lowercase text-3xl tracking-widest text-gold font-light mt-1">astrobacılar</span>
             </a>
 
@@ -192,7 +186,7 @@
                 <a href="{% url 'unlu_listesi' %}" class="hover:text-pink-300 transition pb-1">ÜNLÜLER</a>
             </div>
 
-            <!-- GİRİŞ / PROFİL KISMI -->
+            <!-- GİRİŞ / PROFİL KISMI VE MOBİL BUTONU -->
             <div class="flex items-center gap-6 shrink-0">
                 <div class="hidden md:flex items-center gap-5">
                     <button class="text-[#9486a8] hover:text-gold transition text-lg"><i class="fas fa-search"></i></button>
@@ -212,9 +206,63 @@
                         <a href="{% url 'kayit' %}" class="text-[11px] tracking-[0.2em] text-pink-300 border border-pink-500/30 px-5 py-2 rounded-full hover:bg-pink-900/20 transition">KAYIT OL</a>
                     {% endif %}
                 </div>
+
+                <!-- Hamburger Menü Butonu (Mobil İçin) -->
+                <button id="mobile-menu-btn" class="xl:hidden text-[#9486a8] hover:text-gold transition text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
+
+    <!-- MOBİL SOLDAN AÇILIR MENÜ (DRAWER) -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[60] hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="mobile-drawer" class="fixed top-0 left-0 h-full w-[280px] max-w-[80vw] bg-[#07020e] z-[70] transform -translate-x-full transition-transform duration-300 ease-out flex flex-col border-r border-[rgba(215,105,141,0.2)] shadow-[10px_0_30px_rgba(0,0,0,0.8)]">
+
+        <!-- Drawer Header -->
+        <div class="p-6 flex justify-between items-center border-b border-[rgba(215,105,141,0.2)] bg-[#10051f]/50">
+            <span class="font-serif-mystic text-2xl text-gold lowercase tracking-widest font-light">astrobacılar</span>
+            <button id="close-menu-btn" class="text-[#9486a8] hover:text-pink-400 text-2xl transition focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Drawer Links -->
+        <div class="flex-1 overflow-y-auto py-8 px-4 flex flex-col gap-2">
+            <a href="{% url 'anasayfa' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-gold bg-[rgba(215,105,141,0.1)] rounded-xl border border-[rgba(215,105,141,0.2)]">
+                <i class="fas fa-home text-base opacity-60"></i> ANA SAYFA
+            </a>
+            <a href="{% url 'dogum_haritasi' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                <i class="fas fa-dharmachakra text-base opacity-40"></i> DOĞUM HARİTASI
+            </a>
+            <a href="{% url 'uyumluluk' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                <i class="fas fa-heart text-base opacity-40"></i> SİNASTRİ
+            </a>
+            <a href="{% url 'numeroloji' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                <i class="fas fa-sort-numeric-up text-base opacity-40"></i> NUMEROLOJİ
+            </a>
+            <a href="{% url 'gundem_listesi' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                <i class="fas fa-globe text-base opacity-40"></i> GÜNDEM
+            </a>
+            <a href="{% url 'tarot_anasayfa' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                <i class="fas fa-layer-group text-base opacity-40"></i> TAROT
+            </a>
+            <a href="{% url 'unlu_listesi' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                <i class="fas fa-users text-base opacity-40"></i> ÜNLÜLER
+            </a>
+
+            <!-- Mobil Alt Kısım (Auth) -->
+            <div class="mt-auto pt-8 border-t border-[rgba(215,105,141,0.2)] md:hidden flex flex-col gap-4">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profil' %}" class="text-center text-[11px] font-medium tracking-[0.2em] text-gold">PROFİL ({{ user.username|upper }})</a>
+                    <a href="{% url 'cikis' %}" class="text-center text-[11px] font-medium tracking-[0.2em] text-[#9486a8]">ÇIKIŞ</a>
+                {% else %}
+                    <a href="{% url 'giris' %}" class="text-center text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] py-2">GİRİŞ YAP</a>
+                    <a href="{% url 'kayit' %}" class="btn-elegant w-full justify-center !text-[10px] tracking-[0.2em] py-3 rounded-xl block text-center">KAYIT OL</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
     <!-- ANA YAPI -->
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] xl:grid-cols-[220px_1fr_280px] gap-8">
@@ -315,5 +363,40 @@
 
     </div>
 
+    <!-- Mistik Mobil Menü JavaScript Kodu -->
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const overlay = document.getElementById('mobile-overlay');
+        const drawer = document.getElementById('mobile-drawer');
+
+        // Menü Açma Fonksiyonu
+        function openMenu() {
+            overlay.classList.remove('hidden');
+            // Geçiş animasyonunun çalışması için timeout ile class ekleniyor
+            setTimeout(() => {
+                overlay.classList.remove('opacity-0');
+                drawer.classList.remove('-translate-x-full');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Arka planın kaymasını engelle
+        }
+
+        // Menü Kapatma Fonksiyonu
+        function closeMenu() {
+            overlay.classList.add('opacity-0');
+            drawer.classList.add('-translate-x-full');
+
+            // Animasyon bittikten sonra display:none (hidden) yapılıyor
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Event Listener'lar
+        mobileBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+    </script>
 </body>
 </html>
