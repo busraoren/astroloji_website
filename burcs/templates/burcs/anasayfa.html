@@ -1,173 +1,183 @@
 {% extends 'burcs/base.html' %}
 
-{% block title %}Astroloji - Ana Sayfa{% endblock %}
+{% block title %}astrobacılar - Ana Sayfa{% endblock %}
 
 {% block content %}
 
-<!-- HERO BÖLÜMÜ (Genişletildi ve Ferahlatıldı) -->
-<!-- py-24 ile dikey boşluklar çok daha açıldı, dip dibe görünüm giderildi -->
-<div class="glass-panel rounded-3xl py-24 md:py-28 px-6 md:px-12 mb-16 text-center relative overflow-hidden group border-white/5">
-    <!-- İç Mistik Pembe Parlama -->
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(236,72,153,0.08),_transparent_60%)] opacity-70 group-hover:opacity-100 transition duration-700"></div>
+<!-- HERO BÖLÜMÜ (Mistik ve Ferah Görünüm) -->
+<div class="glass-panel rounded-3xl py-28 md:py-32 px-8 md:px-14 mb-16 text-center corner-decorated group">
+    <!-- İçten gelen kozmik ışık patlaması -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(236,72,153,0.15),_transparent_70%)] opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"></div>
+
+    <!-- Dekoratif astroloji haritası çizgileri -->
+    <svg class="absolute inset-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line x1="0" y1="0" x2="100" y2="100" stroke="#fbcfe8" stroke-width="0.2"/>
+        <line x1="100" y1="0" x2="0" y2="100" stroke="#fbcfe8" stroke-width="0.2"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="#fde047" stroke-width="0.2" stroke-dasharray="1 2"/>
+    </svg>
 
     <div class="relative z-10 flex flex-col items-center justify-center">
-        <p class="text-[9px] md:text-[10px] tracking-[0.3em] text-pink-300/80 font-normal mb-8 flex items-center justify-center gap-3">
-            <span class="text-yellow-500 text-[10px]">✦</span> EVRENİN MESAJINA HAZIR MISIN <span class="text-yellow-500 text-[10px]">✦</span>
+        <p class="text-[11px] md:text-xs tracking-[0.35em] text-pink-300 font-medium mb-8 flex items-center justify-center gap-4">
+            <span class="text-yellow-400 text-sm animate-pulse">✦</span> EVRENİN MESAJINA HAZIR MISIN <span class="text-yellow-400 text-sm animate-pulse">✦</span>
         </p>
 
-        <!-- YAZI BOYUTU VE SATIR ARALIĞI FERAH (leading-relaxed, mb-10) -->
-        <h1 class="font-mistik text-2xl md:text-4xl lg:text-[40px] text-gradient-gold mb-10 leading-relaxed max-w-3xl drop-shadow-sm font-normal">
+        <h1 class="font-mistik text-3xl md:text-5xl lg:text-[50px] text-gradient-gold mb-12 leading-[1.4] max-w-4xl drop-shadow-[0_0_20px_rgba(253,224,71,0.2)]">
             Yıldızların Sana Fısıldadıklarını Keşfet
         </h1>
 
-        <!-- AÇIKLAMA METNİ ALT BOŞLUĞU ARTIRILDI (mb-12) -->
-        <p class="text-gray-400 font-light text-sm md:text-base max-w-xl mb-12 leading-[1.8]">
+        <p class="text-gray-300 font-light text-base md:text-lg max-w-2xl mb-14 leading-[1.8]">
             Doğum haritanın derinliklerine in, evrensel uyumunu sorgula ve kaderini yıldızların mistik diliyle yeniden oku.
         </p>
 
-        <a href="{% url 'dogum_haritasi' %}" class="holo-btn inline-block text-[10px] md:text-xs tracking-[0.2em] px-10 py-4 rounded-full shadow-[0_0_20px_rgba(236,72,153,0.15)]">
+        <a href="{% url 'dogum_haritasi' %}" class="btn-mystic inline-block text-xs md:text-sm tracking-[0.25em] font-semibold px-12 py-5 rounded-full">
             HARİTANI KEŞFET
         </a>
     </div>
 </div>
 
 <!-- POPÜLER ÖZELLİKLER BAŞLIĞI -->
-<div class="flex items-center gap-4 mb-10">
-    <div class="h-[1px] bg-gradient-to-r from-transparent via-pink-500/20 to-transparent flex-1"></div>
-    <p class="text-[9px] md:text-[10px] tracking-[0.25em] text-pink-300/70 font-normal">POPÜLER ANALİZLER</p>
-    <div class="h-[1px] bg-gradient-to-r from-pink-500/20 via-transparent to-transparent flex-1"></div>
+<div class="flex items-center gap-6 mb-12">
+    <div class="h-[1px] bg-gradient-to-r from-transparent via-pink-500/30 to-transparent flex-1"></div>
+    <p class="text-[11px] md:text-xs tracking-[0.3em] text-pink-300 font-medium whitespace-nowrap">✦ POPÜLER ANALİZLER ✦</p>
+    <div class="h-[1px] bg-gradient-to-r from-pink-500/30 via-transparent to-transparent flex-1"></div>
 </div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-    <a href="{% url 'dogum_haritasi' %}" class="card-elegant rounded-2xl p-8 text-center group flex flex-col items-center justify-center min-h-[190px]">
-        <div class="text-4xl mb-6 opacity-60 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 drop-shadow-[0_0_15px_rgba(236,72,153,0.3)]">🌌</div>
-        <p class="font-baslik text-xl text-gray-200 mb-2 font-light group-hover:text-pink-100 transition">Doğum Haritası</p>
-        <p class="text-xs text-gray-500 font-light">Kendini keşfetmenin yolu</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+    <a href="{% url 'dogum_haritasi' %}" class="card-elegant rounded-3xl p-10 text-center group flex flex-col items-center justify-center min-h-[220px]">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(168,85,247,0.15),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 drop-shadow-[0_0_20px_rgba(236,72,153,0.5)] z-10">🌌</div>
+        <p class="font-baslik text-2xl text-gray-100 mb-3 group-hover:text-pink-200 transition z-10">Doğum Haritası</p>
+        <p class="text-sm text-gray-400 font-light z-10">Kendini keşfetmenin yolu</p>
     </a>
-    <a href="{% url 'uyumluluk' %}" class="card-elegant rounded-2xl p-8 text-center group flex flex-col items-center justify-center min-h-[190px]">
-        <div class="text-4xl mb-6 opacity-60 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500 drop-shadow-[0_0_15px_rgba(236,72,153,0.3)]">💞</div>
-        <p class="font-baslik text-xl text-gray-200 mb-2 font-light group-hover:text-pink-100 transition">Uyum Analizi</p>
-        <p class="text-xs text-gray-500 font-light">İlişkilerindeki enerjiyi anla</p>
+    <a href="{% url 'uyumluluk' %}" class="card-elegant rounded-3xl p-10 text-center group flex flex-col items-center justify-center min-h-[220px]">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(236,72,153,0.15),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 drop-shadow-[0_0_20px_rgba(236,72,153,0.5)] z-10">💞</div>
+        <p class="font-baslik text-2xl text-gray-100 mb-3 group-hover:text-pink-200 transition z-10">Uyum Analizi</p>
+        <p class="text-sm text-gray-400 font-light z-10">İlişkilerindeki enerjiyi anla</p>
     </a>
-    <a href="{% url 'tarot_anasayfa' %}" class="card-elegant rounded-2xl p-8 text-center group flex flex-col items-center justify-center min-h-[190px]">
-        <div class="text-4xl mb-6 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(250,204,21,0.2)]">🃏</div>
-        <p class="font-baslik text-xl text-gray-200 mb-2 font-light group-hover:text-pink-100 transition">Tarot Açılımı</p>
-        <p class="text-xs text-gray-500 font-light">Kartların mesajını dinle</p>
+    <a href="{% url 'tarot_anasayfa' %}" class="card-elegant rounded-3xl p-10 text-center group flex flex-col items-center justify-center min-h-[220px]">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(253,224,71,0.15),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_20px_rgba(253,224,71,0.4)] z-10">🃏</div>
+        <p class="font-baslik text-2xl text-gray-100 mb-3 group-hover:text-yellow-200 transition z-10">Tarot Açılımı</p>
+        <p class="text-sm text-gray-400 font-light z-10">Kartların mesajını dinle</p>
     </a>
-    <a href="{% url 'numeroloji' %}" class="card-elegant rounded-2xl p-8 text-center group flex flex-col items-center justify-center min-h-[190px]">
-        <div class="text-4xl mb-6 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(236,72,153,0.3)]">🔢</div>
-        <p class="font-baslik text-xl text-gray-200 mb-2 font-light group-hover:text-pink-100 transition">Numeroloji</p>
-        <p class="text-xs text-gray-500 font-light">Sayıların sırrını çöz</p>
+    <a href="{% url 'numeroloji' %}" class="card-elegant rounded-3xl p-10 text-center group flex flex-col items-center justify-center min-h-[220px]">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(168,85,247,0.15),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.5)] z-10">🔢</div>
+        <p class="font-baslik text-2xl text-gray-100 mb-3 group-hover:text-pink-200 transition z-10">Numeroloji</p>
+        <p class="text-sm text-gray-400 font-light z-10">Sayıların sırrını çöz</p>
     </a>
 </div>
 
 <!-- BURÇ SEMBOLLERİ -->
-<div class="flex items-center gap-4 mb-10">
-    <div class="h-[1px] bg-gradient-to-r from-transparent via-pink-500/20 to-transparent flex-1"></div>
-    <p class="text-[9px] md:text-[10px] tracking-[0.25em] text-pink-300/70 font-normal">ZODYAK İŞARETLERİ</p>
-    <div class="h-[1px] bg-gradient-to-r from-pink-500/20 via-transparent to-transparent flex-1"></div>
+<div class="flex items-center gap-6 mb-12">
+    <div class="h-[1px] bg-gradient-to-r from-transparent via-pink-500/30 to-transparent flex-1"></div>
+    <p class="text-[11px] md:text-xs tracking-[0.3em] text-pink-300 font-medium whitespace-nowrap">✦ ZODYAK İŞARETLERİ ✦</p>
+    <div class="h-[1px] bg-gradient-to-r from-pink-500/30 via-transparent to-transparent flex-1"></div>
 </div>
 
-<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 lg:gap-5 mb-20">
+<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 mb-24">
     {% for burc in burclar %}
-        <a href="{% url 'burc_detay' burc.kodu %}" class="card-elegant rounded-2xl p-6 text-center group relative overflow-hidden">
-            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
-                 style="background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.08), transparent 70%);"></div>
+        <a href="{% url 'burc_detay' burc.kodu %}" class="card-elegant rounded-2xl p-6 text-center group relative overflow-hidden flex flex-col justify-center items-center h-[120px]">
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-[radial-gradient(circle_at_50%_50%,_rgba(236,72,153,0.12),_transparent_70%)]"></div>
 
-            <div class="relative z-10 flex flex-col items-center">
-                <div class="text-3xl md:text-4xl mb-4 text-pink-200/50 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-500 font-light"
-                     style="filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.1)); font-family: 'Noto Sans Symbols2', 'Segoe UI Symbol', sans-serif;">
-                    {{ burc.sembol }}
-                </div>
-                <p class="font-mistik text-[9px] md:text-[10px] text-gray-500 group-hover:text-pink-200 transition tracking-widest">{{ burc.ad }}</p>
+            <div class="text-4xl mb-2 text-pink-300/60 group-hover:text-yellow-400 group-hover:scale-125 transition-all duration-500"
+                 style="filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.3)); font-family: 'Noto Sans Symbols2', 'Segoe UI Symbol', sans-serif;">
+                {{ burc.sembol }}
             </div>
+            <p class="font-mistik text-[10px] md:text-xs text-gray-400 group-hover:text-pink-100 transition tracking-[0.2em] mt-2">{{ burc.ad }}</p>
         </a>
     {% endfor %}
 </div>
 
 {% if aktif_gundem %}
 <!-- GÜNDEM BİLDİRİMİ -->
-<div class="glass-panel rounded-2xl p-8 md:p-10 mb-20 border-l-2 border-l-yellow-600/50 relative overflow-hidden group">
-    <div class="absolute -right-10 -top-10 text-9xl text-yellow-500/5 group-hover:text-yellow-500/10 rotate-12 transition-all duration-700 pointer-events-none">✨</div>
+<div class="glass-panel rounded-3xl p-10 md:p-12 mb-24 border-l-4 border-l-yellow-500 corner-decorated group">
+    <!-- Dekoratif ikon -->
+    <div class="absolute -right-8 -top-8 text-9xl text-yellow-500/10 group-hover:text-yellow-500/20 group-hover:rotate-12 transition-all duration-700 pointer-events-none">✨</div>
 
-    <p class="text-[9px] tracking-[0.3em] text-yellow-500/80 font-normal mb-4 flex items-center gap-2">
+    <p class="text-xs tracking-[0.3em] text-yellow-500 font-semibold mb-5 flex items-center gap-3">
         <span class="animate-pulse">✦</span> ŞU AN GÖKYÜZÜNDE
     </p>
-    <p class="font-baslik text-2xl md:text-3xl text-gray-200 mb-4 font-light">{{ aktif_gundem.baslik }}</p>
-    <p class="text-sm md:text-base text-gray-400 mb-6 font-light leading-[1.8] max-w-3xl">{{ aktif_gundem.kisa_aciklama }}</p>
-    <a href="{% url 'gundem_detay' aktif_gundem.id %}" class="inline-flex items-center gap-2 text-[10px] md:text-xs font-normal tracking-widest text-pink-300 hover:text-yellow-400 transition-colors">
-        DETAYLARI İNCELE <span class="text-lg leading-none font-light">→</span>
+    <p class="font-baslik text-3xl md:text-4xl text-gray-100 mb-5">{{ aktif_gundem.baslik }}</p>
+    <p class="text-base md:text-lg text-gray-300 mb-8 font-light leading-[1.8] max-w-4xl">{{ aktif_gundem.kisa_aciklama }}</p>
+    <a href="{% url 'gundem_detay' aktif_gundem.id %}" class="inline-flex items-center gap-3 text-xs md:text-sm font-semibold tracking-[0.15em] text-pink-400 hover:text-yellow-400 transition-colors">
+        DETAYLARI İNCELE <span class="text-xl leading-none">→</span>
     </a>
 </div>
 {% endif %}
 
 <!-- EV ÇEMBERİ (SVG) -->
-<div class="flex items-center justify-between mb-10">
-    <p class="text-[9px] md:text-[10px] tracking-[0.25em] text-pink-300/70 font-normal">ASTROLOJİDE EVLER</p>
-    <a href="{% url 'ev_listesi' %}" class="text-[9px] md:text-[10px] tracking-[0.2em] text-gray-500 hover:text-pink-300 transition">TÜMÜNÜ GÖR →</a>
+<div class="flex items-center justify-between mb-12">
+    <p class="text-[11px] md:text-xs tracking-[0.3em] text-pink-300 font-medium">✦ ASTROLOJİDE EVLER</p>
+    <a href="{% url 'ev_listesi' %}" class="text-[11px] md:text-xs tracking-[0.2em] text-gray-400 hover:text-yellow-400 transition font-medium border-b border-transparent hover:border-yellow-400 pb-1">TÜMÜNÜ GÖR →</a>
 </div>
 
-<div class="glass-panel rounded-3xl p-10 md:p-14 mb-10 flex flex-col xl:flex-row items-center gap-14 relative overflow-hidden border-white/5">
+<div class="glass-panel rounded-3xl p-12 md:p-16 mb-12 flex flex-col xl:flex-row items-center gap-16 corner-decorated">
 
-    <!-- SVG Container -->
-    <div class="w-full max-w-[380px] shrink-0 mx-auto xl:mx-0 relative z-10" style="filter: drop-shadow(0 0 30px rgba(236,72,153,0.1));">
+    <!-- SVG Container - Daha Detaylı & Renkli Çizim -->
+    <div class="w-full max-w-[420px] shrink-0 mx-auto xl:mx-0 relative z-10" style="filter: drop-shadow(0 0 35px rgba(236,72,153,0.15));">
+        <!-- Arka plan kozmik ışığı -->
+        <div class="absolute inset-0 bg-yellow-500/10 rounded-full blur-[60px] -z-10 animate-pulse"></div>
         <svg viewBox="0 0 400 400" class="w-full h-auto font-body">
             <defs>
                 <radialGradient id="wedgeDark" cx="50%" cy="50%" r="70%">
-                    <stop offset="0%" stop-color="rgba(15,10,25,0.6)"/>
-                    <stop offset="100%" stop-color="rgba(5,2,10,0.9)"/>
+                    <stop offset="0%" stop-color="rgba(30,15,50,0.7)"/>
+                    <stop offset="100%" stop-color="rgba(10,5,20,0.95)"/>
                 </radialGradient>
                 <radialGradient id="wedgeLight" cx="50%" cy="50%" r="70%">
-                    <stop offset="0%" stop-color="rgba(25,15,35,0.6)"/>
-                    <stop offset="100%" stop-color="rgba(10,5,15,0.9)"/>
+                    <stop offset="0%" stop-color="rgba(50,20,70,0.7)"/>
+                    <stop offset="100%" stop-color="rgba(20,5,30,0.95)"/>
                 </radialGradient>
             </defs>
 
-            <a href="{% url 'ev_detay' 1 %}" class="group"><path d="M200,200 L200,10 A190,190 0 0,1 295,35.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 2 %}"><path d="M200,200 L295,35.5 A190,190 0 0,1 364.5,105 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 3 %}"><path d="M200,200 L364.5,105 A190,190 0 0,1 390,200 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 4 %}"><path d="M200,200 L390,200 A190,190 0 0,1 364.5,295 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 5 %}"><path d="M200,200 L364.5,295 A190,190 0 0,1 295,364.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 6 %}"><path d="M200,200 L295,364.5 A190,190 0 0,1 200,390 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 7 %}"><path d="M200,200 L200,390 A190,190 0 0,1 105,364.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 8 %}"><path d="M200,200 L105,364.5 A190,190 0 0,1 35.5,295 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 9 %}"><path d="M200,200 L35.5,295 A190,190 0 0,1 10,200 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 10 %}"><path d="M200,200 L10,200 A190,190 0 0,1 35.5,105 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 11 %}"><path d="M200,200 L35.5,105 A190,190 0 0,1 105,35.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
-            <a href="{% url 'ev_detay' 12 %}"><path d="M200,200 L105,35.5 A190,190 0 0,1 200,10 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.1)" stroke-width="1" class="transition-all duration-300 hover:fill-pink-900/40"/></a>
+            {% comment %} 12 pasta dilimi (Hover efekiyle tamamen pembe/altın karışımı) {% endcomment %}
+            <a href="{% url 'ev_detay' 1 %}" class="group"><path d="M200,200 L200,10 A190,190 0 0,1 295,35.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 2 %}"><path d="M200,200 L295,35.5 A190,190 0 0,1 364.5,105 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 3 %}"><path d="M200,200 L364.5,105 A190,190 0 0,1 390,200 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 4 %}"><path d="M200,200 L390,200 A190,190 0 0,1 364.5,295 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 5 %}"><path d="M200,200 L364.5,295 A190,190 0 0,1 295,364.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 6 %}"><path d="M200,200 L295,364.5 A190,190 0 0,1 200,390 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 7 %}"><path d="M200,200 L200,390 A190,190 0 0,1 105,364.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 8 %}"><path d="M200,200 L105,364.5 A190,190 0 0,1 35.5,295 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 9 %}"><path d="M200,200 L35.5,295 A190,190 0 0,1 10,200 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 10 %}"><path d="M200,200 L10,200 A190,190 0 0,1 35.5,105 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 11 %}"><path d="M200,200 L35.5,105 A190,190 0 0,1 105,35.5 Z" fill="url(#wedgeDark)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
+            <a href="{% url 'ev_detay' 12 %}"><path d="M200,200 L105,35.5 A190,190 0 0,1 200,10 Z" fill="url(#wedgeLight)" stroke="rgba(236,72,153,0.2)" stroke-width="1.5" class="transition-all duration-300 hover:fill-pink-900/60"/></a>
 
-            <!-- Dış ve İç Çerçeve (Kibarlaştırıldı) -->
-            <circle cx="200" cy="200" r="188" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="1"/>
-            <circle cx="200" cy="200" r="194" fill="none" stroke="rgba(236,72,153,0.15)" stroke-width="1" stroke-dasharray="2 8"/>
-            <circle cx="200" cy="200" r="45" fill="#030107" stroke="rgba(212,175,55,0.4)" stroke-width="1"/>
-            <text x="200" y="206" text-anchor="middle" font-size="20" fill="#d4af37" style="font-family: 'Cinzel', serif; font-weight: 300;">✦</text>
+            <!-- Dış ve İç Çerçeve Çizgileri -->
+            <circle cx="200" cy="200" r="188" fill="none" stroke="rgba(253,224,71,0.5)" stroke-width="2"/>
+            <circle cx="200" cy="200" r="196" fill="none" stroke="rgba(236,72,153,0.4)" stroke-width="1" stroke-dasharray="4 6"/>
+            <circle cx="200" cy="200" r="45" fill="#080312" stroke="rgba(253,224,71,0.8)" stroke-width="2"/>
+            <!-- Merkezdeki Sembol -->
+            <text x="200" y="208" text-anchor="middle" font-size="26" fill="#fde047" style="font-family: 'Cinzel', serif;">✦</text>
 
-            {% comment %} Ev Numaraları ve Sembolleri (İnceldi) {% endcomment %}
-            <g class="cursor-pointer fill-gray-500 hover:fill-yellow-500 transition-colors" font-weight="300">
-                <a href="{% url 'ev_detay' 1 %}"><text x="239" y="60" text-anchor="middle" font-size="12" fill="#fbcfe8">1</text><text x="239" y="80" text-anchor="middle" font-size="14">♈︎</text></a>
-                <a href="{% url 'ev_detay' 2 %}"><text x="306" y="98" text-anchor="middle" font-size="12" fill="#fbcfe8">2</text><text x="306" y="118" text-anchor="middle" font-size="14">♉︎</text></a>
-                <a href="{% url 'ev_detay' 3 %}"><text x="345" y="165" text-anchor="middle" font-size="12" fill="#fbcfe8">3</text><text x="345" y="185" text-anchor="middle" font-size="14">♊︎</text></a>
-                <a href="{% url 'ev_detay' 4 %}"><text x="345" y="243" text-anchor="middle" font-size="12" fill="#fbcfe8">4</text><text x="345" y="263" text-anchor="middle" font-size="14">♋︎</text></a>
-                <a href="{% url 'ev_detay' 5 %}"><text x="306" y="310" text-anchor="middle" font-size="12" fill="#fbcfe8">5</text><text x="306" y="330" text-anchor="middle" font-size="14">♌︎</text></a>
-                <a href="{% url 'ev_detay' 6 %}"><text x="239" y="349" text-anchor="middle" font-size="12" fill="#fbcfe8">6</text><text x="239" y="369" text-anchor="middle" font-size="14">♍︎</text></a>
-                <a href="{% url 'ev_detay' 7 %}"><text x="161" y="349" text-anchor="middle" font-size="12" fill="#fbcfe8">7</text><text x="161" y="369" text-anchor="middle" font-size="14">♎︎</text></a>
-                <a href="{% url 'ev_detay' 8 %}"><text x="94" y="310" text-anchor="middle" font-size="12" fill="#fbcfe8">8</text><text x="94" y="330" text-anchor="middle" font-size="14">♏︎</text></a>
-                <a href="{% url 'ev_detay' 9 %}"><text x="55" y="243" text-anchor="middle" font-size="12" fill="#fbcfe8">9</text><text x="55" y="263" text-anchor="middle" font-size="14">♐︎</text></a>
-                <a href="{% url 'ev_detay' 10 %}"><text x="55" y="165" text-anchor="middle" font-size="12" fill="#fbcfe8">10</text><text x="55" y="185" text-anchor="middle" font-size="14">♑︎</text></a>
-                <a href="{% url 'ev_detay' 11 %}"><text x="94" y="98" text-anchor="middle" font-size="12" fill="#fbcfe8">11</text><text x="94" y="118" text-anchor="middle" font-size="14">♒︎</text></a>
-                <a href="{% url 'ev_detay' 12 %}"><text x="161" y="60" text-anchor="middle" font-size="12" fill="#fbcfe8">12</text><text x="161" y="80" text-anchor="middle" font-size="14">♓︎</text></a>
+            {% comment %} Ev Numaraları ve Sembolleri {% endcomment %}
+            <g class="cursor-pointer fill-gray-400 hover:fill-yellow-400 transition-colors">
+                <a href="{% url 'ev_detay' 1 %}"><text x="239" y="60" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">1</text><text x="239" y="82" text-anchor="middle" font-size="16">♈︎</text></a>
+                <a href="{% url 'ev_detay' 2 %}"><text x="306" y="98" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">2</text><text x="306" y="120" text-anchor="middle" font-size="16">♉︎</text></a>
+                <a href="{% url 'ev_detay' 3 %}"><text x="345" y="165" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">3</text><text x="345" y="187" text-anchor="middle" font-size="16">♊︎</text></a>
+                <a href="{% url 'ev_detay' 4 %}"><text x="345" y="243" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">4</text><text x="345" y="265" text-anchor="middle" font-size="16">♋︎</text></a>
+                <a href="{% url 'ev_detay' 5 %}"><text x="306" y="310" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">5</text><text x="306" y="332" text-anchor="middle" font-size="16">♌︎</text></a>
+                <a href="{% url 'ev_detay' 6 %}"><text x="239" y="349" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">6</text><text x="239" y="371" text-anchor="middle" font-size="16">♍︎</text></a>
+                <a href="{% url 'ev_detay' 7 %}"><text x="161" y="349" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">7</text><text x="161" y="371" text-anchor="middle" font-size="16">♎︎</text></a>
+                <a href="{% url 'ev_detay' 8 %}"><text x="94" y="310" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">8</text><text x="94" y="332" text-anchor="middle" font-size="16">♏︎</text></a>
+                <a href="{% url 'ev_detay' 9 %}"><text x="55" y="243" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">9</text><text x="55" y="265" text-anchor="middle" font-size="16">♐︎</text></a>
+                <a href="{% url 'ev_detay' 10 %}"><text x="55" y="165" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">10</text><text x="55" y="187" text-anchor="middle" font-size="16">♑︎</text></a>
+                <a href="{% url 'ev_detay' 11 %}"><text x="94" y="98" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">11</text><text x="94" y="120" text-anchor="middle" font-size="16">♒︎</text></a>
+                <a href="{% url 'ev_detay' 12 %}"><text x="161" y="60" text-anchor="middle" font-size="14" font-weight="500" fill="#fbcfe8">12</text><text x="161" y="82" text-anchor="middle" font-size="16">♓︎</text></a>
             </g>
         </svg>
     </div>
 
     <!-- Sağ Taraf Metin -->
     <div class="text-center xl:text-left z-10 flex-1">
-        <h2 class="font-mistik text-2xl lg:text-3xl text-gradient-purple mb-6 lowercase">on iki yaşam alanı</h2>
-        <p class="text-gray-400 text-sm md:text-base font-light leading-[1.8] max-w-lg mx-auto xl:mx-0 mb-10">
+        <h2 class="font-mistik text-3xl lg:text-4xl text-gradient-pink mb-6">On İki Yaşam Alanı</h2>
+        <p class="text-gray-300 text-base md:text-lg font-light leading-[1.8] max-w-xl mx-auto xl:mx-0 mb-10">
             Doğum haritandaki her ev; kimlik, aşk, kariyer veya aile gibi hayatının farklı bir alanını temsil eder.
             Mistik çemberden bir dilime tıkla ve evrenin senin için sakladığı sırları keşfet.
         </p>
-        <a href="{% url 'ev_listesi' %}" class="holo-btn inline-block text-[10px] md:text-xs tracking-[0.2em] px-8 py-3 rounded-full font-normal">
+        <a href="{% url 'ev_listesi' %}" class="btn-mystic inline-block text-xs md:text-sm tracking-[0.2em] px-10 py-4 rounded-full font-semibold">
             TÜM EVLERİ İNCELE
         </a>
     </div>
@@ -176,30 +186,30 @@
 {% endblock %}
 
 {% block sidebar %}
-<!-- Masaüstü Geniş Ekran İçin Sağ Sidebar Blokları -->
-<div class="glass-panel rounded-2xl p-6 relative overflow-hidden border-white/5">
-    <p class="text-[9px] tracking-[0.25em] text-pink-400/80 font-normal mb-5 flex items-center gap-2">
-        <span class="text-yellow-500">✦</span> HIZLI KEŞİF
+<!-- Masaüstü Geniş Ekran İçin Sağ Sidebar 'Hızlı Keşif' Bloğu (Büyütüldü) -->
+<div class="glass-panel rounded-2xl p-8 corner-decorated">
+    <p class="text-sm tracking-[0.3em] text-pink-400 font-semibold mb-6 flex items-center gap-3">
+        <span class="text-yellow-400 text-lg">✦</span> HIZLI KEŞİF
     </p>
-    <ul class="space-y-4 text-[11px] font-normal tracking-wider">
+    <ul class="space-y-6 text-sm font-medium tracking-wide">
         <li>
-            <a href="{% url 'dogum_haritasi' %}" class="flex items-center gap-3 text-gray-400 hover:text-pink-300 transition group">
-                <span class="text-pink-600/50 group-hover:text-yellow-500 transition-colors">→</span> Doğum haritanı hesapla
+            <a href="{% url 'dogum_haritasi' %}" class="flex items-center gap-4 text-gray-300 hover:text-pink-300 transition group">
+                <span class="text-pink-500 group-hover:text-yellow-400 transition-colors text-lg">→</span> Doğum haritanı hesapla
             </a>
         </li>
         <li>
-            <a href="{% url 'uyumluluk' %}" class="flex items-center gap-3 text-gray-400 hover:text-pink-300 transition group">
-                <span class="text-pink-600/50 group-hover:text-yellow-500 transition-colors">→</span> Uyumluluğunu test et
+            <a href="{% url 'uyumluluk' %}" class="flex items-center gap-4 text-gray-300 hover:text-pink-300 transition group">
+                <span class="text-pink-500 group-hover:text-yellow-400 transition-colors text-lg">→</span> Uyumluluğunu test et
             </a>
         </li>
         <li>
-            <a href="{% url 'tarot_anasayfa' %}" class="flex items-center gap-3 text-gray-400 hover:text-pink-300 transition group">
-                <span class="text-pink-600/50 group-hover:text-yellow-500 transition-colors">→</span> Tarot falına bak
+            <a href="{% url 'tarot_anasayfa' %}" class="flex items-center gap-4 text-gray-300 hover:text-pink-300 transition group">
+                <span class="text-pink-500 group-hover:text-yellow-400 transition-colors text-lg">→</span> Tarot falına bak
             </a>
         </li>
         <li>
-            <a href="{% url 'numeroloji' %}" class="flex items-center gap-3 text-gray-400 hover:text-pink-300 transition group">
-                <span class="text-pink-600/50 group-hover:text-yellow-500 transition-colors">→</span> Numeroloji analizini gör
+            <a href="{% url 'numeroloji' %}" class="flex items-center gap-4 text-gray-300 hover:text-pink-300 transition group">
+                <span class="text-pink-500 group-hover:text-yellow-400 transition-colors text-lg">→</span> Numeroloji analizini gör
             </a>
         </li>
     </ul>
