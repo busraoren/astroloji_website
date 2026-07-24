@@ -44,4 +44,5 @@ def burc_detay(request, burc_kodu):
         'ay_adi': ay_adi,
     })
 def test_detay(request):
-    return render(request, 'test_detay.html')
+    # 'burcs/' takısını ekliyoruz çünkü HTML dosyan o klasörün içinde
+    return render(request, 'burcs/test_detay.html')
