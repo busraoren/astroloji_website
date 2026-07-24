@@ -132,10 +132,10 @@
         }
         @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 0.8; transform: scale(1.2); } }
 
-        /* Sağ Alt Süs Animasyonları İçin Keyframeler */
+        /* Animasyon Keyframeleri (At ve Ördek) */
         @keyframes swing-horse {
-            0% { transform: rotate(-20deg); }
-            100% { transform: rotate(20deg); }
+            0% { transform: rotate(-25deg); }
+            100% { transform: rotate(25deg); }
         }
         @keyframes run-duck {
             0% { transform: translateY(0) rotate(-5deg); }
@@ -161,10 +161,24 @@
     <nav class="border-b border-purple-900/30 bg-[#07020e]/90 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
 
-            <!-- LOGO -->
-            <a href="{% url 'anasayfa' %}" class="flex items-center gap-3 shrink-0">
-                <span class="text-xl text-gold" style="text-shadow: 0 0 10px rgba(229,192,123,0.4);">✧</span>
-                <span class="font-serif-mystic lowercase text-3xl tracking-widest text-gold font-light">astrobacılar</span>
+            <!-- DETAYLANDIRILMIŞ LOGO VE ANİMASYON -->
+            <a href="{% url 'anasayfa' %}" class="flex items-center gap-2 shrink-0 group">
+
+                <!-- Ay'da Sallanan Detaylı At Animasyonu -->
+                <div class="relative w-12 h-12 flex items-center justify-center shrink-0 mr-1">
+                    <!-- Mistik Ay -->
+                    <i class="fas fa-moon text-[30px] text-[#e5c07b] -rotate-12 drop-shadow-[0_0_10px_rgba(229,192,123,0.5)] group-hover:drop-shadow-[0_0_15px_rgba(229,192,123,0.8)] transition-all duration-500"></i>
+
+                    <!-- Detaylı Sallanan At (Satranç Atı Formunda) -->
+                    <div class="absolute top-[15%] right-[32%] origin-top animate-[swing-horse_3s_ease-in-out_infinite_alternate]">
+                        <!-- Parlayan İp -->
+                        <div class="w-[1px] h-[18px] bg-gradient-to-b from-[#e5c07b] to-[#d7698d] mx-auto shadow-[0_0_6px_rgba(215,105,141,0.8)]"></div>
+                        <!-- Asil At Figürü -->
+                        <i class="fas fa-chess-knight text-[#d7698d] text-[13px] block -ml-[5.5px] drop-shadow-[0_0_8px_rgba(215,105,141,0.9)]"></i>
+                    </div>
+                </div>
+
+                <span class="font-serif-mystic lowercase text-3xl tracking-widest text-gold font-light mt-1">astrobacılar</span>
             </a>
 
             <!-- MASAÜSTÜ MENÜ -->
@@ -286,30 +300,17 @@
 
     </div>
 
-    <!-- SAĞ ALT KÖŞE: MİSTİK ANİMASYON SÜSLERİ -->
-    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-6 pointer-events-none opacity-60 hover:opacity-100 transition-opacity duration-500">
-
-        <!-- Ay'da Sallanan At -->
-        <div class="relative w-16 h-16 flex items-center justify-center drop-shadow-[0_0_8px_rgba(215,105,141,0.2)]">
-            <!-- Ay İkonu -->
-            <i class="fas fa-moon text-4xl text-pink-400/40 absolute top-0 right-3"></i>
-            <!-- Sallanan At -->
-            <div class="absolute top-1 right-5 origin-top animate-[swing-horse_3s_ease-in-out_infinite_alternate]">
-                <!-- İp -->
-                <div class="w-[1px] h-5 bg-gold/40 mx-auto"></div>
-                <!-- At -->
-                <i class="fas fa-horse text-gold/80 text-[11px] -ml-[3px] block"></i>
-            </div>
-        </div>
+    <!-- SAĞ ALT KÖŞE: MİSTİK ÖRDEK ANİMASYONU -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-6 pointer-events-none opacity-50 hover:opacity-100 transition-opacity duration-500">
 
         <!-- Dünyada Koşan Ördek -->
-        <div class="relative w-16 h-16 flex items-center justify-center drop-shadow-[0_0_8px_rgba(229,192,123,0.2)]">
+        <div class="relative w-16 h-16 flex items-center justify-center drop-shadow-[0_0_8px_rgba(229,192,123,0.3)]">
             <!-- Koşan Ördek (Emojiyi temaya uydurmak için mistik filtre uygulandı) -->
             <div class="absolute -top-3 z-10 animate-[run-duck_0.4s_ease-in-out_infinite]">
-                <span style="filter: sepia(1) hue-rotate(280deg) saturate(1.5) brightness(1.2);" class="text-sm">🦆</span>
+                <span style="filter: sepia(1) hue-rotate(280deg) saturate(1.5) brightness(1.2);" class="text-sm drop-shadow-[0_0_5px_rgba(215,105,141,0.5)]">🦆</span>
             </div>
             <!-- Dönen Dünya -->
-            <i class="fas fa-globe-europe text-4xl text-gold/20 animate-[spin_10s_linear_infinite]"></i>
+            <i class="fas fa-globe-europe text-4xl text-[#e5c07b]/20 animate-[spin_10s_linear_infinite]"></i>
         </div>
 
     </div>
