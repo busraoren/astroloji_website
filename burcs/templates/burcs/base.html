@@ -131,6 +131,17 @@
             animation: twinkle var(--duration, 4s) infinite alternate;
         }
         @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 0.8; transform: scale(1.2); } }
+
+        /* Sağ Alt Süs Animasyonları İçin Keyframeler */
+        @keyframes swing-horse {
+            0% { transform: rotate(-20deg); }
+            100% { transform: rotate(20deg); }
+        }
+        @keyframes run-duck {
+            0% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-4px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(-5deg); }
+        }
     </style>
 </head>
 <body>
@@ -156,7 +167,7 @@
                 <span class="font-serif-mystic lowercase text-3xl tracking-widest text-gold font-light">astrobacılar</span>
             </a>
 
-            <!-- MASAÜSTÜ MENÜ (Doğum Haritası, Sinastri, Numeroloji, Gündem, Tarot, Ünlüler) -->
+            <!-- MASAÜSTÜ MENÜ -->
             <div class="hidden xl:flex items-center gap-8 text-[11px] tracking-[0.2em] text-[#9486a8]">
                 <a href="{% url 'anasayfa' %}" class="hover:text-pink-300 transition border-b border-pink-500/50 pb-1 text-pink-200">ANA SAYFA</a>
                 <a href="{% url 'dogum_haritasi' %}" class="hover:text-pink-300 transition pb-1">DOĞUM HARİTASI</a>
@@ -194,7 +205,7 @@
     <!-- ANA YAPI -->
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] xl:grid-cols-[220px_1fr_280px] gap-8">
 
-        <!-- SOL SIDEBAR (Sadece mevcut modüller var) -->
+        <!-- SOL SIDEBAR -->
         <aside class="hidden lg:block sticky top-24 h-fit">
             <div class="card-line-art p-3 corner-marks flex flex-col gap-2">
                 <a href="{% url 'anasayfa' %}" class="nav-link active">
@@ -240,7 +251,7 @@
         <aside class="hidden xl:flex flex-col gap-6 sticky top-24 h-fit">
             {% block sidebar %}
 
-            <!-- Sağ Kart 1: Gökyüzü Gündemi (Backend uyarlandı) -->
+            <!-- Sağ Kart 1: Gökyüzü Gündemi -->
             <div class="card-line-art p-6 corner-marks">
                 <div class="flex justify-between items-start mb-4">
                     <div>
@@ -274,5 +285,34 @@
         </aside>
 
     </div>
+
+    <!-- SAĞ ALT KÖŞE: MİSTİK ANİMASYON SÜSLERİ -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-6 pointer-events-none opacity-60 hover:opacity-100 transition-opacity duration-500">
+
+        <!-- Ay'da Sallanan At -->
+        <div class="relative w-16 h-16 flex items-center justify-center drop-shadow-[0_0_8px_rgba(215,105,141,0.2)]">
+            <!-- Ay İkonu -->
+            <i class="fas fa-moon text-4xl text-pink-400/40 absolute top-0 right-3"></i>
+            <!-- Sallanan At -->
+            <div class="absolute top-1 right-5 origin-top animate-[swing-horse_3s_ease-in-out_infinite_alternate]">
+                <!-- İp -->
+                <div class="w-[1px] h-5 bg-gold/40 mx-auto"></div>
+                <!-- At -->
+                <i class="fas fa-horse text-gold/80 text-[11px] -ml-[3px] block"></i>
+            </div>
+        </div>
+
+        <!-- Dünyada Koşan Ördek -->
+        <div class="relative w-16 h-16 flex items-center justify-center drop-shadow-[0_0_8px_rgba(229,192,123,0.2)]">
+            <!-- Koşan Ördek (Emojiyi temaya uydurmak için mistik filtre uygulandı) -->
+            <div class="absolute -top-3 z-10 animate-[run-duck_0.4s_ease-in-out_infinite]">
+                <span style="filter: sepia(1) hue-rotate(280deg) saturate(1.5) brightness(1.2);" class="text-sm">🦆</span>
+            </div>
+            <!-- Dönen Dünya -->
+            <i class="fas fa-globe-europe text-4xl text-gold/20 animate-[spin_10s_linear_infinite]"></i>
+        </div>
+
+    </div>
+
 </body>
 </html>

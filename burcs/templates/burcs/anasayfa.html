@@ -73,7 +73,7 @@
         <div class="mt-auto text-pink-400/50 group-hover:text-pink-400 transition"><i class="fas fa-arrow-right"></i></div>
     </a>
 
-    <!-- Kart 2: Sinastri (Uyum Analizi yerine) -->
+    <!-- Kart 2: Sinastri -->
     <a href="{% url 'uyumluluk' %}" class="card-line-art p-8 text-center group flex flex-col items-center min-h-[200px]">
         <svg viewBox="0 0 100 100" class="w-16 h-16 mb-6 stroke-pink-400/70 group-hover:stroke-pink-400 transition duration-500" fill="none" stroke-width="1.5">
             <path d="M50 85 L20 55 A 20 20 0 0 1 50 35 A 20 20 0 0 1 80 55 Z"/>
@@ -113,10 +113,13 @@
     </a>
 </div>
 
-<!-- BURÇLAR LİSTESİ -->
-<div class="flex items-center justify-between mb-6">
-    <p class="text-[10px] tracking-[0.25em] text-gold uppercase">Burçlar</p>
-    <a href="#" class="text-[10px] tracking-[0.2em] text-[#9486a8] hover:text-pink-300 transition uppercase">Tüm Burçları Gör →</a>
+<!-- BURÇLAR LİSTESİ (Tümünü Gör Kaldırıldı, Ortalandı) -->
+<div class="flex items-center justify-center mb-8">
+    <div class="h-[1px] bg-gradient-to-r from-transparent via-pink-500/30 to-transparent w-24 md:w-32"></div>
+    <p class="text-[10px] tracking-[0.3em] text-gold uppercase mx-6 flex items-center gap-2">
+        <i class="fas fa-star text-pink-400/50"></i> Zodyak İşaretleri <i class="fas fa-star text-pink-400/50"></i>
+    </p>
+    <div class="h-[1px] bg-gradient-to-r from-pink-500/30 via-transparent to-transparent w-24 md:w-32"></div>
 </div>
 
 <div class="card-line-art corner-marks p-6 mb-12">
@@ -147,7 +150,7 @@
 </div>
 {% endif %}
 
-<!-- EV ÇEMBERİ (SVG) -->
+<!-- EV ÇEMBERİ (SVG) YENİDEN EKLENDİ (Line-Art Uyumlu) -->
 <div class="flex items-center justify-between mb-6 mt-12">
     <p class="text-[10px] tracking-[0.25em] text-gold uppercase flex items-center gap-2">
         Astrolojide Evler <i class="fas fa-star-and-crescent text-pink-400"></i>
@@ -156,10 +159,12 @@
 </div>
 
 <div class="card-line-art corner-marks p-10 md:p-14 mb-12 flex flex-col xl:flex-row items-center gap-12">
+    <!-- SVG Container - Daha İnce ve Mistik -->
     <div class="w-full max-w-[400px] shrink-0 mx-auto xl:mx-0 relative z-10">
         <div class="absolute inset-0 bg-pink-900/5 rounded-full blur-[40px] -z-10"></div>
         <svg viewBox="0 0 400 400" class="w-full h-auto font-body drop-shadow-[0_0_15px_rgba(215,105,141,0.1)]">
 
+            {% comment %} 12 pasta dilimi (Şeffaf line-art stili) {% endcomment %}
             <g fill="rgba(12, 5, 22, 0.4)" stroke="rgba(229,192,123,0.3)" stroke-width="0.5">
                 <a href="{% url 'ev_detay' 1 %}" class="group hover:cursor-pointer"><path d="M200,200 L200,10 A190,190 0 0,1 295,35.5 Z" class="transition-colors duration-300 group-hover:fill-[rgba(215,105,141,0.15)]"/></a>
                 <a href="{% url 'ev_detay' 2 %}" class="group hover:cursor-pointer"><path d="M200,200 L295,35.5 A190,190 0 0,1 364.5,105 Z" class="transition-colors duration-300 group-hover:fill-[rgba(215,105,141,0.15)]"/></a>
@@ -175,6 +180,7 @@
                 <a href="{% url 'ev_detay' 12 %}" class="group hover:cursor-pointer"><path d="M200,200 L105,35.5 A190,190 0 0,1 200,10 Z" class="transition-colors duration-300 group-hover:fill-[rgba(215,105,141,0.15)]"/></a>
             </g>
 
+            <!-- İç ve Dış Süsleme Çemberleri -->
             <circle cx="200" cy="200" r="195" fill="none" stroke="rgba(215, 105, 141, 0.4)" stroke-width="0.5"/>
             <circle cx="200" cy="200" r="185" fill="none" stroke="rgba(229, 192, 123, 0.3)" stroke-width="0.5" stroke-dasharray="2 4"/>
             <circle cx="200" cy="200" r="45" fill="#07020e" stroke="rgba(215, 105, 141, 0.6)" stroke-width="0.5"/>
@@ -182,6 +188,7 @@
 
             <text x="200" y="208" text-anchor="middle" font-size="24" fill="#e5c07b" style="font-family: 'Cinzel', serif;">✦</text>
 
+            {% comment %} Ev Numaraları ve Sembolleri {% endcomment %}
             <g class="pointer-events-none" font-weight="300">
                 <text x="239" y="60" text-anchor="middle" font-size="12" fill="#e5c07b">1</text><text x="239" y="80" text-anchor="middle" font-size="14" fill="#d7698d">♈︎</text>
                 <text x="306" y="98" text-anchor="middle" font-size="12" fill="#e5c07b">2</text><text x="306" y="118" text-anchor="middle" font-size="14" fill="#d7698d">♉︎</text>
@@ -199,6 +206,7 @@
         </svg>
     </div>
 
+    <!-- Sağ Taraf Metin -->
     <div class="text-center xl:text-left z-10 flex-1">
         <h2 class="font-serif-mystic text-3xl lg:text-4xl text-gold mb-6 font-light">On İki Yaşam Alanı</h2>
         <p class="text-gray-400 text-sm md:text-base font-light leading-relaxed max-w-xl mx-auto xl:mx-0 mb-8">
