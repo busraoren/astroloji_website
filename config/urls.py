@@ -31,5 +31,5 @@ urlpatterns = [
     path('unluler/', include('unluler.urls')),
     path('evler/', include('evler.urls')),
     path('gundem/', include('astro_gundem.urls')),
-    path('testler/', include('test_detay.urls')),
+    path('kozmik-test/', views.test_detay, name='test_detay'),
 ]

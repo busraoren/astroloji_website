@@ -43,3 +43,5 @@ def burc_detay(request, burc_kodu):
         'yorum': yorum_kaydi.yorum,
         'ay_adi': ay_adi,
     })
+def test_detay(request):
+    return render(request, 'test_detay.html')
