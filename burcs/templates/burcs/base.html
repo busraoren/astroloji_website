@@ -123,7 +123,7 @@
         }
         .nav-link i { font-size: 1rem; opacity: 0.7; }
 
-        /* Yıldızlar (Daha minik ve zarif) */
+        /* Yıldızlar */
         .star-tiny {
             position: absolute;
             background: #fff;
@@ -139,7 +139,6 @@
     <div class="bg-cosmos"></div>
     <div class="bg-noise"></div>
 
-    <!-- Uzay Ayrıntıları (Minik yıldızlar) -->
     <div class="fixed inset-0 pointer-events-none -z-10">
         <div class="star-tiny w-[2px] h-[2px] top-[15%] left-[20%]" style="--duration: 3s; box-shadow: 0 0 5px #e5c07b;"></div>
         <div class="star-tiny w-[1px] h-[1px] top-[40%] left-[80%]" style="--duration: 5s;"></div>
@@ -147,22 +146,23 @@
         <div class="star-tiny w-[1px] h-[1px] top-[85%] left-[60%]" style="--duration: 6s;"></div>
     </div>
 
-    <!-- ÜST MENÜ (NAVBAR) - Şık ve Siyah -->
+    <!-- ÜST MENÜ (NAVBAR) -->
     <nav class="border-b border-purple-900/30 bg-[#07020e]/90 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
 
-            <!-- LOGO: Tamamen küçük harf, kibar tırnaklı font -->
+            <!-- LOGO -->
             <a href="{% url 'anasayfa' %}" class="flex items-center gap-3 shrink-0">
                 <span class="text-xl text-gold" style="text-shadow: 0 0 10px rgba(229,192,123,0.4);">✧</span>
                 <span class="font-serif-mystic lowercase text-3xl tracking-widest text-gold font-light">astrobacılar</span>
             </a>
 
-            <!-- MASAÜSTÜ MENÜ -->
+            <!-- MASAÜSTÜ MENÜ (Doğum Haritası, Sinastri, Numeroloji, Gündem, Tarot, Ünlüler) -->
             <div class="hidden xl:flex items-center gap-8 text-[11px] tracking-[0.2em] text-[#9486a8]">
                 <a href="{% url 'anasayfa' %}" class="hover:text-pink-300 transition border-b border-pink-500/50 pb-1 text-pink-200">ANA SAYFA</a>
-                <a href="{% url 'dogum_haritasi' %}" class="hover:text-pink-300 transition pb-1">BURÇLAR</a>
-                <a href="{% url 'dogum_haritasi' %}" class="hover:text-pink-300 transition pb-1">HARİTAM</a>
-                <a href="{% url 'uyumluluk' %}" class="hover:text-pink-300 transition pb-1">ASTROLOJİ</a>
+                <a href="{% url 'dogum_haritasi' %}" class="hover:text-pink-300 transition pb-1">DOĞUM HARİTASI</a>
+                <a href="{% url 'uyumluluk' %}" class="hover:text-pink-300 transition pb-1">SİNASTRİ</a>
+                <a href="{% url 'numeroloji' %}" class="hover:text-pink-300 transition pb-1">NUMEROLOJİ</a>
+                <a href="{% url 'gundem_listesi' %}" class="hover:text-pink-300 transition pb-1">GÜNDEM</a>
                 <a href="{% url 'tarot_anasayfa' %}" class="hover:text-pink-300 transition pb-1">TAROT</a>
                 <a href="{% url 'unlu_listesi' %}" class="hover:text-pink-300 transition pb-1">ÜNLÜLER</a>
             </div>
@@ -191,26 +191,26 @@
         </div>
     </nav>
 
-    <!-- ANA YAPI (Üç Kolonlu Grid) -->
+    <!-- ANA YAPI -->
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] xl:grid-cols-[220px_1fr_280px] gap-8">
 
-        <!-- SOL SIDEBAR -->
+        <!-- SOL SIDEBAR (Sadece mevcut modüller var) -->
         <aside class="hidden lg:block sticky top-24 h-fit">
             <div class="card-line-art p-3 corner-marks flex flex-col gap-2">
                 <a href="{% url 'anasayfa' %}" class="nav-link active">
                     <i class="fas fa-home"></i> Ana Sayfa
                 </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-sun"></i> Günlük Yorum
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-star-and-crescent"></i> Haftalık Yorum
-                </a>
                 <a href="{% url 'dogum_haritasi' %}" class="nav-link">
-                    <i class="fas fa-dharmachakra"></i> Doğum Haritam
+                    <i class="fas fa-dharmachakra"></i> Doğum Haritası
                 </a>
                 <a href="{% url 'uyumluluk' %}" class="nav-link">
-                    <i class="fas fa-heart"></i> Uyum Analizi
+                    <i class="fas fa-heart"></i> Sinastri
+                </a>
+                <a href="{% url 'numeroloji' %}" class="nav-link">
+                    <i class="fas fa-sort-numeric-up"></i> Numeroloji
+                </a>
+                <a href="{% url 'gundem_listesi' %}" class="nav-link">
+                    <i class="fas fa-globe"></i> Gündem
                 </a>
                 <a href="{% url 'tarot_anasayfa' %}" class="nav-link">
                     <i class="fas fa-layer-group"></i> Tarot
@@ -230,7 +230,7 @@
             </div>
         </aside>
 
-        <!-- ORTA İÇERİK (Index.html buraya gelecek) -->
+        <!-- ORTA İÇERİK -->
         <main class="min-w-0">
             {% block content %}
             {% endblock %}
@@ -240,23 +240,19 @@
         <aside class="hidden xl:flex flex-col gap-6 sticky top-24 h-fit">
             {% block sidebar %}
 
-            <!-- Sağ Kart 1: Günlük Yorum -->
+            <!-- Sağ Kart 1: Gökyüzü Gündemi (Backend uyarlandı) -->
             <div class="card-line-art p-6 corner-marks">
                 <div class="flex justify-between items-start mb-4">
                     <div>
-                        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Günlük Yorumun</p>
-                        <p class="text-xs text-[#9486a8] mt-1">24 Temmuz 2026</p>
+                        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Gökyüzü Gündemi</p>
+                        <p class="text-xs text-[#9486a8] mt-1">Gezegen Hareketleri</p>
                     </div>
-                    <i class="fas fa-sun text-gold/40 text-2xl"></i>
+                    <i class="fas fa-meteor text-gold/40 text-2xl"></i>
                 </div>
-                <div class="flex items-center gap-3 mb-3">
-                    <i class="fas fa-yin-yang text-gold text-xl"></i>
-                    <p class="font-serif-mystic text-xl text-gold">Denge</p>
-                </div>
-                <p class="text-xs text-gray-400 font-light leading-relaxed mb-4">
-                    Bugün içsel dengeni bulmak için harika bir gün. Yıldızlar sana sakinlik vadediyor.
+                <p class="text-xs text-gray-400 font-light leading-relaxed mb-5">
+                    Gökyüzündeki anlık gezegen hareketlerinin ve önemli astrolojik olayların senin üzerindeki etkilerini takip et.
                 </p>
-                <a href="#" class="text-[10px] tracking-widest text-pink-300 hover:text-gold transition">DEVAMINI OKU →</a>
+                <a href="{% url 'gundem_listesi' %}" class="text-[10px] tracking-widest text-pink-300 hover:text-gold transition uppercase">Gündeme Git →</a>
             </div>
 
             <!-- Sağ Kart 2: Ay'ın Fazı -->
@@ -264,7 +260,6 @@
                 <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-1">Ay'ın Fazı</p>
                 <p class="text-sm text-gold font-light mb-4">Büyüyen Ay</p>
 
-                <!-- Ay Çizimi (SVG Line art) -->
                 <svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto mb-4" fill="none">
                     <circle cx="50" cy="50" r="45" stroke="rgba(215, 105, 141, 0.2)" stroke-width="1" stroke-dasharray="2 2"/>
                     <path d="M50 5 A45 45 0 0 1 50 95 A30 45 0 0 0 50 5" fill="rgba(215, 105, 141, 0.1)" stroke="#d7698d" stroke-width="0.5"/>
