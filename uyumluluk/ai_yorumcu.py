@@ -18,7 +18,7 @@ def uyumluluk_yorumla(isim1, gezegenler1, isim2, gezegenler2):
     veri_metni = veri_metnine_cevir(isim1, gezegenler1) + veri_metnine_cevir(isim2, gezegenler2)
 
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        model="deepseek-v4-flash",
         messages=[
             {
                 "role": "system",

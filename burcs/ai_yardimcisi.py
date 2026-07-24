@@ -8,7 +8,7 @@ def burc_yorumu_uret(burc_adi, ay_adi):
     )
 
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        model="deepseek-v4-flash",
         messages=[
             {
                 "role": "system",
