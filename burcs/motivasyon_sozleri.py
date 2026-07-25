@@ -1,0 +1,17 @@
+MOTIVASYON_SOZLERI = [
+    "Yıldızlar sana yol gösterebilir, ama yolu seçmek senin elinde.",
+    "Evren senin için bir plan yapıyor, sabırlı ol.",
+    "Bugün attığın her adım, yarının haritasını çiziyor.",
+    "İçindeki ışık, en karanlık gökyüzünü bile aydınlatabilir.",
+    "Kader bir çizgi değil, sen çizdiğin bir yoldur.",
+    "Bazen en büyük dönüşümler, en sessiz anlarda başlar.",
+    "Gökyüzü değişir, sen de değişebilirsin.",
+    "Bugün, geleceğinin tohumlarını ektiğin gündür.",
+    "Sezgilerin, gördüğünden daha fazlasını bilir.",
+    "Her burç bir hikaye anlatır, senin hikayen daha yeni başlıyor.",
+    "Ay evrelerinde olduğu gibi, sen de dönüşerek büyürsün.",
+    "En parlak yıldızlar bile bazen kararır — bu da geçicidir.",
+    "Kendi ritmini bul, evren zaten seninle senkronize.",
+    "Bugün küçük bir adım, yarın büyük bir değişimin başlangıcı olabilir.",
+    "Ruhun, zihninin duyamadığı şeyleri duyar.",
+]

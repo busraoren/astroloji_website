@@ -1,0 +1,49 @@
+{% extends 'burcs/base.html' %}
+
+{% block title %}Arama Sonuçları{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ ARAMA SONUÇLARI ✦</p>
+    <h2 class="font-baslik text-3xl text-gradient-gold">"{{ query }}"</h2>
+</div>
+
+{% if burc_sonuclari %}
+<p class="text-sm tracking-wide text-rose-300 mb-3">Burçlar</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+    {% for burc in burc_sonuclari %}
+        <a href="{% url 'burc_detay' burc.kodu %}" class="card-elegant rounded-2xl p-5 text-center">
+            <div class="text-3xl mb-2">{{ burc.sembol }}</div>
+            <p class="text-sm text-gray-300">{{ burc.ad }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if unlu_sonuclari %}
+<p class="text-sm tracking-wide text-rose-300 mb-3">Ünlüler</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+    {% for unlu in unlu_sonuclari %}
+        <a href="{% url 'unlu_uyumluluk' unlu.id %}" class="card-elegant rounded-2xl p-5 text-center">
+            <p class="font-baslik text-lg text-rose-100">{{ unlu.isim }}</p>
+            <p class="text-xs text-gray-400 mt-1">{{ unlu.meslek }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if kullanici_sonuclari %}
+<p class="text-sm tracking-wide text-rose-300 mb-3">Kullanıcılar</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    {% for kullanici in kullanici_sonuclari %}
+        <div class="card-elegant rounded-2xl p-5 text-center">
+            <p class="text-sm text-gray-300">{{ kullanici.username }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if not burc_sonuclari and not unlu_sonuclari and not kullanici_sonuclari and query %}
+<p class="text-gray-400 text-sm">"{{ query }}" için sonuç bulunamadı.</p>
+{% endif %}
+{% endblock %}

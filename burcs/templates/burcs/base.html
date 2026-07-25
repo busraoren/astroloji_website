@@ -251,6 +251,16 @@
                 <i class="fas fa-users text-base opacity-40"></i> ÜNLÜLER
             </a>
 
+                        <form method="get" action="{% url 'arama' %}" class="hidden md:block">
+                <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-rose-300/20 rounded-full px-4 py-1.5 text-sm text-gray-200 focus:outline-none focus:border-rose-300/50 transition w-40">
+            </form>
+
+            <a href="{% url 'gundem_listesi' %}" class="relative text-gray-300 hover:text-rose-200 transition">
+                🔔
+                {% if nav_aktif_gundem %}
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-rose-400 rounded-full"></span>
+                {% endif %}
+            </a>
             <!-- Mobil Alt Kısım (Auth) -->
             <div class="mt-auto pt-8 border-t border-[rgba(215,105,141,0.2)] md:hidden flex flex-col gap-4">
                 {% if user.is_authenticated %}
@@ -297,7 +307,7 @@
             <div class="card-line-art p-6 corner-marks mt-6 text-center">
                 <p class="text-[10px] tracking-[0.2em] text-pink-300 mb-4 font-medium uppercase">Günlük Motivasyon</p>
                 <p class="font-serif-mystic text-[15px] italic text-gray-300 leading-relaxed font-light">
-                    "Yıldızlar seni yönlendirebilir, ama yolu seçmek senin elinde."
+                    {{ gunun_sozu }}
                 </p>
                 <i class="fas fa-moon text-pink-500/30 mt-4 text-xl"></i>
             </div>
@@ -329,24 +339,11 @@
             </div>
 
             <!-- Sağ Kart 2: Ay'ın Fazı -->
-            <div class="card-line-art p-6 corner-marks text-center relative overflow-hidden">
-                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-1">Ay'ın Fazı</p>
-                <p class="text-sm text-gold font-light mb-4">Büyüyen Ay</p>
-
-                <svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto mb-4" fill="none">
-                    <circle cx="50" cy="50" r="45" stroke="rgba(215, 105, 141, 0.2)" stroke-width="1" stroke-dasharray="2 2"/>
-                    <path d="M50 5 A45 45 0 0 1 50 95 A30 45 0 0 0 50 5" fill="rgba(215, 105, 141, 0.1)" stroke="#d7698d" stroke-width="0.5"/>
-                    <circle cx="70" cy="30" r="1" fill="#e5c07b"/>
-                    <circle cx="65" cy="70" r="1.5" fill="#e5c07b"/>
-                </svg>
-
-                <p class="text-[11px] text-gray-400 font-light">Niyetlerini belirle, evren seninle.</p>
-            </div>
-
-            {% endblock %}
-        </aside>
-
-    </div>
+                     <div class="card-elegant rounded-2xl p-6 text-center">
+                        <p class="text-sm tracking-wide text-rose-300 font-normal mb-3">✦ AYIN FAZI</p>
+                        <div class="text-4xl mb-2">{{ ay_fazi.emoji }}</div>
+                        <p class="font-baslik text-lg text-rose-100">{{ ay_fazi.isim }}</p>
+                    </div>
 
     <!-- SAĞ ALT KÖŞE: MİSTİK ÖRDEK ANİMASYONU -->
     <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-6 pointer-events-none opacity-50 hover:opacity-100 transition-opacity duration-500">

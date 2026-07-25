@@ -2,7 +2,12 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import BurcYorumu
 from astro_gundem.views import anasayfa_icin_aktif_gundem
+import datetime
+from .motivasyon_sozleri import MOTIVASYON_SOZLERI
 from .burc_bilgileri import BURC_BILGILERI
+from .ay_fazi import ay_fazini_hesapla
+from django.contrib.auth.models import User
+from unluler.models import Unlu
 from .ai_yardimcisi import burc_yorumu_uret
 
 AY_ISIMLERI = ['', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
@@ -20,9 +25,12 @@ def anasayfa(request):
         })
 
     aktif_gundem = anasayfa_icin_aktif_gundem()
+    gun_no = datetime.date.today().timetuple().tm_yday  # yılın kaçıncı günü
+    gunun_sozu = MOTIVASYON_SOZLERI[gun_no % len(MOTIVASYON_SOZLERI)]
+    ay_fazi = ay_fazini_hesapla()
 
-    return render(request, 'burcs/anasayfa.html', {'burclar': burclar, 'aktif_gundem': aktif_gundem})
-
+    return render(request, 'burcs/anasayfa.html',
+                  {'burclar': burclar, 'aktif_gundem': aktif_gundem,'ay_fazi': ay_fazi, 'gunun_sozu': gunun_sozu})
 def burc_detay(request, burc_kodu):
     burc_adi = dict(BurcYorumu.BURC_SECENEKLERI)[burc_kodu]
     bilgi = BURC_BILGILERI[burc_kodu]
@@ -46,3 +54,25 @@ def burc_detay(request, burc_kodu):
 def test_detay(request):
     # 'burcs/' takısını ekliyoruz çünkü HTML dosyan o klasörün içinde
     return render(request, 'burcs/test_detay.html')
+
+def arama(request):
+    query = request.GET.get('q', '').strip()
+
+    burc_sonuclari = []
+    unlu_sonuclari = []
+    kullanici_sonuclari = []
+
+    if query:
+        for kod, ad in BurcYorumu.BURC_SECENEKLERI:
+            if query.lower() in ad.lower():
+                burc_sonuclari.append({'kodu': kod, 'ad': ad, 'sembol': BURC_BILGILERI[kod]['sembol']})
+
+        unlu_sonuclari = Unlu.objects.filter(isim__icontains=query)[:10]
+        kullanici_sonuclari = User.objects.filter(username__icontains=query)[:10]
+
+    return render(request, 'burcs/arama_sonuc.html', {
+        'query': query,
+        'burc_sonuclari': burc_sonuclari,
+        'unlu_sonuclari': unlu_sonuclari,
+        'kullanici_sonuclari': kullanici_sonuclari,
+    })
