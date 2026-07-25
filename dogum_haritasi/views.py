@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from dogum_haritasi.hesaplama import gezegen_konumlarini_hesapla
 from uyumluluk.ai_yorumcu import uyumluluk_yorumla
 from uyumluluk.models import UyumlulukTesti
-from .models import Unlu
+
 
 
 def unlu_listesi(request):
