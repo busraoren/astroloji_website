@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/astro_gundem/context_processor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/ay_fazi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/motivasyon_sozleri.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/templates/burcs/arama_sonuc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/burcs/templates/burcs/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/templates/burcs/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/burcs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/burcs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dogum_haritasi/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dogum_haritasi/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

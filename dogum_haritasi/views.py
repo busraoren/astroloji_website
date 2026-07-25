@@ -1,57 +1,46 @@
+import markdown
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from dogum_haritasi.hesaplama import gezegen_konumlarini_hesapla
-from uyumluluk.ai_yorumcu import uyumluluk_yorumla
-from uyumluluk.models import UyumlulukTesti
+from .hesaplama import gezegen_konumlarini_hesapla
+from .ai_yorumcu import dogum_haritasi_yorumla
+from .forms import DogumHaritasiFormu
+from .models import DogumHaritasi
 
 
+def dogum_haritasi_formu(request):
+    if request.user.is_authenticated:
+        mevcut = DogumHaritasi.objects.filter(kullanici=request.user).order_by('-olusturulma_tarihi').first()
+        if mevcut:
+            return redirect('dogum_haritasi_sonuc', harita_id=mevcut.id)
 
-def unlu_listesi(request):
-    unluler = Unlu.objects.all()
-    return render(request, 'unluler/liste.html', {'unluler': unluler})
+    if request.method == 'POST':
+        form = DogumHaritasiFormu(request.POST)
+        if form.is_valid():
+            veri = form.cleaned_data
+
+            hesaplama_sonucu = gezegen_konumlarini_hesapla(
+                veri['dogum_tarihi'], veri['dogum_saati'], veri['dogum_yeri']
+            )
+            yorum = dogum_haritasi_yorumla(hesaplama_sonucu)
+
+            kullanici = request.user if request.user.is_authenticated else None
+
+            harita = DogumHaritasi.objects.create(
+                kullanici=kullanici,
+                isim=veri['isim'],
+                dogum_tarihi=veri['dogum_tarihi'],
+                dogum_saati=veri['dogum_saati'],
+                dogum_yeri=veri['dogum_yeri'],
+                gezegen_konumlari=hesaplama_sonucu,
+                ai_yorumu=yorum
+            )
+            return redirect('dogum_haritasi_sonuc', harita_id=harita.id)
+    else:
+        form = DogumHaritasiFormu()
+
+    return render(request, 'dogum_haritasi/form.html', {'form': form})
 
 
-@login_required
-def unlu_ile_uyumluluk(request, unlu_id):
-    profil = request.user.profil
-    if not profil.dogum_tarihi or not profil.dogum_saati:
-        return render(request, 'unluler/eksik_bilgi.html')
-
-    unlu = Unlu.objects.get(id=unlu_id)
-
-    # Bu kullanıcı bu ünlüyle daha önce test yaptıysa, direkt onu göster
-    mevcut = UyumlulukTesti.objects.filter(
-        kullanici=request.user, kisi2_isim=unlu.isim,
-        kisi2_dogum_tarihi=unlu.dogum_tarihi
-    ).first()
-    if mevcut:
-        return redirect('uyumluluk_sonuc', sonuc_id=mevcut.id)
-
-    kisi1_gezegenler = gezegen_konumlarini_hesapla(
-        profil.dogum_tarihi, profil.dogum_saati, profil.dogum_yeri
-    )
-    kisi2_gezegenler = gezegen_konumlarini_hesapla(
-        unlu.dogum_tarihi, unlu.dogum_saati, unlu.dogum_yeri
-    )
-
-    yorum = uyumluluk_yorumla(
-        request.user.username, kisi1_gezegenler,
-        unlu.isim, kisi2_gezegenler
-    )
-
-    sonuc = UyumlulukTesti.objects.create(
-        kullanici=request.user,
-        kisi1_isim=request.user.username,
-        kisi1_dogum_tarihi=profil.dogum_tarihi,
-        kisi1_dogum_saati=profil.dogum_saati,
-        kisi1_dogum_yeri=profil.dogum_yeri or '',
-        kisi2_isim=unlu.isim,
-        kisi2_dogum_tarihi=unlu.dogum_tarihi,
-        kisi2_dogum_saati=unlu.dogum_saati,
-        kisi2_dogum_yeri=unlu.dogum_yeri or '',
-        kisi1_gezegenler=kisi1_gezegenler,
-        kisi2_gezegenler=kisi2_gezegenler,
-        ai_yorumu=yorum
-    )
-
-    return redirect('uyumluluk_sonuc', sonuc_id=sonuc.id)
+def dogum_haritasi_sonuc(request, harita_id):
+    harita = DogumHaritasi.objects.get(id=harita_id)
+    yorum_html = markdown.markdown(harita.ai_yorumu)
+    return render(request, 'dogum_haritasi/sonuc.html', {'harita': harita, 'yorum_html': yorum_html})
