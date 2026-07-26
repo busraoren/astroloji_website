@@ -8,8 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {% if user.is_authenticated %}
-    <a href="{% url 'gunluk_yorumum' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">GÜNLÜK YORUMUM</a>
-{% endif %}
     <!-- Mistik serif yazılar ve logolar için Cormorant, okunabilirlik için Jost -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -197,6 +195,9 @@
     </form>
     <a href="{% url 'gundem_listesi' %}" class="relative text-[#9486a8] hover:text-gold transition text-lg">
         <i class="far fa-bell"></i>
+        {% if user.is_authenticated %}
+    <a href="{% url 'gunluk_yorumum' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">GÜNLÜK YORUMUM</a>
+{% endif %}
         {% if nav_aktif_gundem %}
             <span class="absolute -top-1 -right-1 w-2 h-2 bg-pink-500 rounded-full"></span>
         {% endif %}
