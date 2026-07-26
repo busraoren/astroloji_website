@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.utils import timezone
+from django.contrib.auth.models import User
 from .models import BurcYorumu
+from .burc_bilgileri import BURC_BILGILERI
+from .ai_yardimcisi import burc_yorumu_uret
+from unluler.models import Unlu
 from astro_gundem.views import anasayfa_icin_aktif_gundem
 import datetime
 from .motivasyon_sozleri import MOTIVASYON_SOZLERI
-from .burc_bilgileri import BURC_BILGILERI
 from .ay_fazi import ay_fazini_hesapla
-from django.contrib.auth.models import User
-from unluler.models import Unlu
-from .ai_yardimcisi import burc_yorumu_uret
 
 AY_ISIMLERI = ['', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
