@@ -321,34 +321,33 @@
         </main>
 
         <!-- SAĞ SIDEBAR -->
-        <aside class="hidden xl:flex flex-col gap-6 sticky top-24 h-fit">
-            {% block sidebar %}
+<aside class="hidden xl:flex flex-col gap-6 sticky top-24 h-fit">
 
-            <!-- Sağ Kart 1: Gökyüzü Gündemi -->
-            <div class="card-line-art p-6 corner-marks">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Gökyüzü Gündemi</p>
-                        <p class="text-xs text-[#9486a8] mt-1">Gezegen Hareketleri</p>
-                    </div>
-                    <i class="fas fa-meteor text-gold/40 text-2xl"></i>
-                </div>
-                <p class="text-xs text-gray-400 font-light leading-relaxed mb-5">
-                    Gökyüzündeki anlık gezegen hareketlerinin ve önemli astrolojik olayların senin üzerindeki etkilerini takip et.
-                </p>
-                <a href="{% url 'gundem_listesi' %}" class="text-[10px] tracking-widest text-pink-300 hover:text-gold transition uppercase">Gündeme Git →</a>
+    <!-- Gökyüzü Gündemi -->
+    <div class="card-line-art p-6 corner-marks">
+        <div class="flex justify-between items-start mb-4">
+            <div>
+                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Gökyüzü Gündemi</p>
+                <p class="text-xs text-[#9486a8] mt-1">Gezegen Hareketleri</p>
             </div>
+            <i class="fas fa-meteor text-gold/40 text-2xl"></i>
+        </div>
+        <p class="text-xs text-gray-400 font-light leading-relaxed mb-5">
+            Gökyüzündeki anlık gezegen hareketlerinin ve önemli astrolojik olayların senin üzerindeki etkilerini takip et.
+        </p>
+        <a href="{% url 'gundem_listesi' %}" class="text-[10px] tracking-widest text-pink-300 hover:text-gold transition uppercase">Gündeme Git →</a>
+    </div>
 
-            <!-- Sağ Kart 2: Ay'ın Fazı -->
-            <div class="card-line-art p-6 corner-marks text-center relative overflow-hidden">
-                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-3">Ay'ın Fazı</p>
-                <div class="text-5xl mb-3 drop-shadow-[0_0_15px_rgba(229,192,123,0.4)] grayscale-[0.2] hue-rotate-[-10deg]">{{ ay_fazi.emoji }}</div>
-                <p class="font-serif-mystic text-2xl text-gold font-light mb-2">{{ ay_fazi.isim }}</p>
-                <p class="text-[11px] text-[#9486a8] font-light mt-2">Niyetlerini belirle, evren seninle.</p>
-            </div>
+    <!-- Ay'ın Fazı -->
+    <div class="card-line-art corner-marks rounded-2xl p-6 text-center">
+        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-3">Ayın Fazı</p>
+        <div class="text-4xl mb-2">{{ ay_fazi.emoji }}</div>
+        <p class="font-serif-mystic text-lg text-gold">{{ ay_fazi.isim }}</p>
+    </div>
 
-            {% endblock %}
-        </aside>
+    {% block sidebar %}{% endblock %}
+
+</aside>
 
     </div>
 

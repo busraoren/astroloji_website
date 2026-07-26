@@ -28,9 +28,6 @@ def anasayfa(request):
         })
 
     aktif_gundem = anasayfa_icin_aktif_gundem()
-    gun_no = datetime.date.today().timetuple().tm_yday  # yılın kaçıncı günü
-    gunun_sozu = MOTIVASYON_SOZLERI[gun_no % len(MOTIVASYON_SOZLERI)]
-    ay_fazi = ay_fazini_hesapla()
 
     return render(request, 'burcs/anasayfa.html',
                   {'burclar': burclar, 'aktif_gundem': aktif_gundem,'ay_fazi': ay_fazi, 'gunun_sozu': gunun_sozu})

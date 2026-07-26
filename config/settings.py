@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'astro_gundem.context_processors.aktif_gundem_context',
+                'burcs.context_processors.global_widgetler',
             ],
         },
     },
