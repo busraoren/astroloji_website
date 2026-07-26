@@ -9,6 +9,9 @@ from astro_gundem.views import anasayfa_icin_aktif_gundem
 import datetime
 from .motivasyon_sozleri import MOTIVASYON_SOZLERI
 from .ay_fazi import ay_fazini_hesapla
+from django.contrib.auth.decorators import login_required
+from .models import GunlukYorum
+from .burc_hesapla import dogum_tarihinden_burc_bul
 
 AY_ISIMLERI = ['', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
@@ -75,4 +78,26 @@ def arama(request):
         'burc_sonuclari': burc_sonuclari,
         'unlu_sonuclari': unlu_sonuclari,
         'kullanici_sonuclari': kullanici_sonuclari,
+    })
+
+@login_required
+def gunluk_yorumum(request):
+    profil = request.user.profil
+    if not profil.dogum_tarihi:
+        return render(request, 'burcs/gunluk_eksik.html')
+
+    burc_kodu = dogum_tarihinden_burc_bul(profil.dogum_tarihi)
+    burc_adi = dict(BurcYorumu.BURC_SECENEKLERI)[burc_kodu]
+    bugun = timezone.localdate()
+
+    yorum_kaydi = GunlukYorum.objects.filter(burc=burc_kodu, tarih=bugun).first()
+    if not yorum_kaydi:
+        yorum_metni = burc_yorumu_uret(burc_adi, "bugün")
+        yorum_kaydi = GunlukYorum.objects.create(burc=burc_kodu, tarih=bugun, yorum=yorum_metni)
+
+    return render(request, 'burcs/gunluk_yorumum.html', {
+        'burc_adi': burc_adi,
+        'bilgi': BURC_BILGILERI[burc_kodu],
+        'yorum': yorum_kaydi.yorum,
+        'tarih': bugun,
     })

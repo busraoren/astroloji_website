@@ -1,0 +1,13 @@
+{% extends 'burcs/base.html' %}
+{% block title %}Günlük Yorumum{% endblock %}
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-pink-300 mb-3">✦ SANA ÖZEL ✦</p>
+    <div class="text-6xl mb-3">{{ bilgi.sembol }}</div>
+    <h2 class="font-serif-mystic text-4xl text-gold mb-2">{{ burc_adi }}</h2>
+    <p class="text-gray-400 text-sm">{{ tarih }}</p>
+</div>
+<div class="card-line-art corner-marks rounded-2xl p-8 max-w-2xl mx-auto">
+    <p class="text-gray-300 text-sm leading-relaxed">{{ yorum }}</p>
+</div>
+{% endblock %}

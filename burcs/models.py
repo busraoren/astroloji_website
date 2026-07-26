@@ -20,3 +20,15 @@ class BurcYorumu(models.Model):
 
     def __str__(self):
         return f"{self.burc} - {self.ay}/{self.yil}"
+
+class GunlukYorum(models.Model):
+    burc = models.CharField(max_length=20)
+    tarih = models.DateField()
+    yorum = models.TextField()
+    olusturulma_zamani = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('burc', 'tarih')
+
+    def __str__(self):
+        return f"{self.burc} - {self.tarih}"

@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/burcs/templates/burcs/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/templates/burcs/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/burc_hesapla.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/burc_hesapla.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -78,7 +82,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/burcs/views.py</url>
-          <line>33</line>
+          <line>36</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
