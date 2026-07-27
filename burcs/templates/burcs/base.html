@@ -195,11 +195,6 @@
             <div class="flex items-center gap-6 shrink-0">
                 <div class="hidden md:flex items-center gap-5">
 
-                    {% if nav_aktif_gundem %}
-                        <a href="{% url 'gecmis_haritalarim' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">HARİTALARIM</a
-                        <a href="{% url 'gecmis_numerolojim' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">NUMEROLOJİM</a>
-                        <a href="{% url 'gecmis_uyumluluklarim' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">SİNASTRİLERİM</a>
-                    {% endif %}
                     <!-- Arama Çubuğu -->
                     <form method="get" action="{% url 'arama' %}" class="flex items-center">
                         <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-purple-900/30 rounded-full px-4 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-pink-400/50 transition w-32 focus:w-44">
@@ -283,6 +278,21 @@
                 <i class="fas fa-users text-base opacity-40"></i> ÜNLÜLER
             </a>
 
+            <!-- BANA ÖZEL (MOBİL İÇİN) -->
+            {% if user.is_authenticated %}
+                <div class="w-full h-px bg-[rgba(215,105,141,0.2)] my-2"></div>
+                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase px-4 py-2 opacity-70">Bana Özel</p>
+                <a href="{% url 'gecmis_haritalarim' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                    <i class="fas fa-folder-open text-base opacity-40"></i> HARİTALARIM
+                </a>
+                <a href="{% url 'gecmis_numerolojim' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                    <i class="fas fa-list-ol text-base opacity-40"></i> NUMEROLOJİM
+                </a>
+                <a href="{% url 'gecmis_uyumluluklarim' %}" class="flex items-center gap-4 px-4 py-4 text-[11px] font-medium tracking-[0.2em] text-[#d1c5e2] hover:text-pink-300 hover:bg-white/5 rounded-xl transition">
+                    <i class="fas fa-heartbeat text-base opacity-40"></i> SİNASTRİLERİM
+                </a>
+            {% endif %}
+
             <form method="get" action="{% url 'arama' %}" class="hidden md:block mt-4">
                 <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-[rgba(215,105,141,0.2)] rounded-full px-4 py-2 text-sm text-gray-200 focus:outline-none focus:border-pink-400 transition w-full">
             </form>
@@ -337,6 +347,22 @@
                     <i class="fas fa-users"></i> Ünlüler
                 </a>
             </div>
+
+            <!-- BANA ÖZEL (Sadece Giriş Yapanlar) -->
+            {% if user.is_authenticated %}
+            <div class="card-line-art p-3 corner-marks flex flex-col gap-2 mt-6">
+                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase px-4 py-2 opacity-70">Bana Özel</p>
+                <a href="{% url 'gecmis_haritalarim' %}" class="nav-link">
+                    <i class="fas fa-folder-open"></i> Haritalarım
+                </a>
+                <a href="{% url 'gecmis_numerolojim' %}" class="nav-link">
+                    <i class="fas fa-list-ol"></i> Numerolojim
+                </a>
+                <a href="{% url 'gecmis_uyumluluklarim' %}" class="nav-link">
+                    <i class="fas fa-heartbeat"></i> Sinastrilerim
+                </a>
+            </div>
+            {% endif %}
 
             <!-- Sol Alt Motivasyon Kartı (Yenilendi) -->
             <div class="card-line-art p-6 corner-marks mt-6 relative overflow-hidden group">
