@@ -98,3 +98,6 @@ def gunluk_yorumum(request):
         'yorum': yorum_kaydi.yorum,
         'tarih': bugun,
     })
+
+def oyunlar(request):
+    return render(request, 'burcs/oyunlar.html')
