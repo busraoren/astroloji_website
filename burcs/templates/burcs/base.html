@@ -195,6 +195,11 @@
             <div class="flex items-center gap-6 shrink-0">
                 <div class="hidden md:flex items-center gap-5">
 
+                    {% if nav_aktif_gundem %}
+                        <a href="{% url 'gecmis_haritalarim' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">HARİTALARIM</a
+                        <a href="{% url 'gecmis_numerolojim' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">NUMEROLOJİM</a>
+                        <a href="{% url 'gecmis_uyumluluklarim' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">SİNASTRİLERİM</a>
+                    {% endif %}
                     <!-- Arama Çubuğu -->
                     <form method="get" action="{% url 'arama' %}" class="flex items-center">
                         <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-purple-900/30 rounded-full px-4 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-pink-400/50 transition w-32 focus:w-44">
