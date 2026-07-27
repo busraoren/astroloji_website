@@ -1,0 +1,23 @@
+{% extends 'burcs/base.html' %}
+{% block title %}Geçmiş Sinastrilerim{% endblock %}
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-pink-300 mb-3">✦ GEÇMİŞ TESTLERİM ✦</p>
+    <h2 class="font-serif-mystic text-4xl text-gold">Sinastri Sonuçlarım</h2>
+</div>
+
+{% if testler %}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {% for test in testler %}
+        <a href="{% url 'uyumluluk_sonuc' test.id %}" class="card-line-art corner-marks rounded-2xl p-5">
+            <p class="font-serif-mystic text-lg text-pink-100">{{ test.kisi1_isim }} & {{ test.kisi2_isim }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card-line-art corner-marks rounded-2xl p-8 text-center max-w-md mx-auto">
+    <p class="text-gray-400 text-sm mb-6">Henüz bir test yapmadın.</p>
+    <a href="{% url 'uyumluluk' %}" class="btn-elegant">TEST YAP</a>
+</div>
+{% endif %}
+{% endblock %}

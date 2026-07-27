@@ -51,3 +51,9 @@ def uyumluluk_sonuc(request, sonuc_id):
     sonuc = UyumlulukTesti.objects.get(id=sonuc_id)
     yorum_html = markdown.markdown(sonuc.ai_yorumu)
     return render(request, 'uyumluluk/sonuc.html', {'sonuc': sonuc, 'yorum_html': yorum_html})
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def gecmis_uyumluluklarim(request):
+    testler = UyumlulukTesti.objects.filter(kullanici=request.user).order_by('-olusturulma_tarihi')
+    return render(request, 'uyumluluk/gecmis.html', {'testler': testler})
