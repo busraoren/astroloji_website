@@ -1,17 +1,15 @@
-# Dosyanın en üstüne bunu eklemeyi unutma
-from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+# DİKKAT: Profil modelinin adı farklıysa (örneğin UserProfile), aşağıdaki 'Profil' yazan yerleri değiştirmelisin.
+from .models import User
 
 
-# Mevcut profil görünümünü şu mantıkla güncelle:
+@login_required
 def profil(request):
-    # Kullanıcının profili var mı diye dene (try), yoksa (except) yeni oluştur!
-    try:
-        kullanici_profili = request.user.profil
-    except ObjectDoesNotExist:
-        # Profil modeli adın neyse onu kullan (Profil, UserProfile vb.)
-        kullanici_profili = Profil.objects.create(user=request.user)
+    # Kullanıcının profili varsa alır, yoksa veritabanında anında boş bir tane oluşturur.
+    # Sayfanın "Profil yok" diyerek çökmesini kökten çözer.
+    kullanici_profili, created = User.objects.get_or_create(user=request.user)
 
-    # ... fonksiyonun geri kalan kodları ...
     context = {
         'profil': kullanici_profili
     }
