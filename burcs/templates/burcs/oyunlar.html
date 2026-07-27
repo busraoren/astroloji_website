@@ -166,17 +166,18 @@
     // ==========================================
 
     // Django'nun statik dosyaları sunucuda hashleyebilmesi için tam yolları veriyoruz
+// Django'nun statik dosyaları sunucuda hashleyebilmesi için tam yolları veriyoruz
     const cardImages = [
-        "{% static 'img/oyun/kart1.png' %}",
-        "{% static 'img/oyun/kart2.png' %}",
-        "{% static 'img/oyun/kart3.png' %}",
-        "{% static 'img/oyun/kart4.png' %}",
-        "{% static 'img/oyun/kart5.png' %}",
-        "{% static 'img/oyun/kart6.png' %}",
-        "{% static 'img/oyun/kart7.png' %}",
-        "{% static 'img/oyun/kart8.png' %}"
+        "{% static 'burcs/img/oyun/kart1.png' %}",
+        "{% static 'burcs/img/oyun/kart2.png' %}",
+        "{% static 'burcs/img/oyun/kart3.png' %}",
+        "{% static 'burcs/img/oyun/kart4.png' %}",
+        "{% static 'burcs/img/oyun/kart5.png' %}",
+        "{% static 'burcs/img/oyun/kart6.png' %}",
+        "{% static 'burcs/img/oyun/kart7.png' %}",
+        "{% static 'burcs/img/oyun/kart8.png' %}"
     ];
-    const backImage = "{% static 'img/oyun/arka_yuz.png' %}";
+    const backImage = "{% static 'burcs/img/oyun/arka_yuz.png' %}";
 
     let cardsArray = [...cardImages, ...cardImages];
     let hasFlippedCard = false;
