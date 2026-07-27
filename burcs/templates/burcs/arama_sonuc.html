@@ -32,16 +32,6 @@
 </div>
 {% endif %}
 
-{% if kullanici_sonuclari %}
-<p class="text-sm tracking-wide text-rose-300 mb-3">Kullanıcılar</p>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-    {% for kullanici in kullanici_sonuclari %}
-        <div class="card-elegant rounded-2xl p-5 text-center">
-            <p class="text-sm text-gray-300">{{ kullanici.username }}</p>
-        </div>
-    {% endfor %}
-</div>
-{% endif %}
 
 {% if not burc_sonuclari and not unlu_sonuclari and not kullanici_sonuclari and query %}
 <p class="text-gray-400 text-sm">"{{ query }}" için sonuç bulunamadı.</p>
