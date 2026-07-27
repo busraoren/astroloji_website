@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}astrobacılar - Evrenin Sırları{% endblock %}</title>
 
-<!-- MİSTİK FAVICON (Sekme İkonu) - Ay'ın Önünde Duran At -->
+    <!-- MİSTİK FAVICON (Sekme İkonu) - Ay'ın Önünde Duran At -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2250%22 font-size=%2265%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>🌙</text><text x=%2250%22 y=%2255%22 font-size=%2245%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>🐎</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -191,24 +191,34 @@
                 <a href="{% url 'unlu_listesi' %}" class="hover:text-pink-300 transition pb-1">ÜNLÜLER</a>
             </div>
 
-            <!-- GİRİŞ / PROFİL KISMI VE MOBİL BUTONU -->
+
+               <!-- GİRİŞ / PROFİL KISMI VE MOBİL BUTONU -->
             <div class="flex items-center gap-6 shrink-0">
                 <div class="hidden md:flex items-center gap-5">
+
+                    <!-- Arama Çubuğu -->
                     <form method="get" action="{% url 'arama' %}" class="flex items-center">
                         <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-purple-900/30 rounded-full px-4 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-pink-400/50 transition w-32 focus:w-44">
                     </form>
-                    <a href="{% url 'gundem_listesi' %}" class="relative text-[#9486a8] hover:text-gold transition text-lg">
+
+                    <!-- Bildirim Zili -->
+                    <a href="{% url 'gundem_listesi' %}" class="relative text-[#9486a8] hover:text-gold transition text-lg" title="Bildirimler">
                         <i class="far fa-bell"></i>
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'gunluk_yorumum' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">GÜNLÜK YORUMUM</a>
-                        {% endif %}
                         {% if nav_aktif_gundem %}
                             <span class="absolute -top-1 -right-1 w-2 h-2 bg-pink-500 rounded-full"></span>
                         {% endif %}
                     </a>
 
+                    <!-- Günlük Yorumum (İkon Hali) -->
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'gunluk_yorumum' %}" class="text-pink-300 hover:text-gold transition text-lg drop-shadow-[0_0_8px_rgba(215,105,141,0.5)]" title="Günlük Yorumum">
+                            <i class="fas fa-sparkles"></i>
+                        </a>
+                    {% endif %}
+
                     {% if user.is_authenticated %}
                         <div class="h-6 w-px bg-purple-900/50"></div>
+                        <!-- Profil -->
                         <a href="{% url 'profil' %}" class="flex items-center gap-3 text-sm text-[#d1c5e2] hover:text-pink-300 transition">
                             <span class="w-8 h-8 rounded-full border border-pink-500/30 flex items-center justify-center bg-pink-900/20 text-gold text-xs">
                                 {{ user.username|slice:":1"|upper }}
@@ -227,8 +237,6 @@
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
-        </div>
-    </nav>
 
     <!-- MOBİL SOLDAN AÇILIR MENÜ (DRAWER) -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[60] hidden opacity-0 transition-opacity duration-300"></div>
