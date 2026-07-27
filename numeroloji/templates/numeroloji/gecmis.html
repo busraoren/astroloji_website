@@ -8,12 +8,19 @@
 
 {% if sonuclar %}
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    {% for sonuc in sonuclar %}
-        <a href="{% url 'numeroloji_sonuc' sonuc.id %}" class="card-line-art corner-marks rounded-2xl p-5">
-            <p class="font-serif-mystic text-lg text-pink-100">{{ sonuc.isim }}</p>
-            <p class="text-xs text-gray-400 mt-1">{{ sonuc.dogum_tarihi }}</p>
-        </a>
-    {% endfor %}
+  {% for sonuc in sonuclar %}
+    <!-- Senin mevcut 12. satırdaki kart tasarımın (a etiketi vb.) burada duracak -->
+    <a href="{% url 'numeroloji_sonuc' sonuc.id %}" class="card-line-art corner-marks rounded-2xl p-5 block hover:border-pink-400 transition">
+        <p class="font-serif-mystic text-lg text-pink-100">{{ sonuc.isim }}</p>
+    </a>
+{% empty %}
+    <!-- EĞER HİÇ SONUÇ YOKSA BURASI ÇALIŞIR, SAYFA ÇÖKMEZ -->
+    <div class="col-span-full text-center py-10 card-line-art corner-marks">
+        <i class="fas fa-moon text-4xl text-[#9486a8] opacity-50 mb-4"></i>
+        <p class="text-gray-400 text-sm tracking-widest uppercase">Henüz bir numeroloji analizi yapmadın.</p>
+        <a href="{% url 'numeroloji_hesapla' %}" class="btn-elegant mt-4 !text-[10px]">Analiz Yap</a>
+    </div>
+{% endfor %}
 </div>
 {% else %}
 <div class="card-line-art corner-marks rounded-2xl p-8 text-center max-w-md mx-auto">
