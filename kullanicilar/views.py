@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-# DİKKAT: Profil modelinin adı farklıysa (örneğin UserProfile), aşağıdaki 'Profil' yazan yerleri değiştirmelisin.
 from .models import KullaniciProfili
 
 
