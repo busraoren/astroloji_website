@@ -188,19 +188,19 @@
 
             <!-- GİRİŞ / PROFİL KISMI VE MOBİL BUTONU -->
             <div class="flex items-center gap-6 shrink-0">
-<div class="hidden md:flex items-center gap-5">
-    <form method="get" action="{% url 'arama' %}" class="flex items-center">
-        <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-purple-900/30 rounded-full px-4 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-pink-400/50 transition w-32 focus:w-44">
-    </form>
-    <a href="{% url 'gundem_listesi' %}" class="relative text-[#9486a8] hover:text-gold transition text-lg">
-        <i class="far fa-bell"></i>
-        {% if user.is_authenticated %}
-    <a href="{% url 'gunluk_yorumum' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">GÜNLÜK YORUMUM</a>
-{% endif %}
-        {% if nav_aktif_gundem %}
-            <span class="absolute -top-1 -right-1 w-2 h-2 bg-pink-500 rounded-full"></span>
-        {% endif %}
-    </a>
+                <div class="hidden md:flex items-center gap-5">
+                    <form method="get" action="{% url 'arama' %}" class="flex items-center">
+                        <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-purple-900/30 rounded-full px-4 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-pink-400/50 transition w-32 focus:w-44">
+                    </form>
+                    <a href="{% url 'gundem_listesi' %}" class="relative text-[#9486a8] hover:text-gold transition text-lg">
+                        <i class="far fa-bell"></i>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'gunluk_yorumum' %}" class="text-[11px] tracking-[0.2em] text-pink-300 hover:text-gold transition">GÜNLÜK YORUMUM</a>
+                        {% endif %}
+                        {% if nav_aktif_gundem %}
+                            <span class="absolute -top-1 -right-1 w-2 h-2 bg-pink-500 rounded-full"></span>
+                        {% endif %}
+                    </a>
 
                     {% if user.is_authenticated %}
                         <div class="h-6 w-px bg-purple-900/50"></div>
@@ -261,7 +261,16 @@
                 <i class="fas fa-users text-base opacity-40"></i> ÜNLÜLER
             </a>
 
+            <form method="get" action="{% url 'arama' %}" class="hidden md:block mt-4">
+                <input type="text" name="q" placeholder="Ara..." class="bg-white/5 border border-[rgba(215,105,141,0.2)] rounded-full px-4 py-2 text-sm text-gray-200 focus:outline-none focus:border-pink-400 transition w-full">
+            </form>
 
+            <a href="{% url 'gundem_listesi' %}" class="relative text-gray-300 hover:text-pink-300 transition mt-4 flex items-center gap-4 px-4">
+                <i class="fas fa-bell text-base opacity-40"></i> BİLDİRİMLER
+                {% if nav_aktif_gundem %}
+                    <span class="absolute top-0 left-6 w-2 h-2 bg-pink-400 rounded-full"></span>
+                {% endif %}
+            </a>
             <!-- Mobil Alt Kısım (Auth) -->
             <div class="mt-auto pt-8 border-t border-[rgba(215,105,141,0.2)] md:hidden flex flex-col gap-4">
                 {% if user.is_authenticated %}
@@ -304,13 +313,25 @@
                 </a>
             </div>
 
-            <!-- Sol Alt Motivasyon Kartı -->
-            <div class="card-line-art p-6 corner-marks mt-6 text-center">
-                <p class="text-[10px] tracking-[0.2em] text-pink-300 mb-4 font-medium uppercase">Günlük Motivasyon</p>
-                <p class="font-serif-mystic text-[15px] italic text-gray-300 leading-relaxed font-light">
-                    {{ gunun_sozu|default:'"Yıldızlar seni yönlendirebilir, ama yolu seçmek senin elinde."' }}
-                </p>
-                <i class="fas fa-moon text-pink-500/30 mt-4 text-xl"></i>
+            <!-- Sol Alt Motivasyon Kartı (Yenilendi) -->
+            <div class="card-line-art p-6 corner-marks mt-6 relative overflow-hidden group">
+                <!-- Hafif arka plan parlaması -->
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-500/10 rounded-full blur-[30px] group-hover:bg-gold-light/10 transition duration-700 pointer-events-none"></div>
+
+                <div class="flex justify-between items-start mb-4 relative z-10">
+                    <div>
+                        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Günlük Motivasyon</p>
+                        <p class="text-[11px] text-[#9486a8] mt-1">Evrenin Mesajı</p>
+                    </div>
+                    <i class="fas fa-moon text-gold/40 text-2xl"></i>
+                </div>
+
+                <div class="relative z-10">
+                    <i class="fas fa-quote-left absolute -top-1 -left-2 text-2xl text-pink-500/10"></i>
+                    <p class="font-serif-mystic text-[17px] text-gray-200 italic leading-relaxed font-light pl-4">
+                        {{ gunun_sozu|default:'"Yıldızlar seni yönlendirebilir, ama yolu seçmek senin elinde."' }}
+                    </p>
+                </div>
             </div>
         </aside>
 
@@ -321,33 +342,33 @@
         </main>
 
         <!-- SAĞ SIDEBAR -->
-<aside class="hidden xl:flex flex-col gap-6 sticky top-24 h-fit">
+        <aside class="hidden xl:flex flex-col gap-6 sticky top-24 h-fit">
 
-    <!-- Gökyüzü Gündemi -->
-    <div class="card-line-art p-6 corner-marks">
-        <div class="flex justify-between items-start mb-4">
-            <div>
-                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Gökyüzü Gündemi</p>
-                <p class="text-xs text-[#9486a8] mt-1">Gezegen Hareketleri</p>
+            <!-- Gökyüzü Gündemi -->
+            <div class="card-line-art p-6 corner-marks">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase">Gökyüzü Gündemi</p>
+                        <p class="text-xs text-[#9486a8] mt-1">Gezegen Hareketleri</p>
+                    </div>
+                    <i class="fas fa-meteor text-gold/40 text-2xl"></i>
+                </div>
+                <p class="text-xs text-gray-400 font-light leading-relaxed mb-5">
+                    Gökyüzündeki anlık gezegen hareketlerinin ve önemli astrolojik olayların senin üzerindeki etkilerini takip et.
+                </p>
+                <a href="{% url 'gundem_listesi' %}" class="text-[10px] tracking-widest text-pink-300 hover:text-gold transition uppercase">Gündeme Git →</a>
             </div>
-            <i class="fas fa-meteor text-gold/40 text-2xl"></i>
-        </div>
-        <p class="text-xs text-gray-400 font-light leading-relaxed mb-5">
-            Gökyüzündeki anlık gezegen hareketlerinin ve önemli astrolojik olayların senin üzerindeki etkilerini takip et.
-        </p>
-        <a href="{% url 'gundem_listesi' %}" class="text-[10px] tracking-widest text-pink-300 hover:text-gold transition uppercase">Gündeme Git →</a>
-    </div>
 
-    <!-- Ay'ın Fazı -->
-    <div class="card-line-art corner-marks rounded-2xl p-6 text-center">
-        <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-3">Ayın Fazı</p>
-        <div class="text-4xl mb-2">{{ ay_fazi.emoji }}</div>
-        <p class="font-serif-mystic text-lg text-gold">{{ ay_fazi.isim }}</p>
-    </div>
+            <!-- Ay'ın Fazı -->
+            <div class="card-line-art corner-marks rounded-2xl p-6 text-center">
+                <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-3">Ayın Fazı</p>
+                <div class="text-4xl mb-2">{{ ay_fazi.emoji }}</div>
+                <p class="font-serif-mystic text-lg text-gold">{{ ay_fazi.isim }}</p>
+            </div>
 
-    {% block sidebar %}{% endblock %}
+            {% block sidebar %}{% endblock %}
 
-</aside>
+        </aside>
 
     </div>
 
