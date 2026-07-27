@@ -160,13 +160,11 @@
 </div>
 
 <script>
-
     // ==========================================
     // 1. OYUN: KOZMİK HAFIZA (GERÇEK ASSETLERLE)
     // ==========================================
 
     // Django'nun statik dosyaları sunucuda hashleyebilmesi için tam yolları veriyoruz
-// Django'nun statik dosyaları sunucuda hashleyebilmesi için tam yolları veriyoruz
     const cardImages = [
         "{% static 'burcs/img/oyun/kart1.png' %}",
         "{% static 'burcs/img/oyun/kart2.png' %}",
@@ -206,7 +204,6 @@
         cardsArray.forEach((imgUrl) => {
             const card = document.createElement('div');
             card.classList.add('memory-card', 'relative', 'h-32', 'sm:h-40', 'w-full', 'cursor-pointer');
-            // Artık eşleştirmeyi resmin tam URL adresi üzerinden yapacağız
             card.dataset.image = imgUrl;
 
             card.innerHTML = `
@@ -247,7 +244,7 @@
             disableCards();
             matches++;
             if(matches === cardImages.length) {
-                setTimeout(() => alert(\`Tebrikler! Kozmik hafızanı \${moves} hamlede tamamladın.\`), 500);
+                setTimeout(() => alert(`Tebrikler! Kozmik hafızanı ${moves} hamlede tamamladın.`), 500);
             }
         } else {
             unflipCards();
@@ -275,6 +272,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", initMemoryGame);
+
 
     // ==========================================
     // 2. OYUN: GÜNEŞ VS AY DÜELLOSU
@@ -315,7 +313,7 @@
         document.getElementById('fighter-sun').classList.remove('opacity-30', 'grayscale');
 
         powerSlider.value = 50;
-        powerSlider.dispatchEvent(new Event('input')); // Yazıları sıfırla
+        powerSlider.dispatchEvent(new Event('input'));
     }
 
     function updateHealthBars() {
@@ -328,11 +326,11 @@
         const star = document.createElement('i');
 
         // Şiddete göre hız ve büyüklük hesaplama
-        let duration = 900 - (power * 5); // %100 güçte 400ms (çok hızlı)
-        let scale = 1 + (power / 100); // %100 güçte 2x büyüklük
+        let duration = 900 - (power * 5);
+        let scale = 1 + (power / 100);
 
         star.className = 'fas fa-star absolute text-2xl z-20 drop-shadow-[0_0_10px_currentColor]';
-        star.style.transition = \`all \${duration}ms cubic-bezier(0.4, 0, 0.2, 1)\`;
+        star.style.transition = `all ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
         star.style.top = '50%';
         star.style.transform = 'translateY(-50%) scale(1)';
 
@@ -343,7 +341,7 @@
 
             setTimeout(() => {
                 star.style.left = '80%';
-                star.style.transform = \`translateY(-50%) rotate(720deg) scale(\${scale})\`;
+                star.style.transform = `translateY(-50%) rotate(720deg) scale(${scale})`;
             }, 50);
 
         } else {
@@ -353,8 +351,7 @@
 
             setTimeout(() => {
                 star.style.left = '15%';
-                // Ay'ın saldırısı sabit şiddette (yapay zeka)
-                star.style.transform = \`translateY(-50%) rotate(-720deg) scale(1.3)\`;
+                star.style.transform = `translateY(-50%) rotate(-720deg) scale(1.3)`;
             }, 50);
         }
 
@@ -373,15 +370,13 @@
         document.getElementById('battle-log').innerText = logText;
 
         throwProjectile('sun', power, () => {
-            // Şiddete bağlı dinamik hasar (örn: %100 güç = min 20, max 35 hasar)
-            let baseDamage = Math.floor(power / 5); // 100'de 20 base
-            let randomDamage = Math.floor(Math.random() * 16); // 0-15 arası şans
+            let baseDamage = Math.floor(power / 5);
+            let randomDamage = Math.floor(Math.random() * 16);
             let damage = baseDamage + randomDamage;
 
             moonHP -= damage;
             updateHealthBars();
 
-            // Hiddete göre ekran sarsıntısı efekti
             const moonEl = document.getElementById('fighter-moon');
             let shakeClass = power > 70 ? 'damage-shake-heavy' : 'damage-shake-light';
             moonEl.classList.add(shakeClass);
@@ -398,13 +393,11 @@
     function moonCounterAttack() {
         if (sunHP <= 0 || moonHP <= 0) return;
 
-        // Ay'ın sana karşı vurduğu hasar da senin hiddetine göre biraz artar (Denge mekaniği)
         let playerAggro = parseInt(powerSlider.value) > 80 ? 10 : 0;
 
         document.getElementById('battle-log').innerText = "Ay karanlık enerjisiyle karşılık veriyor!";
 
         throwProjectile('moon', 50, () => {
-            // Ay'ın hasarı 10-25 arası + senin agro cezan
             let damage = Math.floor(Math.random() * 16) + 10 + playerAggro;
             sunHP -= damage;
             updateHealthBars();
