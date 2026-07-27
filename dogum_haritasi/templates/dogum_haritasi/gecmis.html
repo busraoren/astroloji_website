@@ -1,0 +1,24 @@
+{% extends 'burcs/base.html' %}
+{% block title %}Geçmiş Haritalarım{% endblock %}
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-pink-300 mb-3">✦ GEÇMİŞ HESAPLAMALARIM ✦</p>
+    <h2 class="font-serif-mystic text-4xl text-gold">Doğum Haritalarım</h2>
+</div>
+
+{% if haritalar %}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {% for harita in haritalar %}
+        <a href="{% url 'dogum_haritasi_sonuc' harita.id %}" class="card-line-art corner-marks rounded-2xl p-5">
+            <p class="font-serif-mystic text-lg text-pink-100">{{ harita.isim|default:"İsimsiz" }}</p>
+            <p class="text-xs text-gray-400 mt-1">{{ harita.dogum_tarihi }} — {{ harita.dogum_yeri }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card-line-art corner-marks rounded-2xl p-8 text-center max-w-md mx-auto">
+    <p class="text-gray-400 text-sm mb-6">Henüz bir hesaplama yapmadın.</p>
+    <a href="{% url 'dogum_haritasi' %}" class="btn-elegant">HARİTA ÇIKAR</a>
+</div>
+{% endif %}
+{% endblock %}
