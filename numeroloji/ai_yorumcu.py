@@ -13,6 +13,7 @@ def numeroloji_yorumla(isim, hesaplama_sonucu):
 """
 
     response = client.chat.completions.create(
+        max_tokens=300,
         model="deepseek-v4-flash",
         messages=[
             {
