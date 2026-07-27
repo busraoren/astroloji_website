@@ -42,3 +42,10 @@ def numeroloji_formu(request):
 
     # Sayfa ilk açıldığında sadece formu gönder (sonuç daha yok)
     return render(request, 'numeroloji/form.html', {'form': form})
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def gecmis_numerolojim(request):
+    sonuclar = NumerolojiSonucu.objects.filter(kullanici=request.user).order_by('-olusturulma_tarihi')
+    return render(request, 'numeroloji/gecmis.html', {'sonuclar': sonuclar})

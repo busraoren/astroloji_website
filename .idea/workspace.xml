@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="" />
+    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/numeroloji/templates/numeroloji/gecmis.html" beforeDir="false" afterPath="$PROJECT_DIR$/numeroloji/templates/numeroloji/gecmis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/numeroloji/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/numeroloji/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/numeroloji/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/numeroloji/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

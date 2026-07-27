@@ -1,0 +1,24 @@
+{% extends 'burcs/base.html' %}
+{% block title %}Geçmiş Numerolojim{% endblock %}
+{% block content %}
+<div class="text-center mb-8">
+    <p class="text-sm tracking-[0.2em] text-pink-300 mb-3">✦ GEÇMİŞ ANALİZLERİM ✦</p>
+    <h2 class="font-serif-mystic text-4xl text-gold">Numeroloji Sonuçlarım</h2>
+</div>
+
+{% if sonuclar %}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {% for sonuc in sonuclar %}
+        <a href="{% url 'numeroloji_sonuc' sonuc.id %}" class="card-line-art corner-marks rounded-2xl p-5">
+            <p class="font-serif-mystic text-lg text-pink-100">{{ sonuc.isim }}</p>
+            <p class="text-xs text-gray-400 mt-1">{{ sonuc.dogum_tarihi }}</p>
+        </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card-line-art corner-marks rounded-2xl p-8 text-center max-w-md mx-auto">
+    <p class="text-gray-400 text-sm mb-6">Henüz bir analiz yapmadın.</p>
+    <a href="{% url 'numeroloji' %}" class="btn-elegant">ANALİZ YAP</a>
+</div>
+{% endif %}
+{% endblock %}
