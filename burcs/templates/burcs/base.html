@@ -423,7 +423,50 @@
         mobileBtn.addEventListener('click', openMenu);
         closeBtn.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
+
     </script>
+<script>
+    // Estetik tıklama sesi (Web Audio API ile üretiliyor, dosya gerekmiyor)
+    function tikSesiCal() {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const simdi = ctx.currentTime;
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1200, simdi);
+        osc.frequency.exponentialRampToValueAtTime(600, simdi + 0.08);
+
+        gain.gain.setValueAtTime(0.08, simdi);
+        gain.gain.exponentialRampToValueAtTime(0.001, simdi + 0.12);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(simdi);
+        osc.stop(simdi + 0.12);
+    }
+
+    // Sitedeki tüm gerçek linklere (fonksiyonel butonlar/kartlar) tıklama sesi ekle
+    document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+
+        // Yeni sekmede açma, ctrl/cmd tıklama gibi durumlarda sesi engellemeyelim, normal davransın
+        if (e.ctrlKey || e.metaKey || e.shiftKey || link.target === '_blank') return;
+
+        // # ile başlayan (sayfa içi bağlantı) veya javascript: linklerini atla
+        if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').startsWith('javascript:')) return;
+
+        e.preventDefault();
+        tikSesiCal();
+
+        setTimeout(() => {
+            window.location.href = link.href;
+        }, 90);
+    });
+</script>
 
 </body>
 </html>
