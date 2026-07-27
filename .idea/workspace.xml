@@ -5,15 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/arka_yuz.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart8.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/burcs/templates/burcs/oyunlar.html" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/templates/burcs/oyunlar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

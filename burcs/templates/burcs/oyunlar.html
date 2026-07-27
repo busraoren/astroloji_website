@@ -23,15 +23,50 @@
     }
 
     /* Savaş Oyunu Animasyonları */
-    @keyframes shake {
+    @keyframes shake-light {
         0% { transform: translate(1px, 1px) rotate(0deg); }
-        25% { transform: translate(-1px, -2px) rotate(-1deg); }
-        50% { transform: translate(-3px, 0px) rotate(1deg); }
-        75% { transform: translate(3px, 2px) rotate(0deg); }
-        100% { transform: translate(1px, -1px) rotate(0deg); }
+        50% { transform: translate(-1px, -1px) rotate(-1deg); }
+        100% { transform: translate(1px, 1px) rotate(0deg); }
     }
-    .damage-shake {
-        animation: shake 0.3s;
+    @keyframes shake-heavy {
+        0% { transform: translate(2px, 2px) rotate(0deg); }
+        25% { transform: translate(-3px, -2px) rotate(-2deg); }
+        50% { transform: translate(-4px, 2px) rotate(2deg); }
+        75% { transform: translate(3px, -3px) rotate(-1deg); }
+        100% { transform: translate(1px, 1px) rotate(0deg); }
+    }
+    .damage-shake-light { animation: shake-light 0.3s; }
+    .damage-shake-heavy { animation: shake-heavy 0.4s; }
+
+    /* Hiddet (Range) Slider Özel Tasarımı */
+    .hiddet-slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 6px;
+        background: rgba(147, 51, 234, 0.3);
+        border-radius: 10px;
+        outline: none;
+        transition: 0.2s;
+    }
+    .hiddet-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--pink-neon);
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(215, 105, 141, 0.8);
+        border: 2px solid var(--gold-light);
+    }
+    .hiddet-slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--pink-neon);
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(215, 105, 141, 0.8);
+        border: 2px solid var(--gold-light);
     }
 </style>
 
@@ -64,7 +99,7 @@
         </div>
 
         <!-- Savaş Arenası -->
-        <div id="battle-arena" class="relative w-full h-48 bg-black/20 rounded-2xl border border-[rgba(215,105,141,0.1)] flex items-center justify-between px-6 sm:px-12 overflow-hidden">
+        <div id="battle-arena" class="relative w-full h-48 bg-black/20 rounded-2xl border border-[rgba(215,105,141,0.1)] flex items-center justify-between px-6 sm:px-12 overflow-hidden mb-6">
 
             <!-- Güneş (Sen) -->
             <div id="fighter-sun" class="flex flex-col items-center z-10 w-24">
@@ -95,16 +130,31 @@
 
         </div>
 
-        <!-- Savaş Butonları -->
-        <div class="text-center mt-8 space-y-4">
+        <!-- Savaş Kontrolleri (Hiddet Ayarı + Buton) -->
+        <div class="max-w-xs mx-auto text-center" id="battle-controls">
+
+            <div class="mb-5">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-[10px] text-pink-300 tracking-widest uppercase">Fırlatma Şiddeti</span>
+                    <span id="power-value" class="text-xs font-bold text-gold">%50</span>
+                </div>
+                <input type="range" id="attack-power" min="10" max="100" value="50" class="hiddet-slider">
+                <p id="power-status" class="text-[10px] text-gray-400 italic mt-2">Odaklanmış kozmik enerji.</p>
+            </div>
+
             <p id="battle-log" class="text-xs text-gray-300 italic h-4 mb-4">Savaşı başlatmak için saldır!</p>
-            <button id="attack-btn" onclick="sunAttack()" class="btn-elegant !text-[10px]">
+
+            <button id="attack-btn" onclick="sunAttack()" class="btn-elegant w-full !text-[10px] py-3">
                 <i class="fas fa-meteor mr-2"></i> YILDIZ FIRLAT
             </button>
+        </div>
+
+        <div class="text-center mt-4">
             <button id="reset-battle-btn" onclick="initBattle()" class="btn-elegant !text-[10px] hidden">
                 <i class="fas fa-redo mr-2"></i> TEKRAR OYNA
             </button>
         </div>
+
     </div>
 
 </div>
@@ -113,14 +163,10 @@
     // ==========================================
     // 1. OYUN: KOZMİK HAFIZA (GERÇEK ASSETLERLE)
     // ==========================================
-
-    // Yüklediğin görsellerin isimleri (Kendi resim isimlerinle değiştirebilirsin)
     const imageFiles = ['kart1.png', 'kart2.png', 'kart3.png', 'kart4.png', 'kart5.png', 'kart6.png', 'kart7.png', 'kart8.png'];
-
-    // Django'nun static klasör yolu
     const basePath = "{% static 'img/oyun/' %}";
 
-    let cardsArray = [...imageFiles, ...imageFiles]; // Çiftleri oluştur
+    let cardsArray = [...imageFiles, ...imageFiles];
     let hasFlippedCard = false;
     let lockBoard = false;
     let firstCard, secondCard;
@@ -146,16 +192,13 @@
 
         cardsArray.forEach((fileName) => {
             const card = document.createElement('div');
-            // Kartları gerçek bir oyun kartı gibi uzun göstermek için h-32/h-40 yaptık
             card.classList.add('memory-card', 'relative', 'h-32', 'sm:h-40', 'w-full', 'cursor-pointer');
             card.dataset.image = fileName;
 
             card.innerHTML = `
-                <!-- Arka Yüz (Kapalı Hali) -->
                 <div class="memory-back absolute inset-0 rounded-xl overflow-hidden border border-[rgba(215,105,141,0.2)] hover:border-pink-400 transition-colors shadow-lg">
                     <img src="${basePath}arka_yuz.png" alt="Kart Arkası" class="w-full h-full object-cover">
                 </div>
-                <!-- Ön Yüz (Açık Hali - Asset) -->
                 <div class="memory-front absolute inset-0 rounded-xl overflow-hidden border border-gold/50 shadow-[0_0_15px_rgba(229,192,123,0.3)]">
                     <img src="${basePath}${fileName}" alt="Oyun Kartı" class="w-full h-full object-cover">
                 </div>
@@ -184,7 +227,6 @@
     }
 
     function checkForMatch() {
-        // Artık eşleştirmeyi resim dosyasının adından yapıyoruz
         let isMatch = firstCard.dataset.image === secondCard.dataset.image;
 
         if (isMatch) {
@@ -218,8 +260,8 @@
         [firstCard, secondCard] = [null, null];
     }
 
-    // Oyun yüklendiğinde başlat
     document.addEventListener("DOMContentLoaded", initMemoryGame);
+
 
     // ==========================================
     // 2. OYUN: GÜNEŞ VS AY DÜELLOSU
@@ -228,15 +270,39 @@
     let moonHP = 100;
     let isBattling = false;
 
+    // Şiddet (Power) Slider Olayları
+    const powerSlider = document.getElementById('attack-power');
+    const powerValueText = document.getElementById('power-value');
+    const powerStatusText = document.getElementById('power-status');
+
+    powerSlider.addEventListener('input', function() {
+        const val = parseInt(this.value);
+        powerValueText.innerText = '%' + val;
+
+        if (val < 40) {
+            powerStatusText.innerText = "Sakin, dengeli ve isabetli.";
+            powerStatusText.className = "text-[10px] text-blue-300 italic mt-2";
+        } else if (val < 80) {
+            powerStatusText.innerText = "Güçlü bir kozmik enerji!";
+            powerStatusText.className = "text-[10px] text-gold italic mt-2";
+        } else {
+            powerStatusText.innerText = "SAF HİDDET! Yıkıcı ama riskli!";
+            powerStatusText.className = "text-[10px] text-red-400 font-bold italic mt-2";
+        }
+    });
+
     function initBattle() {
         sunHP = 100;
         moonHP = 100;
         updateHealthBars();
         document.getElementById('battle-log').innerText = "Savaşı başlatmak için saldır!";
-        document.getElementById('attack-btn').classList.remove('hidden');
+        document.getElementById('battle-controls').classList.remove('hidden');
         document.getElementById('reset-battle-btn').classList.add('hidden');
         document.getElementById('fighter-moon').classList.remove('opacity-30', 'grayscale');
         document.getElementById('fighter-sun').classList.remove('opacity-30', 'grayscale');
+
+        powerSlider.value = 50;
+        powerSlider.dispatchEvent(new Event('input')); // Yazıları sıfırla
     }
 
     function updateHealthBars() {
@@ -244,57 +310,69 @@
         document.getElementById('hp-moon').style.width = Math.max(moonHP, 0) + '%';
     }
 
-    function throwProjectile(attacker, callback) {
+    function throwProjectile(attacker, power, callback) {
         const arena = document.getElementById('battle-arena');
         const star = document.createElement('i');
-        star.className = 'fas fa-star absolute text-2xl transition-all duration-[600ms] ease-in-out z-20 drop-shadow-[0_0_10px_currentColor]';
+
+        // Şiddete göre hız ve büyüklük hesaplama
+        let duration = 900 - (power * 5); // %100 güçte 400ms (çok hızlı)
+        let scale = 1 + (power / 100); // %100 güçte 2x büyüklük
+
+        star.className = 'fas fa-star absolute text-2xl z-20 drop-shadow-[0_0_10px_currentColor]';
+        star.style.transition = \`all \${duration}ms cubic-bezier(0.4, 0, 0.2, 1)\`;
         star.style.top = '50%';
-        star.style.transform = 'translateY(-50%)';
+        star.style.transform = 'translateY(-50%) scale(1)';
 
         if (attacker === 'sun') {
             star.classList.add('text-gold');
-            star.style.left = '15%'; // Başlangıç (Sol)
+            star.style.left = '15%';
             arena.appendChild(star);
 
-            // Animasyonu tetikle
             setTimeout(() => {
-                star.style.left = '80%'; // Hedef (Sağ)
-                star.style.transform = 'translateY(-50%) rotate(360deg) scale(1.5)';
+                star.style.left = '80%';
+                star.style.transform = \`translateY(-50%) rotate(720deg) scale(\${scale})\`;
             }, 50);
 
         } else {
             star.classList.add('text-pink-400');
-            star.style.left = '80%'; // Başlangıç (Sağ)
+            star.style.left = '80%';
             arena.appendChild(star);
 
             setTimeout(() => {
-                star.style.left = '15%'; // Hedef (Sol)
-                star.style.transform = 'translateY(-50%) rotate(-360deg) scale(1.5)';
+                star.style.left = '15%';
+                // Ay'ın saldırısı sabit şiddette (yapay zeka)
+                star.style.transform = \`translateY(-50%) rotate(-720deg) scale(1.3)\`;
             }, 50);
         }
 
-        // Çarpma anı
         setTimeout(() => {
             star.remove();
             callback();
-        }, 650);
+        }, duration + 50);
     }
 
     function sunAttack() {
         if (isBattling || sunHP <= 0 || moonHP <= 0) return;
         isBattling = true;
 
-        document.getElementById('battle-log').innerText = "Güneş yakıcı bir yıldız fırlattı!";
+        let power = parseInt(powerSlider.value);
+        let logText = power > 80 ? "Güneş hiddetle devasa bir yıldız fırlattı!" : "Güneş kozmik ateşini yolladı.";
+        document.getElementById('battle-log').innerText = logText;
 
-        throwProjectile('sun', () => {
-            // Hasar hesapla (15-25 arası)
-            let damage = Math.floor(Math.random() * 11) + 15;
+        throwProjectile('sun', power, () => {
+            // Şiddete bağlı dinamik hasar (örn: %100 güç = min 20, max 35 hasar)
+            let baseDamage = Math.floor(power / 5); // 100'de 20 base
+            let randomDamage = Math.floor(Math.random() * 16); // 0-15 arası şans
+            let damage = baseDamage + randomDamage;
+
             moonHP -= damage;
             updateHealthBars();
 
+            // Hiddete göre ekran sarsıntısı efekti
             const moonEl = document.getElementById('fighter-moon');
-            moonEl.classList.add('damage-shake');
-            setTimeout(() => moonEl.classList.remove('damage-shake'), 300);
+            let shakeClass = power > 70 ? 'damage-shake-heavy' : 'damage-shake-light';
+            moonEl.classList.add(shakeClass);
+            setTimeout(() => moonEl.classList.remove(shakeClass), 400);
 
             if (moonHP <= 0) {
                 endBattle('sun');
@@ -307,29 +385,32 @@
     function moonCounterAttack() {
         if (sunHP <= 0 || moonHP <= 0) return;
 
+        // Ay'ın sana karşı vurduğu hasar da senin hiddetine göre biraz artar (Denge mekaniği)
+        let playerAggro = parseInt(powerSlider.value) > 80 ? 10 : 0;
+
         document.getElementById('battle-log').innerText = "Ay karanlık enerjisiyle karşılık veriyor!";
 
-        throwProjectile('moon', () => {
-            // Hasar hesapla (10-30 arası daha dengesiz)
-            let damage = Math.floor(Math.random() * 21) + 10;
+        throwProjectile('moon', 50, () => {
+            // Ay'ın hasarı 10-25 arası + senin agro cezan
+            let damage = Math.floor(Math.random() * 16) + 10 + playerAggro;
             sunHP -= damage;
             updateHealthBars();
 
             const sunEl = document.getElementById('fighter-sun');
-            sunEl.classList.add('damage-shake');
-            setTimeout(() => sunEl.classList.remove('damage-shake'), 300);
+            sunEl.classList.add('damage-shake-heavy');
+            setTimeout(() => sunEl.classList.remove('damage-shake-heavy'), 400);
 
             if (sunHP <= 0) {
                 endBattle('moon');
             } else {
-                document.getElementById('battle-log').innerText = "Sıra sende!";
+                document.getElementById('battle-log').innerText = "Sıra sende! Hiddetini belirle.";
                 isBattling = false;
             }
         });
     }
 
     function endBattle(winner) {
-        document.getElementById('attack-btn').classList.add('hidden');
+        document.getElementById('battle-controls').classList.add('hidden');
         document.getElementById('reset-battle-btn').classList.remove('hidden');
 
         if (winner === 'sun') {
