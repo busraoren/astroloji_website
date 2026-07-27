@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="" />
+    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/arka_yuz.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/burcs/static/img/oyun/kart8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/templates/burcs/oyunlar.html" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/templates/burcs/oyunlar.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,6 +59,7 @@
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\tarot\static\tarot\kartlar" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\burcs\static\img\oyun" />
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\burcs\templates\burcs" />
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\unluler\templates\unluler" />
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\numeroloji\template\numeroloji" />

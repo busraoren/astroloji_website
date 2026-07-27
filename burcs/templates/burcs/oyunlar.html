@@ -1,4 +1,5 @@
 {% extends 'burcs/base.html' %}
+{% load static %}
 
 {% block title %}astrobacılar - Kozmik Oyunlar{% endblock %}
 
@@ -42,11 +43,11 @@
             <h2 class="font-serif-mystic text-3xl text-gold font-light mb-2">Kozmik Hafıza</h2>
             <p class="text-[11px] text-[#9486a8] tracking-[0.2em] uppercase">Gezegenleri Eşleştir</p>
         </div>
-        
+
         <div class="grid grid-cols-4 gap-3 sm:gap-4 max-w-md mx-auto" id="memory-board">
             <!-- Kartlar JS ile buraya yüklenecek -->
         </div>
-        
+
         <div class="text-center mt-8">
             <p id="memory-moves" class="text-xs text-pink-300 mb-4 tracking-widest hidden">Hamle: <span>0</span></p>
             <button onclick="initMemoryGame()" class="btn-elegant !text-[10px]">
@@ -64,7 +65,7 @@
 
         <!-- Savaş Arenası -->
         <div id="battle-arena" class="relative w-full h-48 bg-black/20 rounded-2xl border border-[rgba(215,105,141,0.1)] flex items-center justify-between px-6 sm:px-12 overflow-hidden">
-            
+
             <!-- Güneş (Sen) -->
             <div id="fighter-sun" class="flex flex-col items-center z-10 w-24">
                 <div class="w-full bg-gray-800 h-1.5 rounded-full mb-3 overflow-hidden">
@@ -91,7 +92,7 @@
                 </div>
                 <span class="text-[10px] text-pink-300 tracking-widest mt-3 uppercase">Ay (Zeka)</span>
             </div>
-            
+
         </div>
 
         <!-- Savaş Butonları -->
@@ -110,10 +111,16 @@
 
 <script>
     // ==========================================
-    // 1. OYUN: KOZMİK HAFIZA (MEMORY GAME)
+    // 1. OYUN: KOZMİK HAFIZA (GERÇEK ASSETLERLE)
     // ==========================================
-    const symbols = ['fa-sun text-gold', 'fa-moon text-pink-300', 'fa-meteor text-orange-400', 'fa-globe-europe text-blue-300', 'fa-star text-yellow-200', 'fa-bolt text-purple-400', 'fa-eye text-green-300', 'fa-fire text-red-400'];
-    let cardsArray = [...symbols, ...symbols]; // Çiftleri oluştur
+
+    // Yüklediğin görsellerin isimleri (Kendi resim isimlerinle değiştirebilirsin)
+    const imageFiles = ['kart1.png', 'kart2.png', 'kart3.png', 'kart4.png', 'kart5.png', 'kart6.png', 'kart7.png', 'kart8.png'];
+
+    // Django'nun static klasör yolu
+    const basePath = "{% static 'img/oyun/' %}";
+
+    let cardsArray = [...imageFiles, ...imageFiles]; // Çiftleri oluştur
     let hasFlippedCard = false;
     let lockBoard = false;
     let firstCard, secondCard;
@@ -137,19 +144,20 @@
         document.querySelector('#memory-moves span').innerText = moves;
         document.getElementById('memory-moves').classList.remove('hidden');
 
-        cardsArray.forEach((symbol, index) => {
+        cardsArray.forEach((fileName) => {
             const card = document.createElement('div');
-            card.classList.add('memory-card', 'relative', 'h-20', 'sm:h-24', 'w-full', 'cursor-pointer');
-            card.dataset.symbol = symbol;
+            // Kartları gerçek bir oyun kartı gibi uzun göstermek için h-32/h-40 yaptık
+            card.classList.add('memory-card', 'relative', 'h-32', 'sm:h-40', 'w-full', 'cursor-pointer');
+            card.dataset.image = fileName;
 
             card.innerHTML = `
                 <!-- Arka Yüz (Kapalı Hali) -->
-                <div class="memory-back absolute inset-0 bg-[#10051f] border-[rgba(215,105,141,0.2)] rounded-xl flex items-center justify-center hover:border-pink-400 transition-colors">
-                    <i class="fas fa-sparkles text-pink-500/30"></i>
+                <div class="memory-back absolute inset-0 rounded-xl overflow-hidden border border-[rgba(215,105,141,0.2)] hover:border-pink-400 transition-colors shadow-lg">
+                    <img src="${basePath}arka_yuz.png" alt="Kart Arkası" class="w-full h-full object-cover">
                 </div>
-                <!-- Ön Yüz (Açık Hali) -->
-                <div class="memory-front absolute inset-0 bg-[#1a0b2e] border border-gold/50 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(229,192,123,0.2)]">
-                    <i class="fas ${symbol} text-2xl sm:text-3xl"></i>
+                <!-- Ön Yüz (Açık Hali - Asset) -->
+                <div class="memory-front absolute inset-0 rounded-xl overflow-hidden border border-gold/50 shadow-[0_0_15px_rgba(229,192,123,0.3)]">
+                    <img src="${basePath}${fileName}" alt="Oyun Kartı" class="w-full h-full object-cover">
                 </div>
             `;
             card.addEventListener('click', flipCard);
@@ -176,13 +184,14 @@
     }
 
     function checkForMatch() {
-        let isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
+        // Artık eşleştirmeyi resim dosyasının adından yapıyoruz
+        let isMatch = firstCard.dataset.image === secondCard.dataset.image;
 
         if (isMatch) {
             disableCards();
             matches++;
-            if(matches === symbols.length) {
-                setTimeout(() => alert(`Tebrikler! Kozmik hafızanı ${moves} hamlede tamamladın.`), 500);
+            if(matches === imageFiles.length) {
+                setTimeout(() => alert(\`Tebrikler! Kozmik hafızanı \${moves} hamlede tamamladın.\`), 500);
             }
         } else {
             unflipCards();
@@ -211,7 +220,6 @@
 
     // Oyun yüklendiğinde başlat
     document.addEventListener("DOMContentLoaded", initMemoryGame);
-
 
     // ==========================================
     // 2. OYUN: GÜNEŞ VS AY DÜELLOSU
@@ -247,7 +255,7 @@
             star.classList.add('text-gold');
             star.style.left = '15%'; // Başlangıç (Sol)
             arena.appendChild(star);
-            
+
             // Animasyonu tetikle
             setTimeout(() => {
                 star.style.left = '80%'; // Hedef (Sağ)
@@ -258,7 +266,7 @@
             star.classList.add('text-pink-400');
             star.style.left = '80%'; // Başlangıç (Sağ)
             arena.appendChild(star);
-            
+
             setTimeout(() => {
                 star.style.left = '15%'; // Hedef (Sol)
                 star.style.transform = 'translateY(-50%) rotate(-360deg) scale(1.5)';
@@ -275,15 +283,15 @@
     function sunAttack() {
         if (isBattling || sunHP <= 0 || moonHP <= 0) return;
         isBattling = true;
-        
+
         document.getElementById('battle-log').innerText = "Güneş yakıcı bir yıldız fırlattı!";
-        
+
         throwProjectile('sun', () => {
             // Hasar hesapla (15-25 arası)
             let damage = Math.floor(Math.random() * 11) + 15;
             moonHP -= damage;
             updateHealthBars();
-            
+
             const moonEl = document.getElementById('fighter-moon');
             moonEl.classList.add('damage-shake');
             setTimeout(() => moonEl.classList.remove('damage-shake'), 300);
@@ -300,7 +308,7 @@
         if (sunHP <= 0 || moonHP <= 0) return;
 
         document.getElementById('battle-log').innerText = "Ay karanlık enerjisiyle karşılık veriyor!";
-        
+
         throwProjectile('moon', () => {
             // Hasar hesapla (10-30 arası daha dengesiz)
             let damage = Math.floor(Math.random() * 21) + 10;
@@ -323,7 +331,7 @@
     function endBattle(winner) {
         document.getElementById('attack-btn').classList.add('hidden');
         document.getElementById('reset-battle-btn').classList.remove('hidden');
-        
+
         if (winner === 'sun') {
             document.getElementById('battle-log').innerHTML = "<span class='text-gold font-bold'>Güneş kazandı! Aydınlık galip geldi.</span>";
             document.getElementById('fighter-moon').classList.add('opacity-30', 'grayscale');
