@@ -160,7 +160,7 @@
 </div>
 
 <script>
-    // ==========================================
+// ==========================================
     // 1. OYUN: KOZMİK HAFIZA (GERÇEK ASSETLERLE)
     // ==========================================
 
@@ -203,7 +203,8 @@
 
         cardsArray.forEach((imgUrl) => {
             const card = document.createElement('div');
-            card.classList.add('memory-card', 'relative', 'h-32', 'sm:h-40', 'w-full', 'cursor-pointer');
+            // 'h-32' ve 'sm:h-40' sınıflarını silip, kartları tam kare yapan 'aspect-square' sınıfını ekledik:
+            card.classList.add('memory-card', 'relative', 'aspect-square', 'w-full', 'cursor-pointer');
             card.dataset.image = imgUrl;
 
             card.innerHTML = `
@@ -272,9 +273,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", initMemoryGame);
-
-
-    // ==========================================
+      // ==========================================
     // 2. OYUN: GÜNEŞ VS AY DÜELLOSU
     // ==========================================
     let sunHP = 100;
