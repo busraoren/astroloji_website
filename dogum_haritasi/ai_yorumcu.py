@@ -20,7 +20,6 @@ def dogum_haritasi_yorumla(hesaplama_sonucu):
             veri_metni += f"{ev_no}. Ev: {bilgi['burc']} burcunda\n"
 
     response = client.chat.completions.create(
-        max_tokens=300,
         model="deepseek-v4-flash",
         messages=[
             {
