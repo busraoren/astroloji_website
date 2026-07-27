@@ -1,5 +1,5 @@
 import markdown
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .hesaplama import numeroloji_hesapla
 from .ai_yorumcu import numeroloji_yorumla
 from .forms import NumerolojiFormu
@@ -7,6 +7,7 @@ from .models import NumerolojiSonucu
 
 
 def numeroloji_formu(request):
+    # Eğer sayfada form gönderildiyse (Hesapla butonuna basıldıysa)
     if request.method == 'POST':
         form = NumerolojiFormu(request.POST)
         if form.is_valid():
@@ -14,6 +15,7 @@ def numeroloji_formu(request):
 
             hesaplama_sonucu = numeroloji_hesapla(veri['isim'], veri['dogum_tarihi'])
             yorum = numeroloji_yorumla(veri['isim'], hesaplama_sonucu)
+            yorum_html = markdown.markdown(yorum)  # Markdown'ı HTML'e çevirdik
 
             kullanici = request.user if request.user.is_authenticated else None
 
@@ -25,14 +27,18 @@ def numeroloji_formu(request):
                 kader_sayisi=hesaplama_sonucu['kader_sayisi'],
                 ai_yorumu=yorum
             )
-            return redirect('numeroloji_sonuc', sonuc_id=sonuc.id)
+
+            # DİKKAT: Yönlendirme (redirect) yapmıyoruz!
+            # Formu, sonucu ve yorumu aynı anda aynı sayfaya gönderiyoruz.
+            return render(request, 'numeroloji/form.html', {
+                'form': form,
+                'sonuc': sonuc,
+                'yorum_html': yorum_html
+            })
+
+    # Eğer sayfaya ilk defa giriliyorsa boş formu göster
     else:
         form = NumerolojiFormu()
 
+    # Sayfa ilk açıldığında sadece formu gönder (sonuç daha yok)
     return render(request, 'numeroloji/form.html', {'form': form})
-
-
-def numeroloji_sonuc(request, sonuc_id):
-    sonuc = NumerolojiSonucu.objects.get(id=sonuc_id)
-    yorum_html = markdown.markdown(sonuc.ai_yorumu)
-    return render(request, 'numeroloji/sonuc.html', {'sonuc': sonuc, 'yorum_html': yorum_html})

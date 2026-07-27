@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -48,6 +48,7 @@
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\tarot\static\tarot\kartlar" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\burcs\templates\burcs" />
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\unluler\templates\unluler" />
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\numeroloji\template\numeroloji" />
       <recent name="C:\Users\hp\astrologyWebsite\astrologyWebsite\dogum_haritasi\templates\dogum_haritası" />

@@ -3,21 +3,49 @@
 {% block title %}Numeroloji{% endblock %}
 
 {% block content %}
-<div class="max-w-lg mx-auto">
+<div class="max-w-lg mx-auto mb-16">
     <div class="text-center mb-8">
-        <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ SAYILARIN GİZLİ DİLİ ✦</p>
-        <h2 class="font-baslik text-3xl text-gradient-gold">Numeroloji Analizi</h2>
-        <p class="text-gray-400 text-sm mt-3">İsmin ve doğum tarihin, kaderinin şifrelerini taşır.</p>
+        <p class="text-[10px] tracking-[0.2em] text-pink-300 font-normal mb-3">✦ SAYILARIN GİZLİ DİLİ ✦</p>
+        <h2 class="font-serif-mystic text-3xl text-gold font-light">Numeroloji Analizi</h2>
+        <p class="text-gray-400 text-sm mt-3 font-light">İsmin ve doğum tarihin, kaderinin şifrelerini taşır.</p>
     </div>
 
-    <div class="card-elegant rounded-3xl p-8">
+    <!-- FORM KISMI -->
+    <div class="card-line-art corner-marks rounded-3xl p-8">
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="holo-btn w-full font-semibold py-3 rounded-full mt-4 tracking-wide text-sm">
-                HESAPLA
+
+            <div class="space-y-4 text-gray-300 font-light text-sm">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn-elegant w-full mt-6">
+                HESAPLA <i class="fas fa-magic ml-2"></i>
             </button>
         </form>
     </div>
+
+    <!-- SONUÇ GÖSTERİM KISMI (Eğer hesaplama yapıldıysa burası görünür) -->
+    {% if yorum %}
+    <div class="mt-8 card-line-art corner-marks rounded-3xl p-8 relative overflow-hidden fade-enter fade-enter-active">
+        <!-- Arka plan süslemesi -->
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-500/10 rounded-full blur-[30px] pointer-events-none"></div>
+
+        <div class="text-center mb-6 relative z-10">
+            <p class="text-[10px] tracking-[0.2em] text-pink-300 uppercase mb-2">Kader Sayın</p>
+            <div class="text-6xl text-gold font-serif-mystic drop-shadow-[0_0_15px_rgba(229,192,123,0.4)]">
+                {{ kader_sayisi }}
+            </div>
+        </div>
+
+        <div class="relative z-10">
+            <h3 class="text-gold text-lg font-serif-mystic mb-3 border-b border-[rgba(215,105,141,0.2)] pb-2">Evrenin Senin İçin Mesajı</h3>
+            <p class="text-gray-300 text-sm leading-relaxed font-light">
+                {{ yorum }}
+            </p>
+        </div>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}
