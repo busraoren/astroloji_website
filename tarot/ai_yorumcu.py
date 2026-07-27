@@ -12,7 +12,6 @@ def tarot_yorumla(cekilen_kartlar):
         kart_metni += f"{i}. Kart: {kart['isim']}\n"
 
     response = client.chat.completions.create(
-        max_tokens=300,
         model="deepseek-v4-flash",
         messages=[
             {
