@@ -33,4 +33,5 @@ urlpatterns = [
     path('evler/', include('evler.urls')),
     path('gundem/', include('astro_gundem.urls')),
     path('kozmik-test/', burcs_views.test_detay, name='test_detay'),
+    path('oyunlar/', burcs_views.oyunlar, name='oyunlar'),
 ]
