@@ -3,5 +3,4 @@ from . import views
 
 urlpatterns = [
     path('', views.numeroloji_formu, name='numeroloji'),
-    path('sonuc/<int:sonuc_id>/', views.numeroloji_sonuc, name='numeroloji_sonuc'),
 ]
