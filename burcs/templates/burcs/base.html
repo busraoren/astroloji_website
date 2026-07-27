@@ -434,9 +434,9 @@
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
 
-        osc.type = 'triangle';
+        osc.type = 'sine';
         osc.frequency.setValueAtTime(1200, simdi);
-        osc.frequency.exponentialRampToValueAtTime(600, simdi + 0.08);
+        osc.frequency.exponentialRampToValueAtTime(450, simdi + 0.09);
 
         gain.gain.setValueAtTime(0.08, simdi);
         gain.gain.exponentialRampToValueAtTime(0.001, simdi + 0.12);
