@@ -160,13 +160,25 @@
 </div>
 
 <script>
+
     // ==========================================
     // 1. OYUN: KOZMİK HAFIZA (GERÇEK ASSETLERLE)
     // ==========================================
-    const imageFiles = ['kart1.png', 'kart2.png', 'kart3.png', 'kart4.png', 'kart5.png', 'kart6.png', 'kart7.png', 'kart8.png'];
-    const basePath = "{% static 'img/oyun/' %}";
 
-    let cardsArray = [...imageFiles, ...imageFiles];
+    // Django'nun statik dosyaları sunucuda hashleyebilmesi için tam yolları veriyoruz
+    const cardImages = [
+        "{% static 'img/oyun/kart1.png' %}",
+        "{% static 'img/oyun/kart2.png' %}",
+        "{% static 'img/oyun/kart3.png' %}",
+        "{% static 'img/oyun/kart4.png' %}",
+        "{% static 'img/oyun/kart5.png' %}",
+        "{% static 'img/oyun/kart6.png' %}",
+        "{% static 'img/oyun/kart7.png' %}",
+        "{% static 'img/oyun/kart8.png' %}"
+    ];
+    const backImage = "{% static 'img/oyun/arka_yuz.png' %}";
+
+    let cardsArray = [...cardImages, ...cardImages];
     let hasFlippedCard = false;
     let lockBoard = false;
     let firstCard, secondCard;
@@ -190,17 +202,18 @@
         document.querySelector('#memory-moves span').innerText = moves;
         document.getElementById('memory-moves').classList.remove('hidden');
 
-        cardsArray.forEach((fileName) => {
+        cardsArray.forEach((imgUrl) => {
             const card = document.createElement('div');
             card.classList.add('memory-card', 'relative', 'h-32', 'sm:h-40', 'w-full', 'cursor-pointer');
-            card.dataset.image = fileName;
+            // Artık eşleştirmeyi resmin tam URL adresi üzerinden yapacağız
+            card.dataset.image = imgUrl;
 
             card.innerHTML = `
                 <div class="memory-back absolute inset-0 rounded-xl overflow-hidden border border-[rgba(215,105,141,0.2)] hover:border-pink-400 transition-colors shadow-lg">
-                    <img src="${basePath}arka_yuz.png" alt="Kart Arkası" class="w-full h-full object-cover">
+                    <img src="${backImage}" alt="Kart Arkası" class="w-full h-full object-cover">
                 </div>
                 <div class="memory-front absolute inset-0 rounded-xl overflow-hidden border border-gold/50 shadow-[0_0_15px_rgba(229,192,123,0.3)]">
-                    <img src="${basePath}${fileName}" alt="Oyun Kartı" class="w-full h-full object-cover">
+                    <img src="${imgUrl}" alt="Oyun Kartı" class="w-full h-full object-cover">
                 </div>
             `;
             card.addEventListener('click', flipCard);
@@ -232,7 +245,7 @@
         if (isMatch) {
             disableCards();
             matches++;
-            if(matches === imageFiles.length) {
+            if(matches === cardImages.length) {
                 setTimeout(() => alert(\`Tebrikler! Kozmik hafızanı \${moves} hamlede tamamladın.\`), 500);
             }
         } else {
@@ -261,7 +274,6 @@
     }
 
     document.addEventListener("DOMContentLoaded", initMemoryGame);
-
 
     // ==========================================
     // 2. OYUN: GÜNEŞ VS AY DÜELLOSU
