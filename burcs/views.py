@@ -29,8 +29,8 @@ def anasayfa(request):
 
     aktif_gundem = anasayfa_icin_aktif_gundem()
 
-    return render(request, 'burcs/anasayfa.html',
-                  {'burclar': burclar, 'aktif_gundem': aktif_gundem,'ay_fazi': ay_fazi, 'gunun_sozu': gunun_sozu})
+    return render(request, 'burcs/anasayfa.html', {'burclar': burclar, 'aktif_gundem': aktif_gundem})
+
 def burc_detay(request, burc_kodu):
     burc_adi = dict(BurcYorumu.BURC_SECENEKLERI)[burc_kodu]
     bilgi = BURC_BILGILERI[burc_kodu]
