@@ -2,14 +2,14 @@ import markdown
 from django.shortcuts import render
 from .hesaplama import numeroloji_hesapla
 from .ai_yorumcu import numeroloji_yorumla
-from .forms import NumerolojiFormu
 from .models import NumerolojiSonucu
+
 
 
 def numeroloji_formu(request):
     # Eğer sayfada form gönderildiyse (Hesapla butonuna basıldıysa)
     if request.method == 'POST':
-        form = NumerolojiFormu(request.POST)
+        form = numeroloji_formu(request.POST)
         if form.is_valid():
             veri = form.cleaned_data
 
@@ -38,7 +38,7 @@ def numeroloji_formu(request):
 
     # Eğer sayfaya ilk defa giriliyorsa boş formu göster
     else:
-        form = NumerolojiFormu()
+        form = numeroloji_formu
 
     # Sayfa ilk açıldığında sadece formu gönder (sonuç daha yok)
     return render(request, 'numeroloji/form.html', {'form': form})
