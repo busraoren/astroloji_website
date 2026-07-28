@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/numeroloji/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/numeroloji/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

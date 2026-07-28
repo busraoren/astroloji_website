@@ -1,21 +1,24 @@
 import markdown
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .hesaplama import numeroloji_hesapla
 from .ai_yorumcu import numeroloji_yorumla
 from .models import NumerolojiSonucu
 
+# Form sınıfını projene dahil etmelisin (Adının NumerolojiFormu olduğunu varsayıyorum)
+from .forms import NumerolojiFormu
 
 
 def numeroloji_formu(request):
-    # Eğer sayfada form gönderildiyse (Hesapla butonuna basıldıysa)
     if request.method == 'POST':
-        form = numeroloji_formu(request.POST)
+        # DİKKAT: Görünümün (view) kendi adını değil, Form sınıfının adını kullanmalısın!
+        form = NumerolojiFormu(request.POST)
         if form.is_valid():
             veri = form.cleaned_data
 
             hesaplama_sonucu = numeroloji_hesapla(veri['isim'], veri['dogum_tarihi'])
             yorum = numeroloji_yorumla(veri['isim'], hesaplama_sonucu)
-            yorum_html = markdown.markdown(yorum)  # Markdown'ı HTML'e çevirdik
+            yorum_html = markdown.markdown(yorum)
 
             kullanici = request.user if request.user.is_authenticated else None
 
@@ -28,24 +31,35 @@ def numeroloji_formu(request):
                 ai_yorumu=yorum
             )
 
-            # DİKKAT: Yönlendirme (redirect) yapmıyoruz!
-            # Formu, sonucu ve yorumu aynı anda aynı sayfaya gönderiyoruz.
             return render(request, 'numeroloji/form.html', {
                 'form': form,
                 'sonuc': sonuc,
                 'yorum_html': yorum_html
             })
 
-    # Eğer sayfaya ilk defa giriliyorsa boş formu göster
     else:
-        form = numeroloji_formu
+        # DİKKAT: Burada da Form sınıfını çağırmalısın
+        form = NumerolojiFormu()
 
-    # Sayfa ilk açıldığında sadece formu gönder (sonuç daha yok)
     return render(request, 'numeroloji/form.html', {'form': form})
 
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def gecmis_numerolojim(request):
     sonuclar = NumerolojiSonucu.objects.filter(kullanici=request.user).order_by('-olusturulma_tarihi')
     return render(request, 'numeroloji/gecmis.html', {'sonuclar': sonuclar})
+
+
+# --- İŞTE EKSİK OLAN VE ÇÖKMEYE SEBEP OLAN YENİ FONKSİYON ---
+def numeroloji_sonuc(request, sonuc_id):
+    # Veritabanından o ID'ye ait sonucu bul, yoksa 404 hatası ver
+    sonuc = get_object_or_404(NumerolojiSonucu, id=sonuc_id)
+
+    # AI yorumunu tekrar HTML formatına çevir
+    yorum_html = markdown.markdown(sonuc.ai_yorumu)
+
+    # Detayları göstereceğin tasarım sayfasını render et (form.html veya detay.html)
+    return render(request, 'numeroloji/form.html', {
+        'sonuc': sonuc,
+        'yorum_html': yorum_html
+    })
