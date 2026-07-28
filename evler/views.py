@@ -15,7 +15,8 @@ def ev_detay(request, ev_no):
     kullanici_burcu = None
     kisisel_yorum = None
 
-    if request.user.is_authenticated:
+    # Kullanıcının giriş yapıp yapmadığını VE bir profili olup olmadığını güvenli bir şekilde kontrol ediyoruz
+    if request.user.is_authenticated and hasattr(request.user, 'profil'):
         profil = request.user.profil
         if profil.dogum_tarihi and profil.dogum_saati:
             hesaplama_sonucu = gezegen_konumlarini_hesapla(

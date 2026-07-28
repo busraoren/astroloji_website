@@ -512,9 +512,11 @@
         tikSesiCal();
 
         setTimeout(() => {
-            window.location.href = link.href;
+            // Eğer tıklanan şey bir SVG elementi ise href'i obje olarak gelir.
+            // Bunu engellemek ve gerçek adresi almak için güvenli bir kontrol yapıyoruz:
+            const hedefUrl = typeof link.href === 'string' ? link.href : link.getAttribute('href');
+            window.location.href = hedefUrl;
         }, 90);
-    });
 </script>
 
 </body>
