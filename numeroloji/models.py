@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class NumerolojiSonucu(models.Model):
-    kullanici = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='numeroloji_sonuclari' )
+    kullanici = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='numeroloji_sonucu' )
     isim = models.CharField(max_length=100)
     dogum_tarihi = models.DateField()
     yasam_yolu_sayisi = models.IntegerField()
