@@ -1,26 +1,37 @@
 {% extends 'burcs/base.html' %}
-
-{% block title %}Kayıt Ol{% endblock %}
+{% block title %}Profilim{% endblock %}
 
 {% block content %}
-<div class="max-w-md mx-auto mt-8">
+<div class="max-w-md mx-auto mb-16 mt-10">
     <div class="text-center mb-8">
-        <p class="text-sm tracking-[0.2em] text-rose-300 font-normal mb-3">✦ YOLCULUĞUNA BAŞLA ✦</p>
-        <h2 class="font-baslik text-3xl text-gradient-gold">Kayıt Ol</h2>
+        <div class="w-20 h-20 mx-auto rounded-full border-2 border-pink-500/50 flex items-center justify-center bg-pink-900/20 text-gold text-3xl mb-4">
+            {{ user.username|slice:":1"|upper }}
+        </div>
+        <p class="text-[10px] tracking-[0.2em] text-pink-300 font-normal mb-2">✦ KOZMİK KİMLİĞİN ✦</p>
+        <h2 class="font-serif-mystic text-3xl text-gold font-light">{{ user.username|upper }}</h2>
     </div>
 
-    <div class="card-elegant rounded-3xl p-8">
-        <form method="post">
+    <div class="card-line-art corner-marks rounded-3xl p-8">
+        <p class="text-gray-300 text-sm font-light mb-6 text-center">
+            Ünlülerle sinastri (uyum) analizi yapabilmemiz için doğum bilgilerini eksiksiz doldurmalısın.
+        </p>
+
+        <!-- Eğer Profil Güncelleme formun varsa buraya form.as_p gelecek -->
+        <form method="post" action="{% url 'profil' %}">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="holo-btn w-full font-semibold py-3 rounded-full mt-4 tracking-wide text-sm">
-                KAYIT OL
-            </button>
+            <!-- Form alanlarını (tarih, saat vb.) forms.py'den gönderiyorsan -->
+            <div class="space-y-4 text-gray-300 text-sm font-light">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn-elegant w-full mt-6">BİLGİLERİMİ GÜNCELLE</button>
         </form>
 
-        <p class="text-center text-sm text-gray-400 mt-5">
-            Zaten hesabın var mı? <a href="{% url 'giris' %}" class="text-rose-300 hover:text-rose-200 transition">Giriş yap</a>
-        </p>
+        <div class="mt-6 pt-6 border-t border-[rgba(215,105,141,0.2)] text-center">
+            <a href="{% url 'cikis' %}" class="text-xs tracking-widest text-pink-400 hover:text-pink-200 transition uppercase">
+                <i class="fas fa-sign-out-alt mr-1"></i> Hesaptan Çıkış Yap
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}
