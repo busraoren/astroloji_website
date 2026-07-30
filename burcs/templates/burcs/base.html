@@ -15,7 +15,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
+<style>
         :root {
             --bg-deep: #07020e;
             --border-mystic: rgba(147, 51, 234, 0.2);
@@ -24,128 +24,78 @@
             --purple-glow: rgba(107, 33, 168, 0.4);
         }
 
+        /* 1. DEĞİŞİKLİK: font-weight 400 yapılarak yazılar belirginleştirildi */
         html, body {
             overflow-x: hidden;
             scroll-behavior: smooth;
             background-color: var(--bg-deep);
             color: #d1c5e2;
             font-family: 'Jost', sans-serif;
-            font-weight: 300;
+            font-weight: 400;
         }
 
-        /* Zarif ve İnce Kaydırma Çubuğu */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: #3b1d52; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--pink-neon); }
 
-        /* Tipografi */
         .font-serif-mystic { font-family: 'Cormorant Garamond', serif; }
         .text-gold { color: var(--gold-light); }
         .text-pink-glow { color: var(--pink-neon); text-shadow: 0 0 10px rgba(215, 105, 141, 0.3); }
 
-        /* Arka Plan Ayrıntıları (Noise ve İnce Çizgiler) */
         .bg-cosmos {
-            position: fixed;
-            inset: 0;
-            z-index: -10;
-            background-image:
-                radial-gradient(circle at 15% 50%, rgba(45, 15, 70, 0.4), transparent 40%),
-                radial-gradient(circle at 85% 20%, rgba(70, 20, 60, 0.3), transparent 30%);
+            position: fixed; inset: 0; z-index: -10;
+            background-image: radial-gradient(circle at 15% 50%, rgba(45, 15, 70, 0.4), transparent 40%),
+                              radial-gradient(circle at 85% 20%, rgba(70, 20, 60, 0.3), transparent 30%);
         }
         .bg-noise {
-            position: fixed;
-            inset: 0;
-            z-index: -9;
-            opacity: 0.04;
+            position: fixed; inset: 0; z-index: -9; opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             pointer-events: none;
         }
 
-        /* Emek Verilmiş İnce Çizgili Kartlar (Line-Art UI) */
         .card-line-art {
             background: rgba(12, 5, 22, 0.6);
             border: 1px solid var(--border-mystic);
-            border-radius: 12px;
-            position: relative;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(5px);
+            border-radius: 12px; position: relative; transition: all 0.4s ease; backdrop-filter: blur(5px);
         }
         .card-line-art:hover {
             border-color: rgba(215, 105, 141, 0.4);
             box-shadow: 0 0 20px rgba(215, 105, 141, 0.05), inset 0 0 15px rgba(229, 192, 123, 0.03);
         }
 
-        /* Kart Köşe Süslemeleri */
         .corner-marks::before, .corner-marks::after {
             content: ''; position: absolute; width: 12px; height: 12px; border: 1px solid transparent; pointer-events: none; transition: 0.3s;
         }
         .corner-marks::before { top: 6px; left: 6px; border-top-color: rgba(229, 192, 123, 0.4); border-left-color: rgba(229, 192, 123, 0.4); }
         .corner-marks::after { bottom: 6px; right: 6px; border-bottom-color: rgba(215, 105, 141, 0.4); border-right-color: rgba(215, 105, 141, 0.4); }
 
-        /* Buton (Zarif ve İnce) */
+        /* 2. DEĞİŞİKLİK: Buton yazıları bir tık büyütüldü */
         .btn-elegant {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            border: 1px solid rgba(215, 105, 141, 0.3);
-            background: rgba(215, 105, 141, 0.05);
-            color: var(--pink-neon);
-            padding: 0.6rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            border: 1px solid rgba(215, 105, 141, 0.3); background: rgba(215, 105, 141, 0.05);
+            color: var(--pink-neon); padding: 0.7rem 1.6rem; border-radius: 30px;
+            font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s ease;
         }
-        .btn-elegant:hover {
-            background: rgba(215, 105, 141, 0.15);
-            border-color: var(--pink-neon);
-            box-shadow: 0 0 15px rgba(215, 105, 141, 0.2);
-            color: #fff;
-        }
+        .btn-elegant:hover { background: rgba(215, 105, 141, 0.15); border-color: var(--pink-neon); box-shadow: 0 0 15px rgba(215, 105, 141, 0.2); color: #fff; }
 
-        /* Sidebar Linkleri */
+        /* 3. DEĞİŞİKLİK: Menü linkleri okunaklı hale getirildi */
         .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 1.25rem;
-            color: #9486a8;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.25rem;
+            color: #b7a9c9; font-size: 0.95rem; letter-spacing: 0.08em; border-radius: 8px;
+            transition: all 0.3s ease; border: 1px solid transparent;
         }
         .nav-link:hover, .nav-link.active {
-            background: linear-gradient(90deg, rgba(215, 105, 141, 0.08), transparent);
-            border-left: 1px solid var(--pink-neon);
-            color: var(--gold-light);
+            background: linear-gradient(90deg, rgba(215, 105, 141, 0.08), transparent); border-left: 2px solid var(--pink-neon); color: var(--gold-light);
         }
-        .nav-link i { font-size: 1rem; opacity: 0.7; }
+        .nav-link i { font-size: 1.1rem; opacity: 0.8; }
 
-        /* Yıldızlar */
-        .star-tiny {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle var(--duration, 4s) infinite alternate;
-        }
+        .star-tiny { position: absolute; background: #fff; border-radius: 50%; animation: twinkle var(--duration, 4s) infinite alternate; }
         @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 0.8; transform: scale(1.2); } }
-
-        /* Animasyon Keyframeleri (At ve Ördek) */
-        @keyframes swing-horse {
-            0% { transform: rotate(-25deg); }
-            100% { transform: rotate(25deg); }
-        }
-        @keyframes run-duck {
-            0% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-4px) rotate(5deg); }
-            100% { transform: translateY(0) rotate(-5deg); }
-        }
+        @keyframes swing-horse { 0% { transform: rotate(-25deg); } 100% { transform: rotate(25deg); } }
+        @keyframes run-duck { 0% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-4px) rotate(5deg); } 100% { transform: translateY(0) rotate(-5deg); } }
     </style>
+
 </head>
 <body>
 
