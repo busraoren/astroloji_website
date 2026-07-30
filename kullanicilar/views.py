@@ -1,32 +1,30 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import KullaniciProfili
 
+# KENDİ YAZDIĞIN FORMLARI İÇERİ AKTARIYORSUN
+from .forms import KayitFormu, ProfilFormu
 
 # --- KAYIT OLMA İŞLEMİ ---
 def kayit_ol(request):
     if request.method == 'POST':
-        # Eğer senin yazdığın özel bir kayıt formun varsa
-        # UserCreationForm yerine kendi formunun adını (örn: KayitFormu) yazabilirsin.
-        form = UserCreationForm(request.POST)
+        # Senin hazırladığın Tailwind tasarımlı özel formu kullanıyoruz
+        form = KayitFormu(request.POST)
         if form.is_valid():
             user = form.save()
-            # Kullanıcı kayıt olduğu an boş bir profil de sisteme eklenir
             KullaniciProfili.objects.get_or_create(user=user)
             login(request, user)
-            return redirect('anasayfa')  # Kayıt sonrası gideceği sayfa
+            return redirect('anasayfa')
     else:
-        form = UserCreationForm()
+        form = KayitFormu()
 
     return render(request, 'kullanicilar/kayit.html', {'form': form})
 
 
 # --- GİRİŞ YAPMA İŞLEMİ ---
 def giris_yap(request):
-    # Eğer urls.py dosyasında bu yolun adı sadece 'giris' ise
-    # fonksiyonun adını def giris(request): olarak değiştirebilirsin.
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -48,14 +46,25 @@ def cikis_yap(request):
     return redirect('anasayfa')
 
 
-# --- PROFİL GÖRÜNTÜLEME İŞLEMİ (DÜZELTİLDİ) ---
+# --- PROFİL GÖRÜNTÜLEME VE GÜNCELLEME İŞLEMİ ---
 @login_required
 def profil(request):
-    # Kullanıcının profili varsa getirir, yoksa anında boş bir tane oluşturur.
-    # RelatedObjectDoesNotExist hatasını kökten çözer.
+    # 1. Kullanıcının profilini bul veya anında oluştur
     kullanici_profili, created = KullaniciProfili.objects.get_or_create(user=request.user)
 
+    # 2. Form gönderildiyse (Bilgilerimi Güncelle butonuna basıldıysa)
+    if request.method == 'POST':
+        form = ProfilFormu(request.POST, instance=kullanici_profili)
+        if form.is_valid():
+            form.save()
+            return redirect('profil') # Başarıyla kaydedince sayfayı yenile
+    else:
+        # 3. Sayfaya ilk girildiğinde formu mevcut bilgilerle doldur
+        form = ProfilFormu(instance=kullanici_profili)
+
+    # 4. Formu HTML sayfasına (template) gönder! (Kutucukların görünmesini sağlayan asıl yer)
     context = {
-        'profil': kullanici_profili
+        'profil': kullanici_profili,
+        'form': form
     }
     return render(request, 'kullanicilar/profil.html', context)
