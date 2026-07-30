@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-%6%!zw5*bz_^enx6yq1s4vswztg=bh7cdk6ih1a)77jt=ww=gc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['astrobacilar.space', 'www.astrobacilar.space', '.railway.app']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -92,10 +92,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 import dj_database_url
 
+import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
+        default=os.environ.get('DATABASE_URL')
     )
 }
 
