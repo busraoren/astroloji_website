@@ -114,7 +114,7 @@
     <nav class="border-b border-purple-900/30 bg-[#07020e]/90 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
 
-            <!-- DETAYLANDIRILMIŞ LOGO VE ANİMASYON -->
+ <!-- DETAYLANDIRILMIŞ LOGO VE ANİMASYON -->
             <a href="{% url 'anasayfa' %}" class="flex items-center gap-2 shrink-0 group">
                 <!-- Ay'da Sallanan Detaylı At Animasyonu -->
                 <div class="relative w-12 h-12 flex items-center justify-center shrink-0 mr-1">
@@ -122,8 +122,9 @@
                     <div class="absolute top-[15%] right-[32%] origin-top animate-[swing-horse_3s_ease-in-out_infinite_alternate]">
                         <!-- İp -->
                         <div class="w-[1px] h-[18px] bg-gradient-to-b from-[#e5c07b] to-[#d7698d] mx-auto shadow-[0_0_6px_rgba(215,105,141,0.8)]"></div>
-                        <!-- Gerçek At Çizimi (fa-horse) ve Büyütüldü -->
-                        <i class="fas fa-horse text-[#d7698d] text-[22px] block -ml-[11px] drop-shadow-[0_0_8px_rgba(215,105,141,0.9)] mt-[1px]"></i>
+
+                        <!-- Gerçek At Çizimi (Yönü Sağa Çevrildi ve İpin Konumu Dengelendi) -->
+                        <i class="fas fa-horse -scale-x-100 text-[#d7698d] text-[22px] block -ml-[2px] drop-shadow-[0_0_8px_rgba(215,105,141,0.9)] mt-[1px]"></i>
                     </div>
                 </div>
                 <span class="font-serif-mystic lowercase text-3xl tracking-widest text-gold font-light mt-1">astrobacılar</span>
