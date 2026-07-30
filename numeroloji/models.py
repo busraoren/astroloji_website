@@ -15,5 +15,3 @@ class NumerolojiSonucu(models.Model):
     def __str__(self):
         return f"{self.isim} - {self.dogum_tarihi}"
 
-
-
