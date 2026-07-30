@@ -469,6 +469,46 @@
             window.location.href = hedefUrl;
         }, 90);
 </script>
-
+<!-- KOZMİK YÜKLEME EKRANI (Varsayılan olarak gizlidir: hidden) -->
+    <div id="cosmic-loader" class="fixed inset-0 bg-[#07020e]/95 backdrop-blur-lg z-[100] hidden flex-col items-center justify-center transition-opacity duration-500">
+        <div class="relative flex items-center justify-center mb-8">
+            <!-- Dış Dönen Çember -->
+            <i class="fas fa-dharmachakra text-[80px] text-[#9486a8] opacity-30 animate-[spin_8s_linear_infinite]"></i>
+            <!-- İç Dönen Güneş -->
+            <i class="fas fa-sun text-[45px] text-gold absolute animate-[spin_4s_linear_infinite_reverse] drop-shadow-[0_0_15px_rgba(229,192,123,0.8)]"></i>
+        </div>
+        <h3 class="font-serif-mystic text-3xl md:text-4xl text-pink-200 mb-3 animate-pulse font-light">
+            Kozmik Enerjiler Hesaplanıyor...
+        </h3>
+        <p class="text-xs text-gray-400 font-light tracking-[0.2em] uppercase text-center px-6">
+            Yıldızların mesajı çözülüyor, lütfen bu süreç tamamlanana kadar bekle.
+        </p>
+    </div>
 </body>
 </html>
+<script>
+    // Sayfadaki HERHANGİ BİR form gönderildiğinde bu kod çalışır
+    document.addEventListener('submit', function(e) {
+
+        // Arama çubuğu (GET metodu) saniyesinde çalıştığı için onu engelliyoruz
+        // Sadece POST metoduyla çalışan ağır hesaplama formlarında devreye girecek
+        if (e.target.method.toLowerCase() === 'get') {
+            return;
+        }
+
+        // 1. Kozmik bekleme ekranını görünür yap
+        const loader = document.getElementById('cosmic-loader');
+        if (loader) {
+            loader.classList.remove('hidden');
+            loader.classList.add('flex');
+        }
+
+        // 2. Kullanıcının art arda butona tıklayıp sunucuyu yormasını (çökertmesini) engelle
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Yıldızlar Okunuyor...';
+        }
+    });
+</script>
