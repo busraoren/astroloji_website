@@ -92,10 +92,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 import dj_database_url
 
-import dj_database_url
-
-import dj_database_url
-
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL')
@@ -152,6 +148,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://astroloji-website.onrender.com',
     'https://astrobacilar.space',
-    'https://www.astrobacilar.space',
+    'https://www.astrobacilar.space'
 ]
