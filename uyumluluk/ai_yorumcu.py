@@ -22,7 +22,7 @@ def uyumluluk_yorumla(isim1, gezegenler1, isim2, gezegenler2):
         messages=[
             {
                 "role": "system",
-                "content": "Sen deneyimli bir astrologsun. İki kişinin gezegen konumlarını karşılaştırıp aralarındaki uyumu (aşk, iletişim, uzun vadeli ilişki potansiyeli açısından) değerlendiren, akıcı, Türkçe bir uyumluluk analizi yazıyorsun. Markdown kullanma, düz paragraflar halinde yaz."
+                "content": "Sen deneyimli bir astrologsun. İki kişinin gezegen konumlarını karşılaştırıp aralarındaki uyumu (aşk, iletişim, uzun vadeli ilişki potansiyeli açısından) değerlendiren, akıcı, Türkçe bir uyumluluk analizi yazıyorsun. 400 kelimeyi geçmesin. Markdown kullanma, düz paragraflar halinde yaz."
             },
             {
                 "role": "user",

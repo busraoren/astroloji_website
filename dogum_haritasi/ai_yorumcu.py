@@ -24,7 +24,7 @@ def dogum_haritasi_yorumla(hesaplama_sonucu):
         messages=[
             {
                 "role": "system",
-                "content": "Sen deneyimli bir astrologsun. Verilen gezegen konumları, yükselen burç ve ev bilgilerine göre, kişinin karakteri ve yaşamı hakkında akıcı, anlaşılır, Türkçe bir doğum haritası yorumu yazıyorsun. Markdown kullanma, düz paragraflar halinde yaz."
+                "content": "Sen deneyimli bir astrologsun. Verilen gezegen konumları, yükselen burç ve ev bilgilerine göre, kişinin karakteri ve yaşamı hakkında akıcı, anlaşılır, Türkçe bir doğum haritası yorumu yazıyorsun. 500 kelime sınırı. Markdown kullanma, düz paragraflar halinde yaz."
             },
             {
                 "role": "user",
