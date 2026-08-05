@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-import datetime
 
 # Modüllerimiz
 from .models import BurcYorumu, GunlukYorum, KozmikTest

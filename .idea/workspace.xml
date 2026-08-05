@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/burcs/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/burcs/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/burcs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/burcs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
