@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import datetime
 
-# Modüllerimiz
 from .models import BurcYorumu, GunlukYorum, KozmikTest
 from .burc_bilgileri import BURC_BILGILERI
 from .ai_yardimcisi import burc_yorumu_uret
@@ -26,7 +26,6 @@ def anasayfa(request):
         })
 
     aktif_gundem = anasayfa_icin_aktif_gundem()
-    # YENİ: Anasayfaya en son eklenen 4 testi yolluyoruz
     vitrin_testleri = KozmikTest.objects.all().order_by('-olusturulma_tarihi')[:4]
 
     return render(request, 'burcs/anasayfa.html', {
@@ -102,16 +101,13 @@ def gunluk_yorumum(request):
 def oyunlar(request):
     return render(request, 'burcs/oyunlar.html')
 
-# YENİ: Tüm Testler Sayfası
 def test_listesi(request):
     tum_testler = KozmikTest.objects.all().order_by('-olusturulma_tarihi')
     return render(request, 'burcs/test_listesi.html', {'tum_testler': tum_testler})
 
-# YENİ: Dinamik Test Detay Sayfası
 def test_detay(request, slug):
     test_obj = get_object_or_404(KozmikTest, slug=slug)
 
-    # Veritabanındaki veriyi Javascript'in sevdiği JSON formatına otomatik çeviriyoruz
     test_data = {
         "title": test_obj.baslik,
         "desc": test_obj.aciklama,
@@ -123,7 +119,7 @@ def test_detay(request, slug):
     for soru in test_obj.sorular.all():
         soru_data = {
             "text": soru.metin,
-            "gorsel_url": soru.gorsel_url, # GIF linkimiz burada!
+            "gorsel_url": soru.gorsel_url,
             "options": [{"text": sec.metin, "category": sec.kategori_kodu} for sec in soru.secenekler.all()]
         }
         test_data["questions"].append(soru_data)
@@ -136,7 +132,7 @@ def test_detay(request, slug):
         }
 
     context = {
-        'test_json': json.dumps(test_data),
+        'test_json': test_data,
         'test_obj': test_obj
     }
     return render(request, 'burcs/test_detay.html', context)
