@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="" />
+    <list default="true" id="99332020-55c2-4b57-b96b-031b10dbd1db" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burcs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/burcs/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,16 +78,5 @@
       <updated>1783500039735</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/burcs/views.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -1,0 +1,23 @@
+{% extends 'burcs/base.html' %}
+{% block title %}Tüm Kozmik Testler{% endblock %}
+
+{% block content %}
+<div class="text-center mb-12">
+    <h1 class="font-serif-mystic text-4xl md:text-5xl text-gold font-light mb-4">Tüm Kozmik Testler</h1>
+    <p class="text-gray-400 text-sm font-light">Evrenin ve yıldızların senin için hazırladığı tüm testleri keşfet.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
+    {% for test in tum_testler %}
+    <a href="{% url 'test_detay' test.slug %}" class="card-line-art corner-marks p-8 flex flex-col items-center text-center group min-h-[220px]">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(215,105,141,0.1),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="text-4xl mb-5 text-pink-400/50 group-hover:text-gold group-hover:scale-110 transition duration-500 z-10">
+            <i class="fas {{ test.ikon }}"></i>
+        </div>
+        <h3 class="font-serif-mystic text-2xl text-gray-200 mb-3 group-hover:text-pink-200 transition z-10">{{ test.baslik|safe }}</h3>
+        <p class="text-sm text-gray-300 font-light leading-relaxed mb-6 z-10 max-w-sm">{{ test.aciklama|truncatechars:80 }}</p>
+        <div class="mt-auto btn-elegant !text-[11px] z-10">TESTİ ÇÖZ <i class="fas fa-arrow-right ml-1"></i></div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,21 +1,20 @@
-from django.shortcuts import render
+import json
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
-from .models import BurcYorumu
+from django.contrib.auth.decorators import login_required
+import datetime
+
+# Modüllerimiz
+from .models import BurcYorumu, GunlukYorum, KozmikTest
 from .burc_bilgileri import BURC_BILGILERI
 from .ai_yardimcisi import burc_yorumu_uret
+from .burc_hesapla import dogum_tarihinden_burc_bul
 from unluler.models import Unlu
 from astro_gundem.views import anasayfa_icin_aktif_gundem
-import datetime
-from .motivasyon_sozleri import MOTIVASYON_SOZLERI
-from .ay_fazi import ay_fazini_hesapla
-from django.contrib.auth.decorators import login_required
-from .models import GunlukYorum
-from .burc_hesapla import dogum_tarihinden_burc_bul
 
 AY_ISIMLERI = ['', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
-
 
 def anasayfa(request):
     burc_listesi = BurcYorumu.BURC_SECENEKLERI
@@ -28,8 +27,14 @@ def anasayfa(request):
         })
 
     aktif_gundem = anasayfa_icin_aktif_gundem()
+    # YENİ: Anasayfaya en son eklenen 4 testi yolluyoruz
+    vitrin_testleri = KozmikTest.objects.all().order_by('-olusturulma_tarihi')[:4]
 
-    return render(request, 'burcs/anasayfa.html', {'burclar': burclar, 'aktif_gundem': aktif_gundem})
+    return render(request, 'burcs/anasayfa.html', {
+        'burclar': burclar,
+        'aktif_gundem': aktif_gundem,
+        'vitrin_testleri': vitrin_testleri
+    })
 
 def burc_detay(request, burc_kodu):
     burc_adi = dict(BurcYorumu.BURC_SECENEKLERI)[burc_kodu]
@@ -51,13 +56,9 @@ def burc_detay(request, burc_kodu):
         'yorum': yorum_kaydi.yorum,
         'ay_adi': ay_adi,
     })
-def test_detay(request):
-    # 'burcs/' takısını ekliyoruz çünkü HTML dosyan o klasörün içinde
-    return render(request, 'burcs/test_detay.html')
 
 def arama(request):
     query = request.GET.get('q', '').strip()
-
     burc_sonuclari = []
     unlu_sonuclari = []
     kullanici_sonuclari = []
@@ -101,3 +102,42 @@ def gunluk_yorumum(request):
 
 def oyunlar(request):
     return render(request, 'burcs/oyunlar.html')
+
+# YENİ: Tüm Testler Sayfası
+def test_listesi(request):
+    tum_testler = KozmikTest.objects.all().order_by('-olusturulma_tarihi')
+    return render(request, 'burcs/test_listesi.html', {'tum_testler': tum_testler})
+
+# YENİ: Dinamik Test Detay Sayfası
+def test_detay(request, slug):
+    test_obj = get_object_or_404(KozmikTest, slug=slug)
+
+    # Veritabanındaki veriyi Javascript'in sevdiği JSON formatına otomatik çeviriyoruz
+    test_data = {
+        "title": test_obj.baslik,
+        "desc": test_obj.aciklama,
+        "icon": f"<i class='fas {test_obj.ikon}'></i>",
+        "questions": [],
+        "results": {}
+    }
+
+    for soru in test_obj.sorular.all():
+        soru_data = {
+            "text": soru.metin,
+            "gorsel_url": soru.gorsel_url, # GIF linkimiz burada!
+            "options": [{"text": sec.metin, "category": sec.kategori_kodu} for sec in soru.secenekler.all()]
+        }
+        test_data["questions"].append(soru_data)
+
+    for sonuc in test_obj.sonuclar.all():
+        test_data["results"][sonuc.kategori_kodu] = {
+            "title": sonuc.baslik,
+            "icon": sonuc.ikon,
+            "desc": sonuc.aciklama
+        }
+
+    context = {
+        'test_json': json.dumps(test_data),
+        'test_obj': test_obj
+    }
+    return render(request, 'burcs/test_detay.html', context)

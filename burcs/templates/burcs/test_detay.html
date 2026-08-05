@@ -72,439 +72,81 @@
 
 <script>
     // --- BÜTÜN TESTLERİN ZENGİNLEŞTİRİLMİŞ VERİTABANI ---
-    const testDB = {
-        "isim": {
-            title: "İsmine ve Doğum Ayına Göre<br>Gerçek Kişiliğin Ne?",
-            desc: "İsmindeki harfler ve doğduğun ay, aslında senin hakkında çok şey söylüyor. Hazırsan başlayalım! ✨",
-            icon: "<i class='fas fa-font'></i>",
-            questions: [
-                {
-                    text: "1. İsminin ilk harfi hangi grupta?",
-                    options: [
-                        { text: "A) A-E-İ arası", category: "lider" },
-                        { text: "B) F-K-M arası", category: "enerji" },
-                        { text: "C) N-S-Ü arası", category: "empati" },
-                        { text: "D) T-Z arası", category: "guven" }
-                    ]
-                },
-                {
-                    text: "2. Doğduğun mevsim hangisi?",
-                    options: [
-                        { text: "A) İlkbahar", category: "enerji" },
-                        { text: "B) Yaz", category: "lider" },
-                        { text: "C) Sonbahar", category: "empati" },
-                        { text: "D) Kış", category: "guven" }
-                    ]
-                },
-                {
-                    text: "3. Bir arkadaş grubunda genelde hangi rolü üstlenirsin?",
-                    options: [
-                        { text: "A) Planı yapan ve koordine eden", category: "lider" },
-                        { text: "B) Ortamın enerjisini yükselten", category: "enerji" },
-                        { text: "C) Herkesi sabırla dinleyen", category: "empati" },
-                        { text: "D) İşleri sessizce halleden", category: "guven" }
-                    ]
-                },
-                {
-                    text: "4. Sana en çok hangi cümle söylenir?",
-                    options: [
-                        { text: "A) 'Sen çok kararlısın ve ne istediğini biliyorsun.'", category: "lider" },
-                        { text: "B) 'Sen çok eğlencelisin, sıkılmak imkansız.'", category: "enerji" },
-                        { text: "C) 'Sen çok anlayışlısın, resmen terapi gibisin.'", category: "empati" },
-                        { text: "D) 'Sana çok güveniyorum, sırrım sende güvende.'", category: "guven" }
-                    ]
-                },
-                {
-                    text: "5. Zor bir günde ne yaparsın?",
-                    options: [
-                        { text: "A) Hemen mantıklı bir çözüm ararım.", category: "lider" },
-                        { text: "B) Müzik açıp kafa dağıtmaya çalışırım.", category: "enerji" },
-                        { text: "C) Yakın birine anlatıp içimi dökerim.", category: "empati" },
-                        { text: "D) Tek başıma kalıp sindirmeyi beklerim.", category: "guven" }
-                    ]
-                },
-                {
-                    text: "6. Hayatta en çok neye önem verirsin?",
-                    options: [
-                        { text: "A) Başarıya ve hedeflere", category: "lider" },
-                        { text: "B) Özgürlüğe ve spontane olmaya", category: "enerji" },
-                        { text: "C) İlişkilere ve duygusal bağlara", category: "empati" },
-                        { text: "D) Güvene ve istikrara", category: "guven" }
-                    ]
-                }
-            ],
-            results: {
-                "lider": { title: "Doğal Bir Lidersin!", icon: "👑", desc: "Kontrolü elden bırakmayı sevmez, hedeflerine kilitlenirsin. Doğal bir otoriten var." },
-                "enerji": { title: "Enerji Kaynağısın!", icon: "✨", desc: "Ortamı sen canlandırırsın, özgürlüğüne düşkünsün. Etrafındaki herkese ilham veriyorsun." },
-                "empati": { title: "Empati Ustasısın!", icon: "🫂", desc: "İnsanlar dertlerini önce sana anlatır. Şifacı bir auran ve müthiş bir dinleme yeteneğin var." },
-                "guven": { title: "Sessiz ve Güvenilirsin!", icon: "🛡️", desc: "Gösterişten uzak, kaya gibi sağlam bir karakterin var. Herkesin sırtını dayamak istediği kişisin." }
-            }
-        },
-        "ask": {
-            title: "Burcuna Göre Aşkta<br>Nasıl Biri Olduğunu Söylüyoruz",
-            desc: "Yıldızlar aşk hayatın hakkında konuşmaya bayılıyor. Tarzını seç, gerisini bize bırak! 💘",
-            icon: "<i class='fas fa-heart'></i>",
-            questions: [
-                {
-                    text: "1. Burcun hangi elementten?",
-                    options: [
-                        { text: "A) Ateş (Koç, Aslan, Yay)", category: "tutku" },
-                        { text: "B) Toprak (Boğa, Başak, Oğlak)", category: "istikrar" },
-                        { text: "C) Hava (İkizler, Terazi, Kova)", category: "ozgur" },
-                        { text: "D) Su (Yengeç, Akrep, Balık)", category: "duygu" }
-                    ]
-                },
-                {
-                    text: "2. İlişkide en çok neye önem verirsin?",
-                    options: [
-                        { text: "A) Heyecan ve tutkuya", category: "tutku" },
-                        { text: "B) Güven ve istikrara", category: "istikrar" },
-                        { text: "C) Özgür iletişim ve arkadaşlığa", category: "ozgur" },
-                        { text: "D) Derin bir duygusal bağa", category: "duygu" }
-                    ]
-                },
-                {
-                    text: "3. Biriyle tanıştığında ilk ne yaparsın?",
-                    options: [
-                        { text: "A) Beklemem, hemen adım atarım.", category: "tutku" },
-                        { text: "B) Acele etmem, zamana yayarım.", category: "istikrar" },
-                        { text: "C) Zekice bir sohbetle bağ kurarım.", category: "ozgur" },
-                        { text: "D) İçten içe onu ve hareketlerini gözlemlerim.", category: "duygu" }
-                    ]
-                },
-                {
-                    text: "4. Kıskançlık seviyeni 1-4 arası puanla:",
-                    options: [
-                        { text: "A) 4 - Çok kıskanır, belli de ederim.", category: "tutku" },
-                        { text: "B) 3 - Sahiplenirim ama mantıklı davranırım.", category: "istikrar" },
-                        { text: "C) 1 - Neredeyse hiç kıskanmam, rahatımdır.", category: "ozgur" },
-                        { text: "D) 2 - Bazen içimden geçer, kendi kendimi yerim.", category: "duygu" }
-                    ]
-                },
-                {
-                    text: "5. Ayrılık anında nasıl davranırsın?",
-                    options: [
-                        { text: "A) Anında tepki verir, gemileri yakarım.", category: "tutku" },
-                        { text: "B) İçime atarım, sonra oturup mantıklıca konuşurum.", category: "istikrar" },
-                        { text: "C) Mantıklı konuşmaya çalışır, arkadaş kalmayı denerim.", category: "ozgur" },
-                        { text: "D) Uzun süre etkisinde kalır, nostalji yaşarım.", category: "duygu" }
-                    ]
-                },
-                {
-                    text: "6. Sana göre ideal bir randevu nasıl olur?",
-                    options: [
-                        { text: "A) Spontane, maceralı ve sürpriz dolu.", category: "tutku" },
-                        { text: "B) Planlı, şık ve kaliteli bir restoranda akşam yemeği.", category: "istikrar" },
-                        { text: "C) İlginç bir etkinlik, sergi veya kalabalık konser.", category: "ozgur" },
-                        { text: "D) Baş başa, samimi ve sessiz bir ortamda şarap eşliğinde.", category: "duygu" }
-                    ]
-                }
-            ],
-            results: {
-                "tutku": { title: "Tutkulu ve Atılgan", icon: "🔥", desc: "Aşkta tam bir alev topusun! Ne istediğini çok iyi biliyor ve çekinmeden peşinden gidiyorsun. Seninle ilişki tam bir macera." },
-                "istikrar": { title: "İstikrar Arayan", icon: "🌱", desc: "Aşkta güven senin için her şeydir. Sağlam adımlar atmayı seviyorsun, partnerin senin yanında kendini hep evinde hisseder." },
-                "ozgur": { title: "Özgür Ruhlu", icon: "💨", desc: "Aşk senin için önce harika bir sohbet ve arkadaşlıktır. Seni zekanla tavlamayan hiç kimse kalbine giden yolu bulamaz." },
-                "duygu": { title: "Derin ve Duygusal", icon: "🌊", desc: "Yüzeysel ilişkiler asla sana göre değil. Ruhların birleşmesini istiyorsun. Romantizmin ve empatin karşındakini büyülüyor." }
-            }
-        },
-        "hayvan": {
-            title: "Hangi Hayvan<br>Ruhuna Sahipsin?",
-            desc: "İçindeki vahşi doğayı ve gizli gücünü açığa çıkarıyoruz. Gerçek hayvan ruhunu öğrenmeye hazır mısın? 🐾",
-            icon: "<i class='fas fa-paw'></i>",
-            questions: [
-                {
-                    text: "1. Bir toplulukta nasıl davranırsın?",
-                    options: [
-                        { text: "A) Ön plana çıkar, liderliği alırım.", category: "aslan" },
-                        { text: "B) Grubu korur, herkesi bir arada tutarım.", category: "kurt" },
-                        { text: "C) Kenardan sessizce izler, analiz yaparım.", category: "baykus" },
-                        { text: "D) Kimseye karışmaz, bağımsız takılırım.", category: "kartal" }
-                    ]
-                },
-                {
-                    text: "2. Karşına beklenmedik bir sorun çıktığında?",
-                    options: [
-                        { text: "A) Kükreyip hemen harekete geçerim.", category: "aslan" },
-                        { text: "B) Ekibimi/arkadaşlarımı toplayıp birlikte çözerim.", category: "kurt" },
-                        { text: "C) Sabırla bekler, en stratejik anı kollarım.", category: "baykus" },
-                        { text: "D) Yukardan büyük resmi görür, tek başıma hallederim.", category: "kartal" }
-                    ]
-                },
-                {
-                    text: "3. Enerjini en çok ne besler?",
-                    options: [
-                        { text: "A) Rekabet, zafer ve heyecan.", category: "aslan" },
-                        { text: "B) Aile bağları ve sadık dostluklar.", category: "kurt" },
-                        { text: "C) Sessizlik, kitaplar ve gece saatleri.", category: "baykus" },
-                        { text: "D) Yeni yerler keşfetmek ve sınırsız özgürlük.", category: "kartal" }
-                    ]
-                },
-                {
-                    text: "4. Seni en iyi tanımlayan kelime hangisi?",
-                    options: [
-                        { text: "A) Cesur", category: "aslan" },
-                        { text: "B) Sadık", category: "kurt" },
-                        { text: "C) Gizemli", category: "baykus" },
-                        { text: "D) Bağımsız", category: "kartal" }
-                    ]
-                },
-                {
-                    text: "5. Stresli anda tepkin nedir?",
-                    options: [
-                        { text: "A) Sorunla doğrudan, hatta bazen agresifçe yüzleşirim.", category: "aslan" },
-                        { text: "B) Yakınlarımdan manevi destek alırım.", category: "kurt" },
-                        { text: "C) Geri çekilip düşünür, plan yaparım.", category: "baykus" },
-                        { text: "D) Ortamdan hemen uzaklaşır, hava alırım.", category: "kartal" }
-                    ]
-                },
-                {
-                    text: "6. Hayattaki en büyük önceliğin nedir?",
-                    options: [
-                        { text: "A) Güç, saygı görmek ve başarı.", category: "aslan" },
-                        { text: "B) Aidiyet hissi ve sevdiklerimle birliktelik.", category: "kurt" },
-                        { text: "C) Bilgelik, öğrenmek ve anlam arayışı.", category: "baykus" },
-                        { text: "D) Özgürlük, macera ve sınırı olmamak.", category: "kartal" }
-                    ]
-                }
-            ],
-            results: {
-                "aslan": { title: "Sen Bir Aslansın!", icon: "🦁", desc: "Cesur, lider ruhlu ve rekabetten asla korkmayan birisin. Ormanın kralı gibi, girdiğin her ortamda varlığını hissettiriyorsun." },
-                "kurt": { title: "Sen Bir Kurtsun!", icon: "🐺", desc: "Sadık, grubuna değer veren ve birlikte güçlü olan birisin. Sevdiklerin için yapamayacağın fedakarlık yok." },
-                "baykus": { title: "Sen Bir Baykuşsun!", icon: "🦉", desc: "Gözlemci, sabırlı ve derin düşünen birisin. Geceyi seviyor, olayların arkasındaki görünmeyen gerçekleri anında fark ediyorsun." },
-                "kartal": { title: "Sen Bir Kartalsın!", icon: "🦅", desc: "Özgür, bağımsız ve kendi yolunu çizen birisin. Yükseklerde uçuyor, detaylara takılmadan büyük resmi görebiliyorsun." }
-            }
-        },
-        "kahve": {
-            title: "Kahve Tercihine Göre<br>Ruh Eşin Kim?",
-            desc: "İçtiğin kahve ruhunun yansımasıdır. Soruları sezgilerinle cevapla ve enerjine en uygun burcu öğren.",
-            icon: "<i class='fas fa-coffee'></i>",
-            questions: [
-                {
-                    text: "1. Sabah uyandığında ilk kahveni nasıl istersin?",
-                    options: [
-                        { text: "Sade ve sert bir filtre kahve (Netlik ararım)", category: "earth_water" },
-                        { text: "Bol köpüklü, karamelli bir Latte (Tatlılık ararım)", category: "air_fire" }
-                    ]
-                },
-                {
-                    text: "2. Kahveni nerede yudumlamak sana huzur verir?",
-                    options: [
-                        { text: "Yağmur yağarken cam kenarında, evimin sessizliğinde.", category: "earth_water" },
-                        { text: "Kalabalık, müzikli ve son derece estetik bir kafede.", category: "air_fire" }
-                    ]
-                },
-                {
-                    text: "3. Çok yoğun bir iş gününde kahveni nasıl içersin?",
-                    options: [
-                        { text: "Hızlıca shot atar işime geri dönerim.", category: "earth_water" },
-                        { text: "Ne olursa olsun yavaş yavaş, keyfini çıkararak içerim.", category: "air_fire" }
-                    ]
-                },
-                {
-                    text: "4. Kahvenin yanında genelde ne eşlik eder?",
-                    options: [
-                        { text: "Birkaç parça şekersiz bitter çikolata.", category: "earth_water" },
-                        { text: "Renkli ve şekerli bir makaron ya da dilim pasta.", category: "air_fire" }
-                    ]
-                },
-                {
-                    text: "5. En çok hangi bardakta içmeyi seversin?",
-                    options: [
-                        { text: "Seramik, büyük ve ağır bir kupada.", category: "earth_water" },
-                        { text: "İnce cam veya estetik buzlu bir bardakta.", category: "air_fire" }
-                    ]
-                }
-            ],
-            results: {
-                "earth_water": {
-                    title: "Oğlak veya Akrep", icon: "♑︎ ♏︎",
-                    desc: "Net, kararlı ve derinlikli bir ruha sahipsin. Karmaşadan uzak duruşunu ve sadakatini ancak senin gibi sağlam basan bir Toprak veya Su grubu burcu dengeleyebilir."
-                },
-                "air_fire": {
-                    title: "İkizler veya Yay", icon: "♊︎ ♐︎",
-                    desc: "Ruhun özgürlüğe, yeniliğe ve maceraya aç! Senin o enerjik, değişken ve tatlı kahveler gibi renkli ruhunu en iyi bir Hava veya Ateş burcu tamamlayabilir."
-                }
-            }
-        },
-        "manifest": {
-            title: "Hangi Manifest<br>Kızısın?",
-            desc: "O ikonik ekibin içinden senin auran kiminle eşleşiyor? Soruları yanıtla ve içindeki karakteri bul.",
-            icon: "<i class='fas fa-crown'></i>",
-            questions: [
-                {
-                    text: "1. Bir ortama/partiye girdiğinde auran nasıldır?",
-                    options: [
-                        { text: "Zekam ve seksiliğimle dikkat çeker, iddialı bir giriş yaparım.", category: "hilal" },
-                        { text: "Biraz ciddi dururum ama tarzımla ince ince iz bırakırım.", category: "lidya" },
-                        { text: "Sakin, olgun ve gizemli seksiliğimle kenarda dururum.", category: "mina" },
-                        { text: "Kıvrak enerjimle hemen ortama dalar, herkesi neşelendiririm!", category: "esin" },
-                        { text: "Tamamen çabasızım! Özgüvenimle anında ortamın yıldızı olurum.", category: "sueda" },
-                        { text: "Maskülen tarzımla 'cool cool' köşemde takılırım.", category: "zeynep" }
-                    ]
-                },
-                {
-                    text: "2. Kriz veya hararetli bir tartışma anında nasıl tepki verirsin?",
-                    options: [
-                        { text: "Aklımı kullanır, havalı duruşumu asla bozmam.", category: "hilal" },
-                        { text: "Duygusallaşırım ama dışarıya sadece ciddiyetimi gösteririm.", category: "lidya" },
-                        { text: "Asla paniklemem. Son derece olgun ve sakin karşılarım.", category: "mina" },
-                        { text: "Konuyu kıvrak zekamla ve pozitifliğimle tatlıya bağlarım.", category: "esin" },
-                        { text: "Olayı tiye alır, komik bir laf atıp konuyu kapatırım.", category: "sueda" },
-                        { text: "Pek umursamam. Maskemi takar, taviz vermem.", category: "zeynep" }
-                    ]
-                },
-                {
-                    text: "3. Flört ederken taktiğin nedir?",
-                    options: [
-                        { text: "Doğrudan hedef alır, cazibemle baş döndürürüm.", category: "hilal" },
-                        { text: "Uzaktan izler, sanat ve kültürden konuşarak etkilerim.", category: "lidya" },
-                        { text: "Sadece bakışlarımla bile onun bana gelmesini sağlarım.", category: "mina" },
-                        { text: "Sürekli güldürür, flörtü eğlenceli bir oyuna çeviririm.", category: "esin" },
-                        { text: "Ters köşe yapar, laf sokarak aklını başından alırım.", category: "sueda" },
-                        { text: "Hiç oralı olmuyormuş gibi yapar, gizem yaratırım.", category: "zeynep" }
-                    ]
-                },
-                {
-                    text: "4. Dolabını açtığımızda giyim tarzında hangi enerji ağır basar?",
-                    options: [
-                        { text: "İddialı, akıllıca kombinlenmiş ve seksi parçalar.", category: "hilal" },
-                        { text: "Özenli, yeteneğimi yansıtan ciddi/estetik parçalar.", category: "lidya" },
-                        { text: "Sade, olgun ve zahmetsizce seksi duran net kıyafetler.", category: "mina" },
-                        { text: "Renkli, cıvıl cıvıl, mutlu kombinler.", category: "esin" },
-                        { text: "Çabasız ama özgüveni yüksek marjinal parçalar.", category: "sueda" },
-                        { text: "Koyu renkler, asi detaylar, maskülen parçalar.", category: "zeynep" }
-                    ]
-                },
-                {
-                    text: "5. Cumartesi gecesi favori aktiviten nedir?",
-                    options: [
-                        { text: "Şık bir mekanda, iddialı kıyafetimle kokteyl yudumlamak.", category: "hilal" },
-                        { text: "Sanat galerisi veya özel konseptli bağımsız bir etkinlik.", category: "lidya" },
-                        { text: "Az kişiyle, kaliteli şarabın açıldığı ev partisi.", category: "mina" },
-                        { text: "Müzik nerede, ben orada! Dans pistinden inmem.", category: "esin" },
-                        { text: "Doğaçlama, plansız bir şekilde sokakları arşınlamak.", category: "sueda" },
-                        { text: "Gece sürüşü veya underground, karanlık bir mekan.", category: "zeynep" }
-                    ]
-                }
-            ],
-            results: {
-                "hilal": { title: "Sen Tam Bir Hilal'sin!", icon: "💅", desc: "Havalı, akıllı ve seksi! Girdiği her ortamı zekasıyla hemen etkisi altına alan tam bir kraliçesin." },
-                "lidya": { title: "Sen Tam Bir Lidya'sın!", icon: "🎭", desc: "Duygusal, yetenekli ve ciddi! Derin hissediyor ama dışarıdan o ağırbaşlı asaletini hiç bozmuyorsun." },
-                "mina": { title: "Sen Tam Bir Mina'sın!", icon: "🍷", desc: "Seksi, olgun ve sakin! Fazla efora gerek yok; olaylara bilgece yaklaşımınla herkesi büyülüyorsun." },
-                "esin": { title: "Sen Tam Bir Esin'sin!", icon: "✨", desc: "Neşeli, mutlu ve kıvrak! Sen kesinlikle ekibin kalbisin. Tatlı enerjinle ortamı aydınlatıyorsun." },
-                "sueda": { title: "Sen Tam Bir Sueda'sın!", icon: "😎", desc: "Mizahi, zeki ve özgüvenli! Çabasızlığınla sadece tek bir espriyle tüm dikkatleri üzerine çekiyorsun." },
-                "zeynep": { title: "Sen Tam Bir Zeynep'sin!", icon: "🏍️", desc: "Havalı, asi ve umursamaz! O maskülen ve cool duruşunla, herkesin gizliden olmak istediği ikonik karaktersin." }
-            }
-        },
-        "aura": {
-            title: "Aura Rengin Ne?",
-            desc: "Hayat düzenine, zevklerine ve içsel dünyana göre çevrene yaydığın ışık hangi renk?",
-            icon: "<i class='fas fa-eye'></i>",
-            questions: [
-                {
-                    text: "1. Hafta sonu deşarj olmak için ideal aktiviten nedir?",
-                    options: [
-                        { text: "Evde detaylı ve tatlı atıştırmalıklar hazırlamak.", category: "pink_blue" },
-                        { text: "Psikolojik gerilim dizileri izleyip kafa yormak.", category: "indigo" },
-                        { text: "Doğaya çıkmak veya hareketli bir spor yapmak.", category: "green" }
-                    ]
-                },
-                {
-                    text: "2. Gardırobunu açtığında gözüne en çok hangi tonlar çarpar?",
-                    options: [
-                        { text: "Pasteller, açık maviler ve pembeler.", category: "pink_blue" },
-                        { text: "Siyah, koyu mor ve iddialı koyu tonlar.", category: "indigo" },
-                        { text: "Doğal toprak tonları ve canlı yeşiller.", category: "green" }
-                    ]
-                },
-                {
-                    text: "3. Arkadaşların seni tek kelimeyle anlatsa ne derdi?",
-                    options: [
-                        { text: "Naif / Tatlı", category: "pink_blue" },
-                        { text: "Gizemli / Zeki", category: "indigo" },
-                        { text: "Enerjik / Motive edici", category: "green" }
-                    ]
-                },
-                {
-                    text: "4. Hangi müzik tarzı sana daha çok hitap eder?",
-                    options: [
-                        { text: "Hafif pop veya romantik akustik.", category: "pink_blue" },
-                        { text: "Elektronik, dark wave veya enstrümantal.", category: "indigo" },
-                        { text: "Hareketli, ritmik ve enerjisi yüksek pop/rock.", category: "green" }
-                    ]
-                },
-                {
-                    text: "5. Senin için mükemmel tatil neresidir?",
-                    options: [
-                        { text: "Şirin kafeleri olan sahil kasabaları.", category: "pink_blue" },
-                        { text: "Kültürel derinliği olan tarihi, puslu şehirler.", category: "indigo" },
-                        { text: "Orman kampı veya macera dolu bir dağ evi.", category: "green" }
-                    ]
-                }
-            ],
-            results: {
-                "pink_blue": { title: "Pastel Mavi / Pembe Aura", icon: "✨", desc: "Zarif, tatlı ve estetik bir enerjin var. İnsanlar senin yanında huzur hissediyor." },
-                "indigo": { title: "İndigo / Derin Mor Aura", icon: "🔮", desc: "Derin, gizemli ve analitiksin. Yüzeysel şeylerden hoşlanmıyor, sezgilerinle hareket ediyorsun." },
-                "green": { title: "Canlı ve Dinamik Yeşil Aura", icon: "🌿", desc: "Enerjik, aktif ve büyümeye açıksın. Etrafına şifa veren, hareketli bir frekans yayıyorsun." }
-            }
-        },
-        "muzik": {
-            title: "Hangi Alternatif Müzik Tarzısın?",
-            desc: "Zodyak elementine ve hislerine göre ruhun hangi melodide yankılanıyor?",
-            icon: "<i class='fas fa-headphones-alt'></i>",
-            questions: [
-                {
-                    text: "1. Odaklanırken arka planda ne çalardı?",
-                    options: [
-                        { text: "Sözsüz, derin ve melankolik Lo-Fi ritimleri.", category: "lofi" },
-                        { text: "Karanlık, tempolu ve atmosferik Dark Wave tınılar.", category: "darkwave" },
-                        { text: "Hareketli, isyankar ve enerjik Alt-Rock parçalar.", category: "altrock" }
-                    ]
-                },
-                {
-                    text: "2. Duygularını genellikle nasıl yaşarsın?",
-                    options: [
-                        { text: "Sakin, içe dönük ve kendi dünyamda.", category: "lofi" },
-                        { text: "Derinlerde kopan fırtınalarla ve analiz ederek.", category: "darkwave" },
-                        { text: "Dışa dönük, tutkulu ve çok tepkisel.", category: "altrock" }
-                    ]
-                },
-                {
-                    text: "3. Bir konsere gitsen nerede durmayı tercih edersin?",
-                    options: [
-                        { text: "En arkada, müziğin içine gömülerek sakince dinlerim.", category: "lofi" },
-                        { text: "Görselliği ve bası tam hissedeceğim orta kısımlarda.", category: "darkwave" },
-                        { text: "En önde! Zıplamalı ve eşlik etmeliyim.", category: "altrock" }
-                    ]
-                },
-                {
-                    text: "4. Bir şarkıda seni ilk vuran şey nedir?",
-                    options: [
-                        { text: "Huzurlu melodisi ve sakinleştirici etkisi.", category: "lofi" },
-                        { text: "Şarkının sözlerindeki derin ve karanlık anlamlar.", category: "darkwave" },
-                        { text: "Beni anında ayağa kaldıran elektro gitar veya bateri ritmi.", category: "altrock" }
-                    ]
-                },
-                {
-                    text: "5. Dışarı çıkarken giyim tarzın hangisine daha yakındır?",
-                    options: [
-                        { text: "Bol, rahat, vintage ve pastel tonlar.", category: "lofi" },
-                        { text: "Siyah ağırlıklı, deri detaylı gizemli parçalar.", category: "darkwave" },
-                        { text: "Yırtık kotlar, grup tişörtleri ve postal/sneaker.", category: "altrock" }
-                    ]
-                }
-            ],
-            results: {
-                "lofi": { title: "Dreampop / Lo-Fi", icon: "🎧", desc: "Ruhun sakin sular gibi. Nostaljiyi ve huzuru seviyorsun. Senin müziğin, yağmurlu bir günde cam kenarında dinlenen yumuşak bir melodi." },
-                "darkwave": { title: "Dark Wave / Synth", icon: "🎹", desc: "Karanlık ve yoğun bir auran var. Psikolojik katmanların, güçlü bir elektronik bass ritmi gibi etrafındakileri etkisi altına alıyor." },
-                "altrock": { title: "Indie / Alt-Rock", icon: "🎸", desc: "Hareketli, isyankar ve tamamen özgünsün! Kurallara uymaktansa kendi ritmini yaratıyorsun. Dinamik ve ateşli bir ruhun var." }
-            }
-        }
-    };
+{% extends 'burcs/base.html' %}
+{% block title %}astrobacılar - Kozmik Test{% endblock %}
 
-    // --- ALTYAPI MANTIĞI ---
-    let currentTestId = "isim"; // Varsayılan olarak İsim testini başlatır
-    let activeTest = null;
+{% block content %}
+<style>
+    .fade-enter { opacity: 0; transform: translateY(10px); transition: all 0.5s ease-out; }
+    .fade-enter-active { opacity: 1; transform: translateY(0); }
+    .fade-exit { opacity: 1; transform: translateY(0); transition: all 0.4s ease-in; }
+    .fade-exit-active { opacity: 0; transform: translateY(-10px); }
+
+    .test-option {
+        background: rgba(12, 5, 22, 0.4);
+        border: 1px solid rgba(147, 51, 234, 0.2);
+        transition: all 0.3s ease;
+    }
+    .test-option:hover {
+        background: rgba(215, 105, 141, 0.1);
+        border-color: rgba(229, 192, 123, 0.5);
+        box-shadow: 0 0 15px rgba(215, 105, 141, 0.15);
+        transform: scale(1.02);
+    }
+</style>
+
+<div class="max-w-3xl mx-auto mb-16">
+    <a href="{% url 'anasayfa' %}" class="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] text-[#9486a8] hover:text-pink-300 transition uppercase mb-8">
+        <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+    </a>
+
+    <div class="card-line-art corner-marks p-8 md:p-14 text-center relative overflow-hidden min-h-[450px] flex flex-col justify-center" id="quiz-container">
+        <!-- Tasarım detayları (Yıldızlar, arka plan) -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(215,105,141,0.05),_transparent_70%)] pointer-events-none"></div>
+        <i class="fas fa-moon absolute top-10 right-10 text-6xl text-pink-500/5 pointer-events-none -rotate-12"></i>
+        <i class="fas fa-star absolute bottom-10 left-10 text-4xl text-gold/5 pointer-events-none animate-pulse"></i>
+
+        <!-- BAŞLANGIÇ EKRANI -->
+        <div id="screen-intro" class="relative z-10 fade-enter fade-enter-active">
+            <div class="text-5xl mb-6 text-gold drop-shadow-[0_0_15px_rgba(229,192,123,0.3)]" id="intro-icon"></div>
+            <h1 class="font-serif-mystic text-3xl md:text-5xl text-gray-100 mb-4 font-light" id="intro-title">Yükleniyor...</h1>
+            <p class="text-sm text-gray-400 font-light leading-relaxed max-w-md mx-auto mb-8" id="intro-desc"></p>
+            <button onclick="startQuiz()" class="btn-elegant">
+                YOLCULUĞA BAŞLA <i class="fas fa-sparkles ml-2 text-[10px]"></i>
+            </button>
+        </div>
+
+        <!-- SORU EKRANI -->
+        <div id="screen-question" class="relative z-10 hidden">
+            <p class="text-[10px] tracking-[0.3em] text-pink-400 uppercase mb-4" id="progress-text">Soru 1</p>
+
+            <!-- YENİ: Varsa GIF veya Görselin görüneceği kutu -->
+            <div id="question-image-container" class="mb-6 max-w-md mx-auto w-full hidden"></div>
+
+            <h2 class="font-serif-mystic text-2xl md:text-3xl text-gold mb-8 font-light leading-snug" id="question-text"></h2>
+            <div class="flex flex-col gap-4 max-w-lg mx-auto w-full" id="options-container"></div>
+        </div>
+
+        <!-- SONUÇ EKRANI -->
+        <div id="screen-result" class="relative z-10 hidden">
+            <p class="text-[10px] tracking-[0.3em] text-gold uppercase mb-4 flex items-center justify-center gap-2">
+                <i class="fas fa-star text-pink-400 text-xs"></i> Kozmik Sonucun <i class="fas fa-star text-pink-400 text-xs"></i>
+            </p>
+            <div class="text-6xl md:text-7xl mb-6 text-pink-300 drop-shadow-[0_0_20px_rgba(215,105,141,0.4)]" style="font-family: 'Noto Sans Symbols2', sans-serif;" id="result-icon"></div>
+            <h3 class="font-serif-mystic text-4xl md:text-5xl text-gray-100 mb-4 font-light" id="result-title"></h3>
+            <p class="text-sm md:text-base text-gray-400 font-light leading-relaxed max-w-lg mx-auto mb-10" id="result-desc"></p>
+
+            <button onclick="resetQuiz()" class="text-[10px] tracking-[0.2em] text-[#9486a8] hover:text-gold transition uppercase border-b border-transparent hover:border-gold pb-1">
+                <i class="fas fa-redo mr-2"></i> Baştan Başla
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Arka plandan (Python'dan) gelen GERÇEK veritabanı objesini okuyoruz
+    const activeTest = JSON.parse('{{ test_json|escapejs }}');
+
     let currentQuestionIndex = 0;
     let scores = {};
 
@@ -512,18 +154,7 @@
     const screenQuestion = document.getElementById("screen-question");
     const screenResult = document.getElementById("screen-result");
 
-    // Testi Başlatma ve URL'den ID Çekme
     window.onload = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const requestedId = urlParams.get('id');
-
-        if (requestedId && testDB[requestedId]) {
-            currentTestId = requestedId;
-        }
-
-        activeTest = testDB[currentTestId];
-
-        // Giriş Ekranını Doldur
         document.getElementById("intro-icon").innerHTML = activeTest.icon;
         document.getElementById("intro-title").innerHTML = activeTest.title;
         document.getElementById("intro-desc").innerHTML = activeTest.desc;
@@ -546,7 +177,7 @@
     }
 
     function startQuiz() {
-        scores = {}; // Skorları sıfırla
+        scores = {};
         switchScreen(screenIntro, screenQuestion, loadQuestion);
     }
 
@@ -554,6 +185,16 @@
         const q = activeTest.questions[currentQuestionIndex];
         document.getElementById("progress-text").innerText = `Soru ${currentQuestionIndex + 1} / ${activeTest.questions.length}`;
         document.getElementById("question-text").innerText = q.text;
+
+        // YENİ: Görsel Varsa Ekrana Çizdir
+        const imageContainer = document.getElementById("question-image-container");
+        if (q.gorsel_url) {
+            imageContainer.innerHTML = `<img src="${q.gorsel_url}" class="w-full h-48 md:h-56 object-cover rounded-xl shadow-[0_0_15px_rgba(215,105,141,0.2)] border border-[rgba(215,105,141,0.3)]">`;
+            imageContainer.classList.remove("hidden");
+        } else {
+            imageContainer.innerHTML = "";
+            imageContainer.classList.add("hidden");
+        }
 
         const optionsContainer = document.getElementById("options-container");
         optionsContainer.innerHTML = "";
@@ -583,7 +224,6 @@
     }
 
     function calculateResult() {
-        // En yüksek puanlı kategoriyi bul
         let finalCategory = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
         let resData = activeTest.results[finalCategory];
 
@@ -599,5 +239,4 @@
         switchScreen(screenResult, screenIntro);
     }
 </script>
-
 {% endblock %}

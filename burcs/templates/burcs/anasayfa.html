@@ -114,48 +114,29 @@
     </div>
 </div>
 
-<!-- KOZMİK TESTLER VİTRİNİ -->
+<!-- anasayfa.html içindeki test gridini tamamen sil ve bununla değiştir -->
 <div class="flex items-center justify-between mb-6 mt-12">
     <p class="text-xs tracking-widest text-gold uppercase flex items-center gap-2 font-medium">
         Kozmik Testler <i class="fas fa-sparkles text-pink-400"></i>
     </p>
-    <!-- Burası ileride tüm testlerin olduğu listeleme sayfasına gidebilir -->
-    <a href="#" class="text-[11px] tracking-widest text-[#b7a9c9] hover:text-pink-300 transition uppercase">Tümünü Gör →</a>
+    <!-- TÜMÜNÜ GÖR LİNKİ ARTIK ÇALIŞIYOR -->
+    <a href="{% url 'test_listesi' %}" class="text-[11px] tracking-widest text-[#b7a9c9] hover:text-pink-300 transition uppercase">Tümünü Gör →</a>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-    <!-- YENİ TEST 1 -->
-    <a href="{% url 'test_detay' %}?id=isim" class="card-line-art corner-marks p-8 flex flex-col items-center text-center group min-h-[220px]">
+    {% for test in vitrin_testleri %}
+    <a href="{% url 'test_detay' test.slug %}" class="card-line-art corner-marks p-8 flex flex-col items-center text-center group min-h-[220px]">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(215,105,141,0.1),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div class="text-4xl mb-5 text-pink-400/50 group-hover:text-gold group-hover:scale-110 transition duration-500 z-10"><i class="fas fa-font"></i></div>
-        <h3 class="font-serif-mystic text-2xl md:text-3xl text-gray-200 mb-3 group-hover:text-pink-200 transition z-10">İsmine ve Doğum Ayına Göre Gerçek Kişiliğin Ne?</h3>
-        <p class="text-sm text-gray-300 font-light leading-relaxed mb-6 z-10 max-w-sm">İsmindeki harfler ve doğduğun ay senin hakkında neler söylüyor, hadi bulalım!</p>
+        <div class="text-4xl mb-5 text-pink-400/50 group-hover:text-gold group-hover:scale-110 transition duration-500 z-10">
+            <i class="fas {{ test.ikon }}"></i>
+        </div>
+        <h3 class="font-serif-mystic text-2xl md:text-3xl text-gray-200 mb-3 group-hover:text-pink-200 transition z-10">{{ test.baslik|safe }}</h3>
+        <p class="text-sm text-gray-300 font-light leading-relaxed mb-6 z-10 max-w-sm">{{ test.aciklama }}</p>
         <div class="mt-auto btn-elegant !text-[11px] z-10">TESTİ ÇÖZ <i class="fas fa-arrow-right ml-1"></i></div>
     </a>
-    <!-- YENİ TEST 2 -->
-    <a href="{% url 'test_detay' %}?id=ask" class="card-line-art corner-marks p-8 flex flex-col items-center text-center group min-h-[220px]">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(229,192,123,0.1),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div class="text-4xl mb-5 text-pink-400/50 group-hover:text-gold group-hover:scale-110 transition duration-500 z-10"><i class="fas fa-heart"></i></div>
-        <h3 class="font-serif-mystic text-2xl md:text-3xl text-gray-200 mb-3 group-hover:text-pink-200 transition z-10">Burcuna Göre Aşkta Nasıl Biri Olduğunu Söylüyoruz</h3>
-        <p class="text-sm text-gray-300 font-light leading-relaxed mb-6 z-10 max-w-sm">Yıldızlar aşk hayatın hakkında konuşmaya bayılıyor. Gerçek aşk stilini keşfet.</p>
-        <div class="mt-auto btn-elegant !text-[11px] z-10">TESTİ ÇÖZ <i class="fas fa-arrow-right ml-1"></i></div>
-    </a>
-    <!-- YENİ TEST 3 -->
-    <a href="{% url 'test_detay' %}?id=hayvan" class="card-line-art corner-marks p-8 flex flex-col items-center text-center group min-h-[220px]">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(147,51,234,0.1),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div class="text-4xl mb-5 text-pink-400/50 group-hover:text-gold group-hover:scale-110 transition duration-500 z-10"><i class="fas fa-paw"></i></div>
-        <h3 class="font-serif-mystic text-2xl md:text-3xl text-gray-200 mb-3 group-hover:text-pink-200 transition z-10">Hangi Hayvan Ruhuna Sahipsin?</h3>
-        <p class="text-sm text-gray-300 font-light leading-relaxed mb-6 z-10 max-w-sm">Her insanın içinde bir hayvan ruhu yatar. Senin gerçek karakterine en yakın hayvan hangisi?</p>
-        <div class="mt-auto btn-elegant !text-[11px] z-10">TESTİ ÇÖZ <i class="fas fa-arrow-right ml-1"></i></div>
-    </a>
-    <!-- ESKİ FAVORİ TEST 4 (Genişletilmiş Haliyle) -->
-    <a href="{% url 'test_detay' %}?id=manifest" class="card-line-art corner-marks p-8 flex flex-col items-center text-center group min-h-[220px]">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(215,105,141,0.1),_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div class="text-4xl mb-5 text-pink-400/50 group-hover:text-gold group-hover:scale-110 transition duration-500 z-10"><i class="fas fa-magic"></i></div>
-        <h3 class="font-serif-mystic text-2xl md:text-3xl text-gray-200 mb-3 group-hover:text-pink-200 transition z-10">Hangi Manifest Kızısın?</h3>
-        <p class="text-sm text-gray-300 font-light leading-relaxed mb-6 z-10 max-w-sm">Burcuna ve ritüellerine göre evrene hangi frekansta mesaj yolluyorsun?</p>
-        <div class="mt-auto btn-elegant !text-[11px] z-10">TESTİ ÇÖZ <i class="fas fa-arrow-right ml-1"></i></div>
-    </a>
+    {% empty %}
+    <p class="text-gray-400 text-sm">Henüz sistemde kozmik test bulunmuyor. Admin panelinden eklemeye başla!</p>
+    {% endfor %}
 </div>
 
 {% if aktif_gundem %}
