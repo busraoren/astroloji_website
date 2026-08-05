@@ -45,12 +45,16 @@ class KozmikTest(models.Model):
     def __str__(self):
         return self.baslik
 
+
 class TestSonucu(models.Model):
     test = models.ForeignKey(KozmikTest, related_name='sonuclar', on_delete=models.CASCADE)
     kategori_kodu = models.CharField(max_length=50, help_text="Örn: aslan, lofi, earth_water")
     baslik = models.CharField(max_length=100)
     ikon = models.CharField(max_length=50, help_text="Emoji veya ikon (Örn: 🦁)")
     aciklama = models.TextField()
+
+    # YENİ EKLENEN SATIR: Sonuç GIF/Resim Linki
+    gorsel_url = models.URLField(blank=True, null=True, help_text="Sonuç için GIF/Resim linki (Giphy, Imgur vb.)")
 
     def __str__(self):
         return f"{self.test.baslik} - {self.baslik}"
