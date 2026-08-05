@@ -143,12 +143,16 @@
     </div>
 </div>
 
+<!-- JSON verisini HTML'e güvenli bir şekilde gömüyoruz -->
+{{ test_json|json_script:"test-veri" }}
+
 <script>
-    // Arka plandan (Python'dan) gelen GERÇEK veritabanı objesini okuyoruz
-    const activeTest = JSON.parse('{{ test_json|escapejs }}');
+    // Gömülen veriyi Javascript'e alıyoruz
+    const activeTest = JSON.parse(document.getElementById('test-veri').textContent);
 
     let currentQuestionIndex = 0;
     let scores = {};
+    // ... kodun geri kalanı aynı kalacak ...
 
     const screenIntro = document.getElementById("screen-intro");
     const screenQuestion = document.getElementById("screen-question");
