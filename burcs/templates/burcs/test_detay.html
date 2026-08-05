@@ -223,8 +223,33 @@
         }
     }
 
-    function calculateResult() {
-        let finalCategory = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+function calculateResult() {
+        // 1. Alınan en yüksek puanı bul
+        let maxPuan = Math.max(...Object.values(scores));
+
+        // 2. Bu en yüksek puana sahip olan tüm kategorileri bir listeye topla (Beraberlik durumu)
+        let kazananKategoriler = Object.keys(scores).filter(kategori => scores[kategori] === maxPuan);
+
+        // 3. Eğer eşitlik varsa, evrenin seçimine (rastgele) bırak!
+        let finalCategory = kazananKategoriler[Math.floor(Math.random() * kazananKategoriler.length)];
+
+        let resData = activeTest.results[finalCategory];
+
+        document.getElementById("result-title").innerText = resData.title;
+        document.getElementById("result-icon").innerText = resData.icon;
+        document.getElementById("result-desc").innerText = resData.desc;
+
+        switchScreen(screenQuestion, screenResult);
+    }function calculateResult() {
+        // 1. Alınan en yüksek puanı bul
+        let maxPuan = Math.max(...Object.values(scores));
+
+        // 2. Bu en yüksek puana sahip olan tüm kategorileri bir listeye topla (Beraberlik durumu)
+        let kazananKategoriler = Object.keys(scores).filter(kategori => scores[kategori] === maxPuan);
+
+        // 3. Eğer eşitlik varsa, evrenin seçimine (rastgele) bırak!
+        let finalCategory = kazananKategoriler[Math.floor(Math.random() * kazananKategoriler.length)];
+
         let resData = activeTest.results[finalCategory];
 
         document.getElementById("result-title").innerText = resData.title;
