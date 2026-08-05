@@ -1,6 +1,6 @@
 {% extends 'burcs/base.html' %}
 
-{% block title %}astrobacılar - Kozmik Test{% endblock %}
+{% block title %}astrobacılar - {{ test_obj.baslik }}{% endblock %}
 
 {% block content %}
 <style>
@@ -23,85 +23,11 @@
 </style>
 
 <div class="max-w-3xl mx-auto mb-16">
-
-    <a href="{% url 'anasayfa' %}" class="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] text-[#9486a8] hover:text-pink-300 transition uppercase mb-8">
-        <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+    <a href="{% url 'test_listesi' %}" class="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] text-[#9486a8] hover:text-pink-300 transition uppercase mb-8">
+        <i class="fas fa-arrow-left"></i> Tüm Testlere Dön
     </a>
 
     <div class="card-line-art corner-marks p-8 md:p-14 text-center relative overflow-hidden min-h-[450px] flex flex-col justify-center" id="quiz-container">
-
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(215,105,141,0.05),_transparent_70%)] pointer-events-none"></div>
-        <i class="fas fa-moon absolute top-10 right-10 text-6xl text-pink-500/5 pointer-events-none -rotate-12"></i>
-        <i class="fas fa-star absolute bottom-10 left-10 text-4xl text-gold/5 pointer-events-none animate-pulse"></i>
-
-        <!-- BAŞLANGIÇ EKRANI -->
-        <div id="screen-intro" class="relative z-10 fade-enter fade-enter-active">
-            <div class="text-5xl mb-6 text-gold drop-shadow-[0_0_15px_rgba(229,192,123,0.3)]" id="intro-icon">
-                <i class="fas fa-spinner fa-spin"></i>
-            </div>
-            <h1 class="font-serif-mystic text-3xl md:text-5xl text-gray-100 mb-4 font-light" id="intro-title">Yükleniyor...</h1>
-            <p class="text-sm text-gray-400 font-light leading-relaxed max-w-md mx-auto mb-8" id="intro-desc"></p>
-            <button onclick="startQuiz()" class="btn-elegant">
-                YOLCULUĞA BAŞLA <i class="fas fa-sparkles ml-2 text-[10px]"></i>
-            </button>
-        </div>
-
-        <!-- SORU EKRANI -->
-        <div id="screen-question" class="relative z-10 hidden">
-            <p class="text-[10px] tracking-[0.3em] text-pink-400 uppercase mb-6" id="progress-text">Soru 1</p>
-            <h2 class="font-serif-mystic text-2xl md:text-3xl text-gold mb-8 font-light leading-snug" id="question-text"></h2>
-            <div class="flex flex-col gap-4 max-w-lg mx-auto w-full" id="options-container"></div>
-        </div>
-
-        <!-- SONUÇ EKRANI -->
-        <div id="screen-result" class="relative z-10 hidden">
-            <p class="text-[10px] tracking-[0.3em] text-gold uppercase mb-4 flex items-center justify-center gap-2">
-                <i class="fas fa-star text-pink-400 text-xs"></i> Kozmik Sonucun <i class="fas fa-star text-pink-400 text-xs"></i>
-            </p>
-            <div class="text-6xl md:text-7xl mb-6 text-pink-300 drop-shadow-[0_0_20px_rgba(215,105,141,0.4)]" style="font-family: 'Noto Sans Symbols2', sans-serif;" id="result-icon"></div>
-            <h3 class="font-serif-mystic text-4xl md:text-5xl text-gray-100 mb-4 font-light" id="result-title"></h3>
-            <p class="text-sm md:text-base text-gray-400 font-light leading-relaxed max-w-lg mx-auto mb-10" id="result-desc"></p>
-
-            <button onclick="resetQuiz()" class="text-[10px] tracking-[0.2em] text-[#9486a8] hover:text-gold transition uppercase border-b border-transparent hover:border-gold pb-1">
-                <i class="fas fa-redo mr-2"></i> Baştan Başla
-            </button>
-        </div>
-
-    </div>
-</div>
-
-<script>
-    // --- BÜTÜN TESTLERİN ZENGİNLEŞTİRİLMİŞ VERİTABANI ---
-{% extends 'burcs/base.html' %}
-{% block title %}astrobacılar - Kozmik Test{% endblock %}
-
-{% block content %}
-<style>
-    .fade-enter { opacity: 0; transform: translateY(10px); transition: all 0.5s ease-out; }
-    .fade-enter-active { opacity: 1; transform: translateY(0); }
-    .fade-exit { opacity: 1; transform: translateY(0); transition: all 0.4s ease-in; }
-    .fade-exit-active { opacity: 0; transform: translateY(-10px); }
-
-    .test-option {
-        background: rgba(12, 5, 22, 0.4);
-        border: 1px solid rgba(147, 51, 234, 0.2);
-        transition: all 0.3s ease;
-    }
-    .test-option:hover {
-        background: rgba(215, 105, 141, 0.1);
-        border-color: rgba(229, 192, 123, 0.5);
-        box-shadow: 0 0 15px rgba(215, 105, 141, 0.15);
-        transform: scale(1.02);
-    }
-</style>
-
-<div class="max-w-3xl mx-auto mb-16">
-    <a href="{% url 'anasayfa' %}" class="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] text-[#9486a8] hover:text-pink-300 transition uppercase mb-8">
-        <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
-    </a>
-
-    <div class="card-line-art corner-marks p-8 md:p-14 text-center relative overflow-hidden min-h-[450px] flex flex-col justify-center" id="quiz-container">
-        <!-- Tasarım detayları (Yıldızlar, arka plan) -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(215,105,141,0.05),_transparent_70%)] pointer-events-none"></div>
         <i class="fas fa-moon absolute top-10 right-10 text-6xl text-pink-500/5 pointer-events-none -rotate-12"></i>
         <i class="fas fa-star absolute bottom-10 left-10 text-4xl text-gold/5 pointer-events-none animate-pulse"></i>
@@ -120,7 +46,7 @@
         <div id="screen-question" class="relative z-10 hidden">
             <p class="text-[10px] tracking-[0.3em] text-pink-400 uppercase mb-4" id="progress-text">Soru 1</p>
 
-            <!-- YENİ: Varsa GIF veya Görselin görüneceği kutu -->
+            <!-- GIF/Görsel Kutusu -->
             <div id="question-image-container" class="mb-6 max-w-md mx-auto w-full hidden"></div>
 
             <h2 class="font-serif-mystic text-2xl md:text-3xl text-gold mb-8 font-light leading-snug" id="question-text"></h2>
@@ -143,16 +69,15 @@
     </div>
 </div>
 
-<!-- JSON verisini HTML'e güvenli bir şekilde gömüyoruz -->
+<!-- JSON Verisini Güvenle HTML'e Gömüyoruz -->
 {{ test_json|json_script:"test-veri" }}
 
 <script>
-    // Gömülen veriyi Javascript'e alıyoruz
+    // Python'dan gelen veriyi okuyoruz
     const activeTest = JSON.parse(document.getElementById('test-veri').textContent);
 
     let currentQuestionIndex = 0;
     let scores = {};
-    // ... kodun geri kalanı aynı kalacak ...
 
     const screenIntro = document.getElementById("screen-intro");
     const screenQuestion = document.getElementById("screen-question");
@@ -190,7 +115,6 @@
         document.getElementById("progress-text").innerText = `Soru ${currentQuestionIndex + 1} / ${activeTest.questions.length}`;
         document.getElementById("question-text").innerText = q.text;
 
-        // YENİ: Görsel Varsa Ekrana Çizdir
         const imageContainer = document.getElementById("question-image-container");
         if (q.gorsel_url) {
             imageContainer.innerHTML = `<img src="${q.gorsel_url}" class="w-full h-48 md:h-56 object-cover rounded-xl shadow-[0_0_15px_rgba(215,105,141,0.2)] border border-[rgba(215,105,141,0.3)]">`;
@@ -227,31 +151,10 @@
         }
     }
 
-function calculateResult() {
-        // 1. Alınan en yüksek puanı bul
+    function calculateResult() {
+        // Eşitlik durumunda rastgele seçen algoritma
         let maxPuan = Math.max(...Object.values(scores));
-
-        // 2. Bu en yüksek puana sahip olan tüm kategorileri bir listeye topla (Beraberlik durumu)
         let kazananKategoriler = Object.keys(scores).filter(kategori => scores[kategori] === maxPuan);
-
-        // 3. Eğer eşitlik varsa, evrenin seçimine (rastgele) bırak!
-        let finalCategory = kazananKategoriler[Math.floor(Math.random() * kazananKategoriler.length)];
-
-        let resData = activeTest.results[finalCategory];
-
-        document.getElementById("result-title").innerText = resData.title;
-        document.getElementById("result-icon").innerText = resData.icon;
-        document.getElementById("result-desc").innerText = resData.desc;
-
-        switchScreen(screenQuestion, screenResult);
-    }function calculateResult() {
-        // 1. Alınan en yüksek puanı bul
-        let maxPuan = Math.max(...Object.values(scores));
-
-        // 2. Bu en yüksek puana sahip olan tüm kategorileri bir listeye topla (Beraberlik durumu)
-        let kazananKategoriler = Object.keys(scores).filter(kategori => scores[kategori] === maxPuan);
-
-        // 3. Eğer eşitlik varsa, evrenin seçimine (rastgele) bırak!
         let finalCategory = kazananKategoriler[Math.floor(Math.random() * kazananKategoriler.length)];
 
         let resData = activeTest.results[finalCategory];
